@@ -1,0 +1,19 @@
+current directory: /home/hanymoh/Desktop/Moneroz/vendor/bundle/gems/byebug-9.0.6/ext/byebug
+/home/hanymoh/.rvm/rubies/ruby-2.3.3/bin/ruby -r ./siteconf20170719-10501-2ljchs.rb extconf.rb
+creating Makefile
+
+current directory: /home/hanymoh/Desktop/Moneroz/vendor/bundle/gems/byebug-9.0.6/ext/byebug
+make "DESTDIR=" clean
+
+current directory: /home/hanymoh/Desktop/Moneroz/vendor/bundle/gems/byebug-9.0.6/ext/byebug
+make "DESTDIR="
+compiling context.c
+compiling byebug.c
+compiling breakpoint.c
+compiling threads.c
+compiling locker.c
+linking shared-object byebug/byebug.so
+
+current directory: /home/hanymoh/Desktop/Moneroz/vendor/bundle/gems/byebug-9.0.6/ext/byebug
+make "DESTDIR=" install
+/usr/bin/install -m 0755 byebug.so ./.gem.20170719-10501-rowiue/byebug

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Moneroz</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="sidebar-mini fixed">
+    <div class="wrapper">
+      <!-- Sart Navbar-->
+      <%= render "layouts/navbar" %>
+      <!-- End Navbar-->
+      <!-- Sart sidebar-->
+      <%= render "layouts/sidebar" %>
+      <!-- End sidebar-->
+      <div class="content-wrapper">
+        <div class="page-title">
+          <div>
+            <h1><i class="fa fa-dashboard"></i> Dashboard</h1>
+            <p>A free and modular admin template</p>
+          </div>
+          <div>
+            <ul class="breadcrumb">
+              <li><i class="fa fa-home fa-lg"></i></li>
+              <li><a href="#">Dashboard</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <%= yield %>
+              <!-- <div class="card-body">Load Your Data Here</div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
