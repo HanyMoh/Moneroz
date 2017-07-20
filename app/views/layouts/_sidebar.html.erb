@@ -15,22 +15,23 @@
           <i class="fa fa-dashboard"></i> Dashboard
         <% end %>
       </li>
-      <li class="treeview <%= active_class(sections_path) %> <%= active_class(units_path) %>"><a href="#"><i class="fa fa-laptop"></i><span>UI Elements</span><i class="fa fa-angle-right"></i></a>
+      <li class="treeview <%= active_class(sections_path) %> <%= active_class(units_path) %> <%= active_class(products_path) %>"><a href="#"><i class="fa fa-laptop"></i><span>Basic Data</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
-          <li class="<%= active_class(sections_path) %>">
+          <li>
+            <%= link_to products_path do %>
+              <i class="fa fa-circle-o"></i> Products
+            <% end %>
+          </li>
+          <li>
             <%= link_to sections_path do %>
               <i class="fa fa-circle-o"></i> Sections
             <% end %>
           </li>
-          <li class="<%= active_class(units_path) %>">
+          <li>
             <%= link_to units_path do %>
               <i class="fa fa-circle-o"></i> Units
             <% end %>
           </li>
-          <li><a href="bootstrap-components.html"><i class="fa fa-circle-o"></i> Bootstrap Elements</a></li>
-          <li><a href="https://fontawesome.io/icons/" target="_blank"><i class="fa fa-circle-o"></i> Font Icons</a></li>
-          <li><a href="ui-cards.html"><i class="fa fa-circle-o"></i> Cards</a></li>
-          <li><a href="widgets.html"><i class="fa fa-circle-o"></i> Widgets</a></li>
         </ul>
       </li>
       <li><a href="charts.html"><i class="fa fa-pie-chart"></i><span>Charts</span></a></li>

@@ -1,82 +1,108 @@
 <%= form_for(product) do |f| %>
-  <% if product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+<% if product.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
 
-      <ul>
-      <% product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <ul>
+    <% product.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="raw">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label class="control-label"><%= f.label :code %></label>
+      <%= f.number_field :code, class: "form-control" %>
     </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label class="control-label"><%= f.label :barcode %></label>
+      <%= f.text_field :barcode, placeholder: "Enter your barcode", class: "form-control" %>
+    </div>
+  </div>
+</div>
+
+<div class="raw">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label class="control-label"><%= f.label :section_id %></label>
+      <%= f.text_field :section_id, placeholder: "Choose your section", class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="form-group">
+      <label class="control-label"><%= f.label :name %></label>
+      <%= f.text_field :name, placeholder: "Enter your product", class: "form-control" %>
+    </div>
+  </div>
+</div>
+
+<div class="raw">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label class="control-label"><%= f.label :unit_id %></label>
+      <%= f.text_field :unit_id, placeholder: "Choose your unit", class: "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label class="control-label"><%= f.label :refill %></label>
+      <%= f.number_field :refill, class: "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label class="control-label"><%= f.label :unit_refill_id %></label>
+      <%= f.text_field :unit_refill_id, placeholder: "Choose your refill", class: "form-control" %>
+    </div>
+  </div>
+</div>
+
+<div class="raw">
+  <div class="col-md-3">
+    <div class="form-group">
+      <label class="control-label"><%= f.label :price_in %></label>
+      <%= f.text_field :price_in, class: "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label class="control-label"><%= f.label :price_out %></label>
+      <%= f.text_field :price_out, class: "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label class="control-label"><%= f.label :discount_value %></label>
+      <%= f.text_field :discount_value, class: "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label class="control-label"><%= f.label :tax %></label>
+      <%= f.text_field :tax, class: "form-control" %>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.check_box :service %>
+  <%= f.label :service %>
+</div>
+
+<div class="form-group">
+  <%= f.label :note %>
+  <%= f.text_area :note, class: "form-control" %>
+</div>
+
+<div class="actions">
+  <%= button_tag( :class => "btn btn-primary") do %>
+  <i class="fa fa-fw fa-lg fa-check-circle"></i> Create Product
   <% end %>
-
-  <div class="field">
-    <%= f.label :code %>
-    <%= f.number_field :code %>
-  </div>
-
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :barcode %>
-    <%= f.text_field :barcode %>
-  </div>
-
-  <div class="field">
-    <%= f.label :price_in %>
-    <%= f.text_field :price_in %>
-  </div>
-
-  <div class="field">
-    <%= f.label :price_out %>
-    <%= f.text_field :price_out %>
-  </div>
-
-  <div class="field">
-    <%= f.label :section_id %>
-    <%= f.text_field :section_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :unit_id %>
-    <%= f.text_field :unit_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :refill %>
-    <%= f.number_field :refill %>
-  </div>
-
-  <div class="field">
-    <%= f.label :unit_refill_id %>
-    <%= f.text_field :unit_refill_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :service %>
-    <%= f.check_box :service %>
-  </div>
-
-  <div class="field">
-    <%= f.label :discount_value %>
-    <%= f.text_field :discount_value %>
-  </div>
-
-  <div class="field">
-    <%= f.label :tax %>
-    <%= f.text_field :tax %>
-  </div>
-
-  <div class="field">
-    <%= f.label :note %>
-    <%= f.text_field :note %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+</div>
 <% end %>

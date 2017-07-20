@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
     @page_title = "بيانات الأصناف"
     @products = Product.sorted
   end
-  
+
   # GET /products/new
   def new
     @page_title = "بيانات الأصناف"
@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
+        format.html { redirect_to products_url, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class ProductsController < ApplicationController
       end
 
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit }

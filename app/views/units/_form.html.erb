@@ -11,17 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :code %>
-    <%= f.text_field :code %>
+    <%= f.text_field :code, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, placeholder: "Enter your unit", class: "form-control" %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= button_tag( :class => "btn btn-primary") do %>
+    <i class="fa fa-fw fa-lg fa-check-circle"></i> Create Product
+    <% end %>
   </div>
 <% end %>
