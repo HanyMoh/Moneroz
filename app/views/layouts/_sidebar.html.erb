@@ -10,9 +10,18 @@
     </div>
     <!-- Sidebar Menu-->
     <ul class="sidebar-menu">
-      <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
-      <li class="treeview"><a href="#"><i class="fa fa-laptop"></i><span>UI Elements</span><i class="fa fa-angle-right"></i></a>
+      <li class="<%= active_class(root_path) %>">
+        <%= link_to root_path do %>
+          <i class="fa fa-dashboard"></i> Dashboard
+        <% end %>
+      </li>
+      <li class="treeview <%= active_class(sections_path) %>"><a href="#"><i class="fa fa-laptop"></i><span>UI Elements</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
+          <li class="<%= active_class(sections_path) %>">
+            <%= link_to sections_path do %>
+              <i class="fa fa-circle-o"></i> Sections
+            <% end %>
+          </li>
           <li><a href="bootstrap-components.html"><i class="fa fa-circle-o"></i> Bootstrap Elements</a></li>
           <li><a href="https://fontawesome.io/icons/" target="_blank"><i class="fa fa-circle-o"></i> Font Icons</a></li>
           <li><a href="ui-cards.html"><i class="fa fa-circle-o"></i> Cards</a></li>

@@ -1,0 +1,38 @@
+<%= link_to 'Add New Section', new_section_path, class: "btn btn-primary" %>
+
+<hr>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Section Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sections.each do |section| %>
+      <tr>
+        <td>
+          <div class="btn-group">
+            <%= link_to edit_section_path(section), class: "btn btn-primary btn-xs"  do %>
+              <i class="fa fa-pencil"></i>
+            <% end %>
+
+            <%= link_to section, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"  do %>
+              <i class="fa fa-trash-o"></i>
+            <% end %>
+          </div>
+        </td>
+        <td>
+          <p class="text-primary">
+            <span class="badge"><%= section.code %></span>
+            <%= section.name %>
+          </p>
+      </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="card-footer"><%= link_to 'Add New Section', new_section_path, class: "btn btn-primary" %></div>

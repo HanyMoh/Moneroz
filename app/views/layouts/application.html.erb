@@ -19,22 +19,31 @@
       <div class="content-wrapper">
         <div class="page-title">
           <div>
-            <h1><i class="fa fa-dashboard"></i> Dashboard</h1>
-            <p>A free and modular admin template</p>
+            <% unless @page_title %>
+              <h1><i class="fa fa-dashboard"></i> Dashboard</h1>
+              <p>Leave it to the savvy.</p>
+            <% else %>
+              <h1><i class="fa fa-cogs"></i> <%= @page_title %></h1>
+            <% end %>
           </div>
-          <div>
-            <ul class="breadcrumb">
-              <li><i class="fa fa-home fa-lg"></i></li>
-              <li><a href="#">Dashboard</a></li>
-            </ul>
-          </div>
+          <% unless notice.blank? %>
+            <div class="alert alert-info alert-dismissable alert-fixed">
+              <%= notice %>
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            </div>
+            <% end %>
+            <% unless alert.blank? %>
+            <div class="alert alert-danger alert-dismissable alert-fixed">
+              <%= alert %>
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            </div>
+          <% end %>
         </div>
 
         <div class="row">
           <div class="col-md-12">
             <div class="card">
               <%= yield %>
-              <!-- <div class="card-body">Load Your Data Here</div> -->
             </div>
           </div>
         </div>
