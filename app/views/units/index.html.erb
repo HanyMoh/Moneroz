@@ -1,0 +1,38 @@
+<%= link_to 'Add New Unit', new_unit_path, class: "btn btn-primary" %>
+
+<hr>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Unit Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @units.each do |unit| %>
+      <tr>
+        <td>
+          <div class="btn-group">
+            <%= link_to edit_unit_path(unit), class: "btn btn-primary btn-xs"  do %>
+              <i class="fa fa-pencil"></i>
+            <% end %>
+
+            <%= link_to unit, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"  do %>
+              <i class="fa fa-trash-o"></i>
+            <% end %>
+          </div>
+        </td>
+        <td>
+          <p class="text-primary">
+            <span class="badge"><%= unit.code %></span>
+            <%= unit.name %>
+          </p>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="card-footer"><%= link_to 'Add New Unit', new_unit_path, class: "btn btn-primary" %></div>

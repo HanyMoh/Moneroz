@@ -1,16 +1,11 @@
 class SectionsController < ApplicationController
-  before_action :set_section, only: [:show, :edit, :update, :destroy]
+  before_action :set_section, only: [:edit, :update, :destroy]
 
   # GET /sections
   # GET /sections.json
   def index
     @page_title = "بيانات الأقسام"
     @sections = Section.sorted
-  end
-
-  # GET /sections/1
-  # GET /sections/1.json
-  def show
   end
 
   # GET /sections/new
@@ -29,6 +24,9 @@ class SectionsController < ApplicationController
   # POST /sections.json
   def create
     @section = Section.new(section_params)
+    if @section.code == 0 or @section.code == nil
+      @section.code = Section.max_code
+    end
 
     respond_to do |format|
       if @section.save
@@ -45,6 +43,10 @@ class SectionsController < ApplicationController
   # PATCH/PUT /sections/1.json
   def update
     respond_to do |format|
+      if @section.code == 0 or @section.code == nil
+        @section.code = Section.max_code
+      end
+
       if @section.update(section_params)
         format.html { redirect_to sections_url, notice: 'Section was successfully updated.' }
         format.json { render :show, status: :ok, location: @section }

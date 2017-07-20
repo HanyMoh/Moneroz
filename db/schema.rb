@@ -10,16 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719195403) do
+ActiveRecord::Schema.define(version: 20170720093931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "sections", force: :cascade do |t|
-    t.integer  "code"
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "code"
+    t.string  "name", limit: 60, null: false
+  end
+
+  create_table "units", force: :cascade do |t|
+    t.string "code"
+    t.string "name", limit: 20, null: false
   end
 
 end

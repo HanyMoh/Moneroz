@@ -15,11 +15,16 @@
           <i class="fa fa-dashboard"></i> Dashboard
         <% end %>
       </li>
-      <li class="treeview <%= active_class(sections_path) %>"><a href="#"><i class="fa fa-laptop"></i><span>UI Elements</span><i class="fa fa-angle-right"></i></a>
+      <li class="treeview <%= active_class(sections_path) %> <%= active_class(units_path) %>"><a href="#"><i class="fa fa-laptop"></i><span>UI Elements</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
           <li class="<%= active_class(sections_path) %>">
             <%= link_to sections_path do %>
               <i class="fa fa-circle-o"></i> Sections
+            <% end %>
+          </li>
+          <li class="<%= active_class(units_path) %>">
+            <%= link_to units_path do %>
+              <i class="fa fa-circle-o"></i> Units
             <% end %>
           </li>
           <li><a href="bootstrap-components.html"><i class="fa fa-circle-o"></i> Bootstrap Elements</a></li>
