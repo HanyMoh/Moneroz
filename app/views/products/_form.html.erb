@@ -1,0 +1,82 @@
+<%= form_for(product) do |f| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :code %>
+    <%= f.number_field :code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :barcode %>
+    <%= f.text_field :barcode %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price_in %>
+    <%= f.text_field :price_in %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price_out %>
+    <%= f.text_field :price_out %>
+  </div>
+
+  <div class="field">
+    <%= f.label :section_id %>
+    <%= f.text_field :section_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :unit_id %>
+    <%= f.text_field :unit_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :refill %>
+    <%= f.number_field :refill %>
+  </div>
+
+  <div class="field">
+    <%= f.label :unit_refill_id %>
+    <%= f.text_field :unit_refill_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :service %>
+    <%= f.check_box :service %>
+  </div>
+
+  <div class="field">
+    <%= f.label :discount_value %>
+    <%= f.text_field :discount_value %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tax %>
+    <%= f.text_field :tax %>
+  </div>
+
+  <div class="field">
+    <%= f.label :note %>
+    <%= f.text_field :note %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

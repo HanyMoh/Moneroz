@@ -1,0 +1,22 @@
+<%= link_to 'Add New Product', new_product_path, class: "btn btn-primary" %>
+
+<hr>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Section</th>
+      <th>Barcode</th>
+      <th>Name</th>
+      <th>Unit</th>
+      <th>Price out</th>
+      <th>Price in</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @products %>
+  </tbody>
+</table>
+
+<div class="card-footer"><%= link_to 'Add New Product', new_product_path, class: "btn btn-primary" %></div>

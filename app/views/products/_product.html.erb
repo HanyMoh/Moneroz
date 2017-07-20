@@ -1,0 +1,126 @@
+<!-- =======================================================================
+     START :: Table row
+     ======================================================================= -->
+<tr id="product_<%= product.id %>">
+  <td>
+    <div class="btn-group">
+      <%= link_to product, data: {toggle: "modal", target: "#my_show_product_#{product.id}"}, remote: true, class: "btn btn-success btn-xs"  do %>
+      <i class="fa fa-check"></i>
+      <% end %>
+
+      <%= link_to edit_product_path(product), class: "btn btn-primary btn-xs"  do %>
+      <i class="fa fa-pencil"></i>
+      <% end %>
+
+      <%= link_to product, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"  do %>
+      <i class="fa fa-trash-o"></i>
+      <% end %>
+    </div>
+  </td>
+  <td><%= product.section.name if product.section %></td>
+  <td><%= product.barcode %></td>
+  <td class="text-primary">
+    <strong><%= product.name %></strong>
+  </td>
+  <td>
+    <%= product.unit.name if product.unit %>
+    <span class="badge"><%= product.refill %></span>
+    <%= product.unit_refill.name if product.unit_refill %>
+  </td>
+  <td>
+    <span class="label label-warning"><%= product.price_out.to_f %></span>
+    ج.م
+  </td>
+  <td>
+    <span class="label label-success"><%= product.price_in.to_f %></span>
+    ج.م
+  </td>
+</tr>
+  <!-- END :: Table row
+     ======================================================================= -->
+
+  <!-- =======================================================================
+     START :: Modal show action
+     ======================================================================= -->
+  <div class="modal fade" id="my_show_product_<%= product.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden=true>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h5 class="modal-title" id="myModalLabel"><%= "#{product.barcode} - #{product.name}" %></h5>
+        </div>
+        <!-- =============================================================== -->
+        <div class="modal-body">
+          <p>
+            <span class="fa fa-angle-double-right text-primary"></span>
+            <strong>Section:</strong>
+            <span class="text-info"><%= product.section.name if product.section %></span>
+          </p>
+          <p>
+            <span class="fa fa-angle-double-right text-primary"></span>
+            <strong>code:</strong>
+            <%= product.code %>
+          </p>
+          <p>
+            <span class="fa fa-angle-double-right text-primary"></span>
+            <strong>barcode:</strong>
+            <span class="text-muted"><%= product.barcode %></span>
+          </p>
+          <p>
+            <span class="fa fa-angle-double-right text-primary"></span>
+            <strong>Product name:</strong>
+            <span class="text-primary"><%= product.name %></span>
+          </p>
+          <p>
+            <span class="fa fa-angle-double-right text-primary"></span>
+            <strong>Price in:</strong>
+            <span class="label label-success"><%= product.price_in.to_f %></span>
+            ج.م
+          </p>
+          <p>
+            <span class="fa fa-angle-double-right text-primary"></span>
+            <strong>Price out:</strong>
+            <span class="label label-warning"><%= product.price_out.to_f %></span>
+            ج.م
+          </p>
+          <p>
+            <span class="fa fa-angle-double-right text-primary"></span>
+            <strong>Unit:</strong>
+            <%= product.unit.name if product.unit %>
+            <span class="badge"><%= product.refill %></span>
+            <%= product.unit_refill.name if product.unit_refill %>
+          </p>
+          <p>
+            <span class="fa fa-angle-double-right text-primary"></span>
+            <strong>Service:</strong>
+            <%= product.service %>
+          </p>
+          <p>
+            <span class="fa fa-angle-double-right text-primary"></span>
+            <strong>Discount:</strong>
+            <span class="label label-info"><%= product.discount_value.to_f %></span>
+            ج.م
+          </p>
+          <p>
+            <span class="fa fa-angle-double-right text-primary"></span>
+            <strong>Tax:</strong>
+            <span class="label label-info"><%= product.tax.to_f %></span>
+            ج.م
+          </p>
+          <p>
+            <span class="fa fa-angle-double-right text-primary"></span>
+            <strong>Note:</strong>
+            <%= product.note %>
+          </p>
+        </div>
+        <!-- =============================================================== -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="my_show_product_close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End :: Modal show action
+     ======================================================================= -->

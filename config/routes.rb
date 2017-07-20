@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :people
+  resources :products, :except => [:show]
   resources :units, :except => [:show]
   resources :sections, :except => [:show]
   root to: 'home#index'
