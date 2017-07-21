@@ -1,0 +1,74 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my_new_person"><%= "Add New #{@single_word}" %></button>
+
+<hr>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th data-type="number">Code</th>
+      <th><%= "#{@single_word} Name" %></th>
+      <th>Phone</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody class="all_people">
+    <%= render @people %>
+  </tbody>
+</table>
+
+<div class="card-footer">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my_new_person"><%= "Add New #{@single_word}" %></button>
+</div>
+
+<!-- =======================================================================
+       Modal create action
+     ======================================================================= -->
+<%= form_for(@person, remote: true) do |f| %>
+<div class="modal fade" id="my_new_person" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden=true>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel"><%= "Add New #{@single_word}" %></h4>
+      </div>
+      <div class="modal-body">
+        <!-- ============================================================= -->
+        <div class="field">
+          <%= f.label :code %><br>
+          <%= f.text_field :code, class: "form-control person_code"  %>
+        </div>
+        <div class="field">
+          <%= f.label :name,"#{@single_word} Name" %><br>
+          <%= f.text_field :name, class: "form-control person_name require", data_type: "text"  %>
+        </div>
+        <div class="field">
+          <!-- hidden field pass value -->
+          <%= f.hidden_field :person_type, :value => @person.person_type %>
+        </div>
+        <div class="field">
+          <%= f.label :phone %><br>
+          <%= f.text_field :phone, class: "form-control person_phone" %>
+        </div>
+        <div class="field">
+          <%= f.label :address %><br>
+          <%= f.text_field :address, class: "form-control person_address", data_type: "address" %>
+        </div>
+        <div class="field">
+          <%= f.label :note %><br>
+          <%= f.text_field :note, class: "form-control person_note" %>
+        </div>
+        <!-- ============================================================= -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="my_new_person_close">close</button>
+        <%= submit_tag "Create", class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+</div>
+<!-- END :: Modal create action
+     ======================================================================= -->

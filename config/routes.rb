@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  resources :people
-  resources :products, :except => [:show]
+  resources :people do
+    collection do
+      get :suppliers
+      get :customers
+      get :stores
+      get :storages
+      get :fees
+    end
+  end
+  resources :products
   resources :units, :except => [:show]
   resources :sections, :except => [:show]
   root to: 'home#index'

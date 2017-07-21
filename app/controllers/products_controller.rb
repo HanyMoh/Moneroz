@@ -1,11 +1,14 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
   # GET /products.json
   def index
     @page_title = "بيانات الأصناف"
     @products = Product.sorted
+  end
+
+  def show
   end
 
   # GET /products/new

@@ -40,6 +40,12 @@
           <% end %>
         </div>
 
+        <% if current_page?(root_path) %>
+          <div class="raw">
+            <%= render "layouts/widgets" %>
+          </div>
+        <% end %>
+
         <div class="row">
           <div class="col-md-12">
             <div class="card">
@@ -47,6 +53,7 @@
             </div>
           </div>
         </div>
+        
       </div>
     </div>
   </body>

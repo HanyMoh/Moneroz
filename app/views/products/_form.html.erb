@@ -30,7 +30,7 @@
   <div class="col-md-6">
     <div class="form-group">
       <label class="control-label"><%= f.label :section_id %></label>
-      <%= f.text_field :section_id, placeholder: "Choose your section", class: "form-control" %>
+      <%= f.collection_select(:section_id, Section.all, :id, :name, { include_blank: true }, { :class => "form-control" }) %>
     </div>
   </div>
 
@@ -43,22 +43,22 @@
 </div>
 
 <div class="raw">
-  <div class="col-md-4">
+  <div class="col-md-5">
     <div class="form-group">
       <label class="control-label"><%= f.label :unit_id %></label>
-      <%= f.text_field :unit_id, placeholder: "Choose your unit", class: "form-control" %>
+      <%= f.collection_select(:unit_id, Unit.all, :id, :name, { :selected => 1 }, { :class => "form-control" }) %>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-2">
     <div class="form-group">
       <label class="control-label"><%= f.label :refill %></label>
       <%= f.number_field :refill, class: "form-control" %>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-5">
     <div class="form-group">
       <label class="control-label"><%= f.label :unit_refill_id %></label>
-      <%= f.text_field :unit_refill_id, placeholder: "Choose your refill", class: "form-control" %>
+      <%= f.collection_select(:unit_refill_id, Unit.all, :id, :name, {:selected => 2}, { :class => "form-control" }) %>
     </div>
   </div>
 </div>

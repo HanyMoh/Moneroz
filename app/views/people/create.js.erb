@@ -1,0 +1,9 @@
+$("#my_new_person").modal('hide');
+$(".person_code").val('<%= raw Person.max_code(@person.person_type) %>');
+$(".person_name").val('');
+$(".person_phone").val('');
+$(".person_address").val('');
+$(".person_note").val('');
+
+$(".all_people").prepend('<%= j render @person %>');
+$("#person_<%= @person.id %>").hide().fadeIn(700);
