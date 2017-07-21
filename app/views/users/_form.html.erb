@@ -1,0 +1,52 @@
+<%= form_for(user) do |f| %>
+<% if user.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(user.errors.count, "error") %>
+    prohibited this user from being saved:</h2>
+
+  <ul>
+    <% user.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="form-group">
+  <%= f.label :user_name %>
+  <%= f.text_field :user_name, readonly: false, class: 'require form-control' %>
+</div>
+
+<div class="row">
+  <div class="form-group col-xs-12 col-sm-12 col-md-6">
+    <%= f.label :active, class: 'control-label' %>
+    <%= f.select :active, [["Yes", true], ["No", false]], {:include_blank => true},{class: 'require form-control'} %>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-6">
+    <%= f.label :admin, class: 'control-label' %>
+    <%= f.select :admin, [["Yes", true], ["No", false]], {:include_blank => true},{class: 'require form-control'} %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group col-xs-12 col-sm-12 col-md-6">
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control' %>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-6">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :email %>
+  <%= f.email_field :email, class: 'form-control' %>
+</div>
+
+<div class="actions">
+  <%= button_tag( :class => "btn btn-primary") do %>
+    <i class="fa fa-fw fa-lg fa-check-circle"></i> Save
+  <% end %>
+</div>
+<% end %>
