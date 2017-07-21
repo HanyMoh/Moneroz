@@ -1,0 +1,32 @@
+<div class="login-form">
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
+
+  <%= render "layouts/notice"%>
+
+  <div class="form-group">
+    <label class="control-label">USERNAME</label>
+    <%= f.text_field :user_name, autofocus: true, placeholder: "User Name", autofocus: true, class: 'form-control'  %>
+  </div>
+  <div class="form-group">
+    <label class="control-label">PASSWORD</label>
+    <%= f.password_field :password, autocomplete: "off", placeholder:"Password", class: "form-control"  %>
+  </div>
+  <div class="form-group btn-container">
+    <%= button_tag( :class => "btn btn-primary btn-block") do %>
+      <i class="fa fa-sign-in fa-lg fa-fw"></i> Log in
+    <% end %>
+  </div>
+<% end %>
+  <div >
+    <br><br>
+    <h5 class="login-head text-success"><i class="fa fa-lg fa-fw fa-cogs"></i> Leave it to the savvy</h5>
+    <div>
+      <p>
+        <span class="text-info">Call us at: +2 01125039123</span>
+        <br />
+        <strong>Copyright</strong> IQAdv &copy; 2017-2018
+      </p>
+    </div>
+  </div>
+</div>

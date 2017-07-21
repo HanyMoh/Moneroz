@@ -5,6 +5,6 @@ Person.create(id: 3, code: 1, name: 'الخزينة الرئيسية', person_ty
 
 Unit.delete_all
 units = Unit.create([
-    { id: 1, name: 'وحدة' },
-    { id: 2, name: 'قطعة' }
+    { id: 1, code: 1, name: 'وحدة' },
+    { id: 2, code: 2, name: 'قطعة' }
   ])

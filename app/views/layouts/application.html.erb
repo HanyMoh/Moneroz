@@ -26,18 +26,7 @@
               <h1><i class="fa fa-cogs"></i> <%= @page_title %></h1>
             <% end %>
           </div>
-          <% unless notice.blank? %>
-            <div class="alert alert-info alert-dismissable alert-fixed">
-              <%= notice %>
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            </div>
-            <% end %>
-            <% unless alert.blank? %>
-            <div class="alert alert-danger alert-dismissable alert-fixed">
-              <%= alert %>
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            </div>
-          <% end %>
+          <%= render "layouts/notice"%>
         </div>
 
         <% if current_page?(root_path) %>
@@ -53,7 +42,7 @@
             </div>
           </div>
         </div>
-        
+
       </div>
     </div>
   </body>

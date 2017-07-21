@@ -23,7 +23,11 @@
                 <ul class="dropdown-menu settings-menu">
                   <li><a href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
                   <li><a href="page-user.html"><i class="fa fa-user fa-lg"></i> Profile</a></li>
-                  <li><a href="page-login.html"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+                  <li>
+                    <%= link_to destroy_user_session_path, :method => :delete do %>
+                      <i class="fa fa-sign-out fa-lg"></i> Logout
+                    <% end %>
+                  </li>
                 </ul>
               </li>
             </ul>
