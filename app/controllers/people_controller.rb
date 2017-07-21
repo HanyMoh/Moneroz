@@ -53,7 +53,7 @@ class PeopleController < ApplicationController
     set_person_type(1,"بيانات العملاء","Customer")
   end
   def suppliers
-    set_person_type(2, "بيانات الموردين" ,"Suppliers")
+    set_person_type(2, "بيانات الموردين" ,"Supplier")
   end
   def stores
     set_person_type(3, "بيانات المخازن", "Store")
@@ -62,7 +62,7 @@ class PeopleController < ApplicationController
     set_person_type(4, "بيانات الخزائن", "Storage")
   end
   def fees
-    set_person_type(5, "بيانات المصروفات" ,"Expenses")
+    set_person_type(5, "بيانات المصروفات" ,"Expense")
   end
 
   # DELETE /people/1

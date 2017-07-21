@@ -5,10 +5,9 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th data-type="number">Code</th>
+      <th>&nbsp;</th>
       <th><%= "#{@single_word} Name" %></th>
       <th>Phone</th>
-      <th>&nbsp;</th>
     </tr>
   </thead>
   <tbody class="all_people">
@@ -63,7 +62,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" id="my_new_person_close">close</button>
-        <%= submit_tag "Create", class: "btn btn-primary" %>
+        <%= button_tag( :class => "btn btn-primary") do %>
+          <i class="fa fa-fw fa-lg fa-check-circle"></i> Save
+        <% end %>
       </div>
     </div>
   </div>
