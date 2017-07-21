@@ -4,16 +4,19 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
 
   def index
+    authorize! :read, User
     @page_title = "بيانات الموظفين"
     @users = User.all
   end
 
   def new
+    authorize! :create, User
     @page_title = "بيانات الموظفين"
     @user = User.new
   end
 
   def edit
+    authorize! :update, User
     @page_title = "بيانات الموظفين"
   end
 

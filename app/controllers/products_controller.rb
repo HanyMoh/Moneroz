@@ -1,18 +1,22 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
   # GET /products.json
   def index
+    authorize! :read, Product
     @page_title = "بيانات الأصناف"
     @products = Product.sorted
   end
 
   def show
+    authorize! :read, Product
   end
 
   # GET /products/new
   def new
+    authorize! :create, Product
     @page_title = "بيانات الأصناف"
     @product = Product.new
     @product.code = Product.max_code
@@ -20,6 +24,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
+    authorize! :update, Product
     @page_title = "بيانات الأصناف"
   end
 
@@ -67,6 +72,7 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
+    authorize! :destroy, Product
     @product.destroy
     respond_to do |format|
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }

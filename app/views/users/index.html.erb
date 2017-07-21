@@ -1,6 +1,7 @@
-<%= link_to 'Add New User', new_user_path, class: "btn btn-primary" %>
-
-<hr>
+<% if can? :create, User %>
+  <%= link_to 'Add New User', new_user_path, class: "btn btn-primary" %>
+  <hr>
+<% end %>
 
 <table class="table table-hover">
   <thead>
@@ -17,8 +18,10 @@
     <tr>
       <% @users.each do |user| %>
       <td>
-        <%= link_to edit_user_path(user), class: "btn btn-primary btn-xs"  do %>
-          <i class="fa fa-pencil"></i>
+        <% if can? :update, User %>
+          <%= link_to edit_user_path(user), class: "btn btn-primary btn-xs"  do %>
+            <i class="fa fa-pencil"></i>
+          <% end %>
         <% end %>
       </td>
       <td><%= user.user_name %></td>
@@ -30,5 +33,6 @@
   </tbody>
 </table>
 
-
-<div class="card-footer"><%= link_to 'Add New User', new_user_path, class: "btn btn-primary" %></div>
+<% if can? :create, User %>
+  <div class="card-footer"><%= link_to 'Add New User', new_user_path, class: "btn btn-primary" %></div>
+<% end %>

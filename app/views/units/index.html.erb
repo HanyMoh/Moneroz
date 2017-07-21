@@ -1,6 +1,8 @@
-<%= link_to 'Add New Unit', new_unit_path, class: "btn btn-primary" %>
+<% if can? :create, Unit %>
+  <%= link_to 'Add New Unit', new_unit_path, class: "btn btn-primary" %>
+  <hr>
+<% end %>
 
-<hr>
 
 <table class="table table-hover">
   <thead>
@@ -15,12 +17,16 @@
       <tr>
         <td>
           <div class="btn-group">
-            <%= link_to edit_unit_path(unit), class: "btn btn-primary btn-xs"  do %>
-              <i class="fa fa-pencil"></i>
+            <% if can? :update, Unit %>
+              <%= link_to edit_unit_path(unit), class: "btn btn-primary btn-xs"  do %>
+                <i class="fa fa-pencil"></i>
+              <% end %>
             <% end %>
 
-            <%= link_to unit, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"  do %>
-              <i class="fa fa-trash-o"></i>
+            <% if can? :destroy, Unit %>
+              <%= link_to unit, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"  do %>
+                <i class="fa fa-trash-o"></i>
+              <% end %>
             <% end %>
           </div>
         </td>
@@ -35,4 +41,6 @@
   </tbody>
 </table>
 
-<div class="card-footer"><%= link_to 'Add New Unit', new_unit_path, class: "btn btn-primary" %></div>
+<% if can? :create, Unit %>
+  <div class="card-footer"><%= link_to 'Add New Unit', new_unit_path, class: "btn btn-primary" %></div>
+<% end %>

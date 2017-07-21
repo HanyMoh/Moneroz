@@ -1,7 +1,9 @@
 class PeopleController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_person, only: [:show, :update, :destroy]
 
   def show
+    authorize! :read, Person
   end
 
   # POST /people
@@ -50,18 +52,23 @@ class PeopleController < ApplicationController
   end
 
   def customers
+    authorize! :customer, Person
     set_person_type(1,"بيانات العملاء","Customer")
   end
   def suppliers
+    authorize! :supplier, Person
     set_person_type(2, "بيانات الموردين" ,"Supplier")
   end
   def stores
+    authorize! :store, Person
     set_person_type(3, "بيانات المخازن", "Store")
   end
   def storages
+    authorize! :storage, Person
     set_person_type(4, "بيانات الخزائن", "Storage")
   end
   def fees
+    authorize! :fee, Person
     set_person_type(5, "بيانات المصروفات" ,"Expense")
   end
 

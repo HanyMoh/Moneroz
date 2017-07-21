@@ -8,14 +8,18 @@
       <i class="fa fa-check"></i>
       <% end %>
 
-      <%= link_to person, data: {toggle: "modal", target: "#my_update_person_#{person.id}"}, remote: true, class: "btn btn-primary btn-xs"  do %>
-      <i class="fa fa-pencil"></i>
+      <% if can? :update, Person %>
+        <%= link_to person, data: {toggle: "modal", target: "#my_update_person_#{person.id}"}, remote: true, class: "btn btn-primary btn-xs"  do %>
+        <i class="fa fa-pencil"></i>
+        <% end %>
       <% end %>
 
-      <% unless person.id == 1 || person.id == 2 || person.id == 3 # Don't detete id no.[1,2,3]  %>
-      <%= link_to person, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "btn btn-danger btn-xs"  do %>
-      <i class="fa fa-trash-o"></i>
-      <% end %>
+      <% if can? :destroy, Person %>
+        <% unless person.id == 1 || person.id == 2 || person.id == 3 # Don't detete id no.[1,2,3]  %>
+          <%= link_to person, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "btn btn-danger btn-xs"  do %>
+            <i class="fa fa-trash-o"></i>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
 

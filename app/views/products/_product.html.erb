@@ -8,12 +8,15 @@
       <i class="fa fa-check"></i>
       <% end %>
 
-      <%= link_to edit_product_path(product), class: "btn btn-primary btn-xs"  do %>
-      <i class="fa fa-pencil"></i>
+      <% if can? :update, Product %>
+        <%= link_to edit_product_path(product), class: "btn btn-primary btn-xs"  do %>
+        <i class="fa fa-pencil"></i>
+        <% end %>
       <% end %>
-
-      <%= link_to product, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"  do %>
-      <i class="fa fa-trash-o"></i>
+      <% if can? :destroy, Product %>
+        <%= link_to product, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"  do %>
+        <i class="fa fa-trash-o"></i>
+        <% end %>
       <% end %>
     </div>
   </td>
@@ -31,10 +34,12 @@
     <span class="label label-warning"><%= product.price_out.to_f %></span>
     ج.م
   </td>
-  <td>
-    <span class="label label-success"><%= product.price_in.to_f %></span>
-    ج.م
-  </td>
+  <% if current_user.admin? %>
+    <td>
+      <span class="label label-success"><%= product.price_in.to_f %></span>
+      ج.م
+    </td>
+  <% end %>
 </tr>
   <!-- END :: Table row
      ======================================================================= -->
@@ -73,12 +78,14 @@
             <strong>Product name:</strong>
             <span class="text-primary"><%= product.name %></span>
           </p>
+          <% if current_user.admin? %>
           <p>
             <span class="fa fa-angle-double-right text-primary"></span>
             <strong>Price in:</strong>
             <span class="label label-success"><%= product.price_in.to_f %></span>
             ج.م
           </p>
+          <% end %>
           <p>
             <span class="fa fa-angle-double-right text-primary"></span>
             <strong>Price out:</strong>

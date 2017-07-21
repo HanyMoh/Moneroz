@@ -1,15 +1,18 @@
 class UnitsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_unit, only: [:edit, :update, :destroy]
 
   # GET /units
   # GET /units.json
   def index
+    authorize! :read, Unit
     @page_title = "بيانات الوحدات"
     @units = Unit.sorted
   end
 
   # GET /units/new
   def new
+    authorize! :create, Unit
     @page_title = "بيانات الوحدات"
     @unit = Unit.new
     @unit.code = Unit.max_code
@@ -17,6 +20,7 @@ class UnitsController < ApplicationController
 
   # GET /units/1/edit
   def edit
+    authorize! :update, Unit
     @page_title = "بيانات الوحدات"
   end
 
@@ -60,6 +64,7 @@ class UnitsController < ApplicationController
   # DELETE /units/1
   # DELETE /units/1.json
   def destroy
+    authorize! :destroy, Unit
     @unit.destroy
     respond_to do |format|
       format.html { redirect_to units_url, notice: 'Unit was successfully destroyed.' }

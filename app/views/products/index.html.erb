@@ -11,7 +11,9 @@
       <th>Name</th>
       <th>Unit</th>
       <th>Price out</th>
-      <th>Price in</th>
+      <% if current_user.admin? %>
+        <th>Price in</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>

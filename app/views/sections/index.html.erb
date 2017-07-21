@@ -1,6 +1,7 @@
-<%= link_to 'Add New Section', new_section_path, class: "btn btn-primary" %>
-
-<hr>
+<% if can? :create, Section %>
+  <%= link_to 'Add New Section', new_section_path, class: "btn btn-primary" %>
+  <hr>
+<% end %>
 
 <table class="table table-hover">
   <thead>
@@ -15,12 +16,15 @@
       <tr>
         <td>
           <div class="btn-group">
-            <%= link_to edit_section_path(section), class: "btn btn-primary btn-xs"  do %>
-              <i class="fa fa-pencil"></i>
+            <% if can? :update, Section %>
+              <%= link_to edit_section_path(section), class: "btn btn-primary btn-xs"  do %>
+                <i class="fa fa-pencil"></i>
+              <% end %>
             <% end %>
-
-            <%= link_to section, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"  do %>
-              <i class="fa fa-trash-o"></i>
+            <% if can? :destroy, Section %>
+              <%= link_to section, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"  do %>
+                <i class="fa fa-trash-o"></i>
+              <% end %>
             <% end %>
           </div>
         </td>
@@ -35,4 +39,6 @@
   </tbody>
 </table>
 
-<div class="card-footer"><%= link_to 'Add New Section', new_section_path, class: "btn btn-primary" %></div>
+<% if can? :create, Section %>
+  <div class="card-footer"><%= link_to 'Add New Section', new_section_path, class: "btn btn-primary" %></div>
+<% end %>

@@ -18,34 +18,42 @@
       </li>
       <li class="treeview <%= active_class(customers_people_path) %>"><a href="#"><i class="fa fa-edit"></i><span>Sales</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
-          <li>
-            <%= link_to customers_people_path do %>
-            <i class="fa fa-circle-o"></i> Customers
-            <% end %>
-          </li>
+          <% if can? :customer, Person %>
+            <li>
+              <%= link_to customers_people_path do %>
+              <i class="fa fa-circle-o"></i> Customers
+              <% end %>
+            </li>
+          <% end %>
         </ul>
       </li>
       <li class="treeview <%= active_class(suppliers_people_path) %>"><a href="#"><i class="fa fa-th-list"></i><span>Procurement</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
-          <li>
-            <%= link_to suppliers_people_path do %>
-            <i class="fa fa-circle-o"></i> Suppliers
-            <% end %>
-          </li>
+          <% if can? :supplier, Person %>
+            <li>
+              <%= link_to suppliers_people_path do %>
+              <i class="fa fa-circle-o"></i> Suppliers
+              <% end %>
+            </li>
+          <% end %>
         </ul>
       </li>
       <li class="treeview <%= active_class(storages_people_path) %> <%= active_class(fees_people_path) %>"><a href="#"><i class="fa fa-file-text"></i><span>Accounts</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
-          <li>
-            <%= link_to storages_people_path do %>
-            <i class="fa fa-circle-o"></i> Storages
-            <% end %>
-          </li>
-          <li>
-            <%= link_to fees_people_path do %>
-            <i class="fa fa-circle-o"></i> Expenses
-            <% end %>
-          </li>
+          <% if can? :storage, Person %>
+            <li>
+              <%= link_to storages_people_path do %>
+              <i class="fa fa-circle-o"></i> Storages
+              <% end %>
+            </li>
+          <% end %>
+          <% if can? :fee, Person %>
+            <li>
+              <%= link_to fees_people_path do %>
+              <i class="fa fa-circle-o"></i> Expenses
+              <% end %>
+            </li>
+          <% end %>
         </ul>
       </li>
       <li class="treeview <%= active_class(sections_path) %> <%= active_class(units_path) %> <%= active_class(products_path) %>"><a href="#"><i class="fa fa-laptop"></i><span>Basic Data</span><i class="fa fa-angle-right"></i></a>
