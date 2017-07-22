@@ -1,0 +1,8 @@
+$("#my_new_payment").modal('hide');
+$(".payment_code").val('<%= raw Payment.max_code(@payment.pay_type) %>');
+$(".payment_money").val('');
+$(".payment_description").val('');
+$(".payment_note").val('');
+
+$(".all_payments").prepend('<%= j render @payment %>');
+$("#payment_<%= @payment.id %>").hide().fadeIn(700);

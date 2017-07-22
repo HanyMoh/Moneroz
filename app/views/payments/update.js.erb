@@ -1,0 +1,6 @@
+$("#my_update_payment_<%= @payment.id %>").modal('hide');
+
+$("#payment_<%= @payment.id %>").fadeOut(500, function() {
+  $(this).remove();
+  $(".all_payments").prepend('<%= j render @payment %>');
+});

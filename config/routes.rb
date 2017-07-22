@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :payments do
+    collection do
+      get :cash_in
+      get :cash_out
+    end
+  end
+
   devise_for :users
   resources :users
 
@@ -12,6 +19,7 @@ Rails.application.routes.draw do
       get :fees
     end
   end
+  
   resources :products
   resources :units, :except => [:show]
   resources :sections, :except => [:show]

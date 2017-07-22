@@ -1,6 +1,7 @@
 *.rbc
 capybara-*.html
 .rspec
+/app/assets/stylesheets/scaffolds.scss
 /log
 /tmp
 /test

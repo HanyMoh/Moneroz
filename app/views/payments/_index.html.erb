@@ -1,0 +1,99 @@
+<!-- =======================================================================
+       index content panel
+     ======================================================================= -->
+     <% if (can? :cash_in, Payment) || (can? :cash_out, Payment) %>
+       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my_new_payment"><%= "Add New #{@single_word}" %></button>
+       <hr>
+     <% end %>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>&nbsp;</th>
+          <th>Date</th>
+          <th>Code</th>
+          <th>Storage</th>
+          <th>Account</th>
+          <th>Money</th>
+          <th>Description</th>
+          <th>User</th>
+        </tr>
+      </thead>
+      <tbody class="all_payments">
+        <%= render @payments %>
+      </tbody>
+    </table>
+
+    <% if (can? :cash_in, Payment) || (can? :cash_out, Payment) %>
+      <div class="card-footer">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my_new_payment"><%= "Add New #{@single_word}" %></button>
+      </div>
+    <% end %>
+
+<!-- END :: index content panel
+     ======================================================================= -->
+
+
+<!-- =======================================================================
+       Modal create action
+     ======================================================================= -->
+<%= form_for(@payment, remote: true) do |f| %>
+<div class="modal fade" id="my_new_payment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden=true>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel"><%= "Add New #{@single_word}" %></h4>
+      </div>
+      <div class="modal-body">
+        <!-- ============================================================= -->
+        <div class="field">
+          <%= f.label :code %><br>
+          <%= f.text_field :code, class: "form-control payment_code"  %>
+        </div>
+        <div class="field">
+          <%= f.label :pay_date, "Date" %><br>
+          <%= f.text_field :pay_date, class: "form-control datepicker require payment_pay_date" %>
+        </div>
+        <div class="field">
+          <!-- hidden field pass value -->
+          <%= f.hidden_field :pay_type, :value => @payment.pay_type %>
+          <%= f.hidden_field :effect, :value => @payment.effect %>
+        </div>
+        <div class="field">
+          <%= f.label :storage_id %><br>
+          <%= f.collection_select(:storage_id, Person.people_by_type(4), :id, :name, {:selected => 1}, { :class => "form-control require" }) %>
+        </div>
+        <div class="field">
+          <%= f.label :person_id,"Account Name" %><br>
+          <%= f.collection_select(:person_id, Person.all, :id, :full_description, {include_blank: true, :selected => 0}, { :class => "form-control require" }) %>
+        </div>
+        <div class="field">
+            <%= f.label :money %><br>
+          <%= f.text_field :money,:placeholder => "0.00", :class => "form-control require import payment_money", :data_type => "double" %>
+        </div>
+        <div class="field">
+          <%= f.label :description %><br>
+          <%= f.text_field :description, class: "form-control require payment_description" %>
+        </div>
+        <div class="field">
+          <%= f.label :note %><br>
+          <%= f.text_field :note, class: "form-control payment_note" %>
+        </div>
+        <!-- ============================================================= -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="my_new_payment_close">Close</button>
+        <%= button_tag( :class => "btn btn-primary") do %>
+          <i class="fa fa-fw fa-lg fa-check-circle"></i> Save
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+</div>
+<!-- END :: Modal create action
+     ======================================================================= -->

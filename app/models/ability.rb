@@ -8,6 +8,7 @@ class Ability
        can :manage, :all
     elsif !user.admin? && user.active?
     # can [:read, :create, :update, :destroy], Model
+      can [:read, :create, :cash_in, :cash_out], Payment
       can [:read, :create, :customer, :fee], Person
       can [:read, :create], Product
       can [:read, :create], Section

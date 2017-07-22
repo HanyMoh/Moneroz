@@ -38,12 +38,19 @@
           <% end %>
         </ul>
       </li>
-      <li class="treeview <%= active_class(storages_people_path) %> <%= active_class(fees_people_path) %>"><a href="#"><i class="fa fa-file-text"></i><span>Accounts</span><i class="fa fa-angle-right"></i></a>
+      <li class="treeview <%= active_class(storages_people_path) %> <%= active_class(fees_people_path) %> <%= active_class(cash_in_payments_path) %> <%= active_class(cash_out_payments_path) %>"><a href="#"><i class="fa fa-file-text"></i><span>Accounts</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
-          <% if can? :storage, Person %>
+          <% if can? :cash_in, Payment %>
             <li>
-              <%= link_to storages_people_path do %>
-              <i class="fa fa-circle-o"></i> Storages
+              <%= link_to cash_in_payments_path do %>
+              <i class="fa fa-circle-o"></i> Cash In
+              <% end %>
+            </li>
+          <% end %>
+          <% if can? :cash_out, Payment %>
+            <li>
+              <%= link_to cash_out_payments_path do %>
+              <i class="fa fa-circle-o"></i> Cash out
               <% end %>
             </li>
           <% end %>
@@ -53,6 +60,13 @@
               <i class="fa fa-circle-o"></i> Expenses
               <% end %>
             </li>
+          <% end %>
+          <% if can? :storage, Person %>
+          <li>
+            <%= link_to storages_people_path do %>
+            <i class="fa fa-circle-o"></i> Storages
+            <% end %>
+          </li>
           <% end %>
         </ul>
       </li>
