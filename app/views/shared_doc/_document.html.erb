@@ -1,0 +1,78 @@
+<!-- =======================================================================
+     START :: Table row
+     ======================================================================= -->
+<tr id="document_<%= document.id %>">
+  <td>
+    <div class="btn-group">
+      <%= link_to document, data: {toggle: "modal", target: "#my_show_document_#{document.id}"}, remote: true, class: "btn btn-success btn-xs" do %>
+      <i class="fa fa-check"></i>
+      <% end %>
+
+      <% if can? :update, Document %>
+      <%= link_to edit_document_path(document), class: "btn btn-primary btn-xs" do %>
+          <i class="fa fa-pencil"></i>
+        <% end %>
+      <% end %>
+
+      <% if can? :destroy, Document %>
+        <%= link_to document, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "btn btn-danger btn-xs"  do %>
+        <i class="fa fa-trash-o"></i>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- =======================================================================
+        START :: Modal show action
+        ======================================================================= -->
+    <div class="modal fade" id="my_show_document_<%= document.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden=true>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel"><%= "عرض بيانات #{@single_word}" %></h4>
+          </div>
+          <div class="modal-body">
+            <!-- =============================================================== -->
+
+            <div class="field">
+              <p><%= document.code %></p>
+            </div>
+            <div class="field">
+              <p><%= document.storage.name if document.storage %></p>
+            </div>
+            <div class="field">
+              <p><%= document.person.name if document.person  %></p>
+            </div>
+            <div class="field">
+              <p>< %= document.description %></p>
+            </div>
+            <div class="field">
+              <p><%= document.note %></p>
+            </div>
+            <!-- =============================================================== -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="my_show_document_close">إغلاق</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End :: Modal show action
+        ======================================================================= -->
+
+  </td>
+    <td><%= document.doc_date %></td>
+    <td><%= document.code %></td>
+    <td><%= document.storage.name if document.storage %></td>
+    <td><%= document.person.name if document.person %></td>
+    <td><span class="label label-success"><%= document.payment %></span> ج.م</td>
+    <td><%= document.discount_value %> ج.م</td>
+    <td><%= document.tax %> ج.م</td>
+    <td><span class="label label-danger"><%= document.payment %></span>
+  ج.م</td>
+    <td><%= document.user.user_name if document.user %></td>
+</tr>
+<!-- END :: Table row
+     ======================================================================= -->

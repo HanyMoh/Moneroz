@@ -1,0 +1,12 @@
+<% if (can? :add_first_term, Document) %>
+  <%= link_to 'Add New', add_first_term_documents_path,class: "btn btn-primary" %>
+  <hr>
+<% end %>
+
+<%= render 'shared_doc/index' %>
+
+<% if (can? :add_first_term, Document) %>
+  <div class="card-footer">
+    <%= link_to 'Add New', add_first_term_documents_path,class: "btn btn-primary" %>
+  </div>
+<% end %>

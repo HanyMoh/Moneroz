@@ -1,0 +1,12 @@
+<% if (can? :add_purchase, Document) %>
+  <%= link_to 'Add New', add_purchase_documents_path,class: "btn btn-primary" %>
+  <hr>
+<% end %>
+
+<%= render 'shared_doc/index' %>
+
+<% if (can? :add_purchase, Document) %>
+  <div class="card-footer">
+    <%= link_to 'Add New', add_purchase_documents_path,class: "btn btn-primary" %>
+  </div>
+<% end %>

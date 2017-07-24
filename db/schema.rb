@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170722054550) do
+ActiveRecord::Schema.define(version: 20170723095949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "documents", force: :cascade do |t|
+    t.date     "doc_date"
+    t.integer  "code"
+    t.integer  "store_id"
+    t.integer  "storage_id"
+    t.integer  "person_id"
+    t.integer  "user_id"
+    t.decimal  "payment",        precision: 11, scale: 2, default: "0.0"
+    t.integer  "doc_type",                                default: 0
+    t.integer  "effect",                                  default: 0
+    t.decimal  "discount_value", precision: 8,  scale: 2, default: "0.0"
+    t.decimal  "discount_ratio", precision: 8,  scale: 2, default: "0.0"
+    t.decimal  "tax",            precision: 8,  scale: 2, default: "0.0"
+    t.boolean  "hold",                                    default: false
+    t.string   "note"
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
+    t.index ["person_id"], name: "index_documents_on_person_id", using: :btree
+    t.index ["storage_id"], name: "index_documents_on_storage_id", using: :btree
+    t.index ["store_id"], name: "index_documents_on_store_id", using: :btree
+    t.index ["user_id"], name: "index_documents_on_user_id", using: :btree
+  end
 
   create_table "payments", force: :cascade do |t|
     t.integer  "code"
@@ -97,6 +120,8 @@ ActiveRecord::Schema.define(version: 20170722054550) do
     t.index ["user_name"], name: "index_users_on_user_name", unique: true, using: :btree
   end
 
+  add_foreign_key "documents", "people"
+  add_foreign_key "documents", "users"
   add_foreign_key "products", "sections"
   add_foreign_key "products", "units"
 end

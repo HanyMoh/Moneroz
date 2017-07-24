@@ -5,8 +5,10 @@ class Person < ApplicationRecord
                   4 => "storage",
                   5 => "fee" }.freeze
 
-  has_many :storage_payments, :class_name  => 'Payment',
-                              :foreign_key => 'storage_id'
+  has_many :documents
+  has_many :storage_payments,  :class_name  => 'Payment',  :foreign_key => 'storage_id'
+  has_many :storage_documents, :class_name  => 'Document', :foreign_key => 'storage_id'
+  has_many :store_documents,   :class_name  => 'Document', :foreign_key => 'store_id'
 
   validates :name, presence: true, length: { within: 3..60 }, uniqueness: { scope: [:person_type] }
 

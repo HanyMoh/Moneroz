@@ -1,0 +1,12 @@
+<% if (can? :add_returned_sale, Document) %>
+  <%= link_to 'Add New', add_returned_sale_documents_path,class: "btn btn-primary" %>
+  <hr>
+<% end %>
+
+<%= render 'shared_doc/index' %>
+
+<% if (can? :add_returned_sale, Document) %>
+  <div class="card-footer">
+    <%= link_to 'Add New', add_returned_sale_documents_path,class: "btn btn-primary" %>
+  </div>
+<% end %>

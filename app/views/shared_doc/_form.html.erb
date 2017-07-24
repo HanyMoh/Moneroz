@@ -1,0 +1,87 @@
+<%= form_for(@document) do |f| %>
+  <% if @document.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
+
+      <ul>
+      <% @document.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :doc_date %>
+    <%= f.date_select :doc_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :code %>
+    <%= f.number_field :code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :store_id %>
+    <%= f.text_field :store_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :storage_id %>
+    <%= f.text_field :storage_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :person_id %>
+    <%= f.text_field :person_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :payment %>
+    <%= f.text_field :payment %>
+  </div>
+
+  <div class="field">
+    <%= f.label :doc_type %>
+    <%= f.number_field :doc_type %>
+  </div>
+
+  <div class="field">
+    <%= f.label :effect %>
+    <%= f.number_field :effect %>
+  </div>
+
+  <div class="field">
+    <%= f.label :discount_value %>
+    <%= f.text_field :discount_value %>
+  </div>
+
+  <div class="field">
+    <%= f.label :discount_ratio %>
+    <%= f.text_field :discount_ratio %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tax %>
+    <%= f.text_field :tax %>
+  </div>
+
+  <div class="field">
+    <%= f.label :hold %>
+    <%= f.check_box :hold %>
+  </div>
+
+  <div class="field">
+    <%= f.label :note %>
+    <%= f.text_field :note %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

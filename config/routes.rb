@@ -1,5 +1,25 @@
 Rails.application.routes.draw do
 
+  resources :documents do
+    collection do
+      get :first_term
+      get :purchase
+      get :sale_cash
+      get :selling_futures
+      get :returned_sale
+      get :returned_buy
+      get :barcode
+      # Add new
+      get :add_first_term
+      get :add_purchase
+      get :add_sale_cash
+      get :add_selling_futures
+      get :add_returned_sale
+      get :add_returned_buy
+      get :add_barcode
+    end
+  end
+
   resources :payments do
     collection do
       get :cash_in
@@ -19,9 +39,10 @@ Rails.application.routes.draw do
       get :fees
     end
   end
-  
+
   resources :products
   resources :units, :except => [:show]
   resources :sections, :except => [:show]
   root to: 'home#index'
+
 end
