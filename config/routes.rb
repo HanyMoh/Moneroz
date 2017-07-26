@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       get :add_returned_sale
       get :add_returned_buy
       get :add_barcode
-    end 
+    end
   end
 
   resources :payments do
