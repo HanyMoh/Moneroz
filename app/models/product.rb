@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  has_many   :doc_items
   belongs_to :section
   belongs_to :unit,        class_name: 'Unit'
   belongs_to :unit_refill, class_name: 'Unit', foreign_key: "unit_refill_id"
@@ -15,12 +16,12 @@ class Product < ApplicationRecord
     "#{(product.section.id.to_s).rjust(3, '0')}#{(product.code.to_s).rjust(6, '0')}"
   }
 
-  scope :find_by_barcode, lambda{ |barcode|
+  scope :get_barcode, lambda{ |barcode|
     barcode = barcode.gsub(' ', '')
     where('barcode = ?', barcode)
   }
 
-  scope :find_by_Product, lambda{ |name|
+  scope :get_Product, lambda{ |name|
     name = name.gsub(' ', '')
     name = "%#{name}%"
     where('name like ?', name)

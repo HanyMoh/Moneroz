@@ -11,77 +11,117 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :doc_date %>
-    <%= f.date_select :doc_date %>
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <%= f.label :doc_date %>
+      <%= f.text_field :doc_date, placeholder: "Enter your date", class: "form-control" %>
+    </div>
+
+    <div class="form-group col-sm-2">
+      <%= f.label :code %>
+      <%= f.text_field :code, placeholder: "Enter your code", class: "form-control" %>
+    </div>
+
+    <div class="form-group col-sm-7">
+      <%= f.label :note %>
+      <%= f.text_field :note, placeholder: "Enter your note here", class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :code %>
-    <%= f.number_field :code %>
+  <div class="row">
+    <div class="field col-sm-4">
+      <% case @document.doc_type %>
+      <% when 1 %>
+      <!-- # first_term # don't show any person -->
+      <% when 2,6  %>
+      <!-- # purchase or returned_buy -->
+      <%= f.label :person_id,"Supplier" %><br>
+      <%= f.collection_select(:person_id, Person.people_by_type(2), :id, :name, {:selected => 1}, { :class => "form-control require" }) %>
+      <% when 3 %>
+      <!-- # sale_cash -->
+      <%= f.label :person_id,"Customer" %><br>
+      <%= f.collection_select(:person_id, Person.where('id=1'), :id, :name, { :selected => 1 }, { :disabled => "disabled", :class => "form-control" }) %>
+      <% when 4 %>
+      <!-- # selling_futures -->
+      <%= f.label :person_id,"Customer" %>
+      <%= f.collection_select(:person_id, Person.people_by_type(1).where('id<>1'), :id, :name, {:selected => 0}, { :class => "form-control require" }) %>
+      <% when 5 %>
+      <!-- # returned_sale  -->
+      <%= f.label :person_id,"Customer" %>
+      <%= f.collection_select(:person_id, Person.people_by_type(1), :id, :name, {:selected => 1}, { :class => "form-control require" }) %>
+      <% when 7 %>
+      <!-- # barcode don't show any person -->
+      <% end %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :store_id %>
-    <%= f.text_field :store_id %>
+    <%= f.hidden_field :doc_type, :value => @document.doc_type %>
+    <%= f.hidden_field :effect, :value => @document.effect %>
+    <%= f.hidden_field :store_id, :value => @document.store_id %>
+    <%= f.hidden_field :user_id, :value => @document.user_id %>
+
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <%= f.label :storage_id %><br>
+      <%= f.collection_select(:storage_id, Person.people_by_type(4), :id, :name, {:selected => 1}, { :class => "form-control" }) %>
+    </div>
+
+    <div class="form-group col-sm-3">
+    </div>
+
+    <div class="form-group col-sm-2">
+      <%= f.label :discount_value %>
+      <%= f.text_field :discount_value, class: "form-control" %>
+    </div>
+
+    <div class="form-group col-sm-2">
+      <%= f.label :discount_ratio %>
+      <%= f.text_field :discount_ratio, class: "form-control" %>
+    </div>
+
+    <div class="form-group col-sm-2">
+      <%= f.label :tax %>
+      <%= f.text_field :tax, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :storage_id %>
-    <%= f.text_field :storage_id %>
+  <hr>
+
+    <!-- [Nested doc_items] -->
+    <%= f.fields_for :doc_items do |builder| %>
+    <%= render "doc_item_fields", f: builder %>
+    <% end %>
+    <%= link_to_add_some_fields t('.add_field'), f, :doc_items %>
+
+  <hr>
+
+  <div class="row">
+    <div class="form-group col-sm-2">
+      <label class="control-label">Total</label><br>
+      <input class="form-control lock-color" placeholder="0.00" disabled>
+    </div>
+
+    <div class="form-group col-sm-2">
+      <%= f.label :payment %><br>
+      <%= f.text_field :payment,:placeholder => "0.00", class: "form-control alerm-text" %>
+    </div>
+
+    <div class="form-group col-sm-2">
+      <label class="control-label">Net</label><br>
+      <input class="form-control lock-color" placeholder="0.00" disabled>
+    </div>
+
+    <div class="form-group col-sm-2">
+      <label class="control-label">Rest</label><br>
+      <input class="form-control lock-color alerm-text" placeholder="0.00" disabled>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :person_id %>
-    <%= f.text_field :person_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :user_id %>
-    <%= f.text_field :user_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :payment %>
-    <%= f.text_field :payment %>
-  </div>
-
-  <div class="field">
-    <%= f.label :doc_type %>
-    <%= f.number_field :doc_type %>
-  </div>
-
-  <div class="field">
-    <%= f.label :effect %>
-    <%= f.number_field :effect %>
-  </div>
-
-  <div class="field">
-    <%= f.label :discount_value %>
-    <%= f.text_field :discount_value %>
-  </div>
-
-  <div class="field">
-    <%= f.label :discount_ratio %>
-    <%= f.text_field :discount_ratio %>
-  </div>
-
-  <div class="field">
-    <%= f.label :tax %>
-    <%= f.text_field :tax %>
-  </div>
-
-  <div class="field">
-    <%= f.label :hold %>
-    <%= f.check_box :hold %>
-  </div>
-
-  <div class="field">
-    <%= f.label :note %>
-    <%= f.text_field :note %>
-  </div>
+  <hr>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= button_tag( :class => "btn btn-primary") do %>
+    <i class="fa fa-fw fa-lg fa-check-circle"></i> Create Document
+    <% end %>
   </div>
 <% end %>

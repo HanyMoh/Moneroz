@@ -7,10 +7,13 @@ class Document < ApplicationRecord
                6 => "returned_buy",
                7 => "barcode" }.freeze
 
+  has_many   :doc_items, dependent: :destroy
   belongs_to :person
   belongs_to :store,   class_name: 'Person'
   belongs_to :storage, class_name: 'Person'
   belongs_to :user
+
+  accepts_nested_attributes_for :doc_items, :allow_destroy => true, reject_if: proc { |attributes| attributes['product_id'].blank? }
 
   validates :code, uniqueness: { scope: [:doc_type] }
 

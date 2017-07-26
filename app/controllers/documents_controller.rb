@@ -17,19 +17,22 @@ class DocumentsController < ApplicationController
   # GET /documents/1/edit
   def edit
     authorize! :update, Document
+    @document.doc_items.build
   end
 
   # POST /documents
   # POST /documents.json
   def create
     @document = Document.new(document_params)
+    @document.user = current_user
     set_field
 
     respond_to do |format|
       if @document.save
-        format.html { redirect_to @document, notice: 'Document was successfully created.' }
+        # redirect_back(fallback_location: fallback_location)
+        format.html { redirect_to :back, notice: 'Document was successfully created.' }
       else
-        format.html { render :new }
+        format.html { redirect_to :back, alert: 'Document was not successfully created.' }
       end
     end
   end
@@ -41,7 +44,7 @@ class DocumentsController < ApplicationController
       set_field
 
       if @document.update(document_params)
-        format.html { redirect_to @document, notice: 'Document was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Document was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -154,7 +157,7 @@ class DocumentsController < ApplicationController
       if @document.code == 0 || @document.code.nil?
         @document.code = Document.max_code(@document.doc_type)
       end
-      @document.user = current_user
+
     end
 
     def get_list_documents(doc_type, title)
@@ -168,11 +171,15 @@ class DocumentsController < ApplicationController
         @document.code = Document.max_code(doc_type)
         @document.doc_type = doc_type
         @document.effect = effect
-        # @document.doc_items.build
+        @document.user = current_user
+        @document.store = Person.find(2)
+        @document.doc_items.build
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:doc_date, :code, :store_id, :storage_id, :person_id, :user_id, :payment, :doc_type, :effect, :discount_value, :discount_ratio, :tax, :hold, :note)
+      params.require(:document).permit(
+      :doc_date, :code, :store_id, :storage_id, :person_id, :user_id, :payment, :doc_type, :effect, :discount_value, :discount_ratio, :tax, :hold, :note, doc_items_attributes: [ :id, :product_id, :quantity, :price, :effect, :returned, :discount_value, :_destroy ]
+      )
     end
 end
