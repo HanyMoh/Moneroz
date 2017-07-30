@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_filter :authorize_admin, only: :create
+  before_action :authorize_admin, only: :create
   before_action :set_user, only: [:show, :edit, :update]
 
   def index

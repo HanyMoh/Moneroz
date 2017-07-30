@@ -6,8 +6,8 @@ class CreateProducts < ActiveRecord::Migration[5.0]
       t.string     :barcode,        :limit => 13, :null => false
       t.decimal    :price_in,       precision: 11, scale: 2
       t.decimal    :price_out,      precision: 11, scale: 2
-      t.references :section,        index: true, foreign_key: true
-      t.references :unit,           index: true, foreign_key: true, default: 1
+      t.references :section,        index: true
+      t.references :unit,           index: true, default: 1
       t.integer    :refill,         default: 1
       t.references :unit_refill,    index: true, default: 2
       t.boolean    :service,        default: false

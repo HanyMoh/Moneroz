@@ -41,6 +41,7 @@
       <!-- # sale_cash -->
       <%= f.label :person_id,"Customer" %><br>
       <%= f.collection_select(:person_id, Person.where('id=1'), :id, :name, { :selected => 1 }, { :disabled => "disabled", :class => "form-control" }) %>
+      <%= f.hidden_field :person_id, :value => 1 %>
       <% when 4 %>
       <!-- # selling_futures -->
       <%= f.label :person_id,"Customer" %>
@@ -88,11 +89,11 @@
   <hr>
 
     <!-- [Nested doc_items] -->
-    <%= f.fields_for :doc_items do |builder| %>
-    <%= render "doc_item_fields", f: builder %>
-    <% end %>
-    <%= link_to_add_some_fields t('.add_field'), f, :doc_items %>
 
+    <%= f.fields_for :doc_items do |builder| %>
+      <%= render "doc_item_fields", f: builder %>
+    <% end %>
+    <%= link_to_add_some_fields "Add New Item", f, :doc_items %>
   <hr>
 
   <div class="row">
@@ -120,8 +121,6 @@
   <hr>
 
   <div class="actions">
-    <%= button_tag( :class => "btn btn-primary") do %>
-    <i class="fa fa-fw fa-lg fa-check-circle"></i> Create Document
-    <% end %>
+    <%= submit_tag "Create Document", class: "btn btn-primary" %>
   </div>
 <% end %>

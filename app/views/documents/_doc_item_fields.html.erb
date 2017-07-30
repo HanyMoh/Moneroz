@@ -1,15 +1,11 @@
 <div class="nested nested_box">
-  <%= f.label :quantity %>
+  <div class="pull-left col-lg-1">
+    <%= link_to "×", '#', class: "close remove_fields" %>
+  </div>
   <%= f.text_field :quantity %>
-  <%= f.label :price %>
   <%= f.text_field :price %>
-  <!-- < %= f.label :effect %>
-  < %= f.text_field :effect %> -->
   <%= f.hidden_field :effect, :value => @document.effect %>
-  <%= f.label :discount_value %>
   <%= f.text_field :discount_value %>
-  <%= f.label :returned %>
-  <%= f.text_field :returned %>
-  <%= f.label :product_id %>
-  <%= f.text_field :product_id %>
+  <%= f.collection_select(:product_id, Product.all, :id, :name, {include_blank: true, :selected => 0}, { :class => "" }) %>
+  <!-- <input class="document_invoice_total total" id="invoice_total" type="text" placeholder="0.00" disabled> -->
 </div>

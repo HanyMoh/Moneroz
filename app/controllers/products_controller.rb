@@ -35,7 +35,7 @@ class ProductsController < ApplicationController
     if @product.code == 0 || @product.code.nil?
       @product.code = Product.max_code
     end
-    @product.barcode = Product.set_barcode(@product)
+    @product.barcode = Product.generat_barcode(@product)
 
     respond_to do |format|
       if @product.save

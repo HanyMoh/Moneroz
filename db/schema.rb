@@ -134,10 +134,4 @@ ActiveRecord::Schema.define(version: 20170725191020) do
     t.index ["user_name"], name: "index_users_on_user_name", unique: true, using: :btree
   end
 
-  add_foreign_key "doc_items", "documents"
-  add_foreign_key "doc_items", "products"
-  add_foreign_key "documents", "people"
-  add_foreign_key "documents", "users"
-  add_foreign_key "products", "sections"
-  add_foreign_key "products", "units"
 end

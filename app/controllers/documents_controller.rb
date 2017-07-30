@@ -24,15 +24,14 @@ class DocumentsController < ApplicationController
   # POST /documents.json
   def create
     @document = Document.new(document_params)
-    @document.user = current_user
     set_field
+    @document.user = current_user
 
     respond_to do |format|
       if @document.save
-        # redirect_back(fallback_location: fallback_location)
-        format.html { redirect_to :back, notice: 'Document was successfully created.' }
+        format.html { redirect_back(fallback_location: root_url, notice: 'Document was successfully created.') }
       else
-        format.html { redirect_to :back, alert: 'Document was not successfully created.' }
+        format.html { redirect_back(fallback_location: root_url, alert: 'Document was not successfully created.') }
       end
     end
   end
@@ -44,7 +43,7 @@ class DocumentsController < ApplicationController
       set_field
 
       if @document.update(document_params)
-        format.html { redirect_to :back, notice: 'Document was successfully updated.' }
+        format.html { redirect_back fallback_location: root_url, notice: 'Document was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -157,7 +156,6 @@ class DocumentsController < ApplicationController
       if @document.code == 0 || @document.code.nil?
         @document.code = Document.max_code(@document.doc_type)
       end
-
     end
 
     def get_list_documents(doc_type, title)
@@ -167,19 +165,17 @@ class DocumentsController < ApplicationController
 
     def set_document_type(effect, doc_type, title)
       @page_title = title
-      @document = Document.new # we can replace next 3 lines with intialize
-        @document.code = Document.max_code(doc_type)
-        @document.doc_type = doc_type
-        @document.effect = effect
-        @document.user = current_user
-        @document.store = Person.find(2)
-        @document.doc_items.build
+      @document = Document.new
+      set_field
+      @document.doc_type = doc_type
+      @document.effect = effect
+      @document.user = current_user
+      @document.store = Person.find(2)
+      @document.doc_items.build
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(
-      :doc_date, :code, :store_id, :storage_id, :person_id, :user_id, :payment, :doc_type, :effect, :discount_value, :discount_ratio, :tax, :hold, :note, doc_items_attributes: [ :id, :product_id, :quantity, :price, :effect, :returned, :discount_value, :_destroy ]
-      )
+      params.require(:document).permit(:doc_date, :code, :store_id, :storage_id, :person_id, :user_id, :payment, :doc_type, :effect, :discount_value, :discount_ratio, :tax, :hold, :note, doc_items_attributes: [:id, :product_id, :quantity, :price, :effect, :discount_value, :returned, :_destroy])
     end
 end
