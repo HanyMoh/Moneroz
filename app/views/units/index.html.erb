@@ -1,5 +1,5 @@
 <% if can? :create, Unit %>
-  <%= link_to 'Add New Unit', new_unit_path, class: "btn btn-primary" %>
+  <%= link_to 'إضافة وحدة جديدة', new_unit_path, class: "btn btn-primary" %>
   <hr>
 <% end %>
 
@@ -8,7 +8,7 @@
   <thead>
     <tr>
       <th></th>
-      <th>Unit Name</th>
+      <th>اسم الوحدة</th>
     </tr>
   </thead>
 
@@ -24,7 +24,7 @@
             <% end %>
 
             <% if can? :destroy, Unit %>
-              <%= link_to unit, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"  do %>
+              <%= link_to unit, method: :delete, data: { confirm: 'هل أنت متأكد؟' }, class: "btn btn-danger btn-xs"  do %>
                 <i class="fa fa-trash-o"></i>
               <% end %>
             <% end %>
@@ -42,5 +42,5 @@
 </table>
 
 <% if can? :create, Unit %>
-  <div class="card-footer"><%= link_to 'Add New Unit', new_unit_path, class: "btn btn-primary" %></div>
+  <div class="card-footer"><%= link_to 'إضافة وحدة جديدة', new_unit_path, class: "btn btn-primary" %></div>
 <% end %>

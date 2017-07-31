@@ -53,23 +53,23 @@ class PeopleController < ApplicationController
 
   def customers
     authorize! :customer, Person
-    set_person_type(1,"بيانات العملاء","Customer")
+    set_person_type(1,"بيانات العملاء","عميل")
   end
   def suppliers
     authorize! :supplier, Person
-    set_person_type(2, "بيانات الموردين" ,"Supplier")
+    set_person_type(2, "بيانات الموردين" ,"مورد")
   end
   def stores
     authorize! :store, Person
-    set_person_type(3, "بيانات المخازن", "Store")
+    set_person_type(3, "بيانات المخازن", "مخزن")
   end
   def storages
     authorize! :storage, Person
-    set_person_type(4, "بيانات الخزائن", "Storage")
+    set_person_type(4, "بيانات الخزائن", "خزينة")
   end
   def fees
     authorize! :fee, Person
-    set_person_type(5, "بيانات المصروفات" ,"Expense")
+    set_person_type(5, "بيانات المصروفات" ,"مصروف")
   end
 
   # DELETE /people/1

@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :code %>
+    <%= f.label :code,"الكود" %>
     <%= f.text_field :code, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :name %>
+    <%= f.label :name,"اسم الوحدة" %>
     <%= f.text_field :name, placeholder: "Enter your unit", class: "form-control" %>
   </div>
 
   <div class="actions">
     <%= button_tag( :class => "btn btn-primary") do %>
-    <i class="fa fa-fw fa-lg fa-check-circle"></i> Create Unit
+    <i class="fa fa-fw fa-lg fa-check-circle"></i> تسجيل الوحدة
     <% end %>
   </div>
 <% end %>

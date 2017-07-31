@@ -14,7 +14,7 @@
         <% end %>
       <% end %>
       <% if can? :destroy, Product %>
-        <%= link_to product, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"  do %>
+        <%= link_to product, method: :delete, data: { confirm: 'هل أنت متأكد؟' }, class: "btn btn-danger btn-xs"  do %>
         <i class="fa fa-trash-o"></i>
         <% end %>
       <% end %>
@@ -59,72 +59,72 @@
         <!-- =============================================================== -->
         <div class="modal-body">
           <p>
-            <span class="fa fa-angle-double-right text-primary"></span>
-            <strong>Section:</strong>
+            <span class="fa fa-angle-double-left text-primary"></span>
+            <strong>اسم القسم:</strong>
             <span class="text-info"><%= product.section.name if product.section %></span>
           </p>
           <p>
-            <span class="fa fa-angle-double-right text-primary"></span>
-            <strong>code:</strong>
+            <span class="fa fa-angle-double-left text-primary"></span>
+            <strong>الكود:</strong>
             <%= product.code %>
           </p>
           <p>
-            <span class="fa fa-angle-double-right text-primary"></span>
-            <strong>barcode:</strong>
+            <span class="fa fa-angle-double-left text-primary"></span>
+            <strong>الباركود:</strong>
             <span class="text-muted"><%= product.barcode %></span>
           </p>
           <p>
-            <span class="fa fa-angle-double-right text-primary"></span>
-            <strong>Product name:</strong>
+            <span class="fa fa-angle-double-left text-primary"></span>
+            <strong>اسم الصنف:</strong>
             <span class="text-primary"><%= product.name %></span>
           </p>
           <% if current_user.admin? %>
           <p>
-            <span class="fa fa-angle-double-right text-primary"></span>
-            <strong>Price in:</strong>
+            <span class="fa fa-angle-double-left text-primary"></span>
+            <strong>سعر الشراء:</strong>
             <span class="label label-success"><%= product.price_in.to_f %></span>
             ج.م
           </p>
           <% end %>
           <p>
-            <span class="fa fa-angle-double-right text-primary"></span>
-            <strong>Price out:</strong>
+            <span class="fa fa-angle-double-left text-primary"></span>
+            <strong>سعر البيع:</strong>
             <span class="label label-warning"><%= product.price_out.to_f %></span>
             ج.م
           </p>
           <p>
-            <span class="fa fa-angle-double-right text-primary"></span>
-            <strong>Unit:</strong>
+            <span class="fa fa-angle-double-left text-primary"></span>
+            <strong>الوحدة:</strong>
             <%= product.unit.name if product.unit %>
             <span class="badge"><%= product.refill %></span>
             <%= product.unit_refill.name if product.unit_refill %>
           </p>
           <p>
-            <span class="fa fa-angle-double-right text-primary"></span>
-            <strong>Service:</strong>
-            <%= product.service ? "Yes" : "No" %>
+            <span class="fa fa-angle-double-left text-primary"></span>
+            <strong>هل هو خدمة مقدمة:</strong>
+            <%= product.service ? "نعم" : "لا" %>
           </p>
           <p>
-            <span class="fa fa-angle-double-right text-primary"></span>
-            <strong>Discount:</strong>
+            <span class="fa fa-angle-double-left text-primary"></span>
+            <strong>قيمة الخصم:</strong>
             <span class="label label-info"><%= product.discount_value.to_f %></span>
             ج.م
           </p>
           <p>
-            <span class="fa fa-angle-double-right text-primary"></span>
-            <strong>Tax:</strong>
+            <span class="fa fa-angle-double-left text-primary"></span>
+            <strong>الضريبة:</strong>
             <span class="label label-info"><%= product.tax.to_f %></span>
             ج.م
           </p>
           <p>
-            <span class="fa fa-angle-double-right text-primary"></span>
-            <strong>Note:</strong>
+            <span class="fa fa-angle-double-left text-primary"></span>
+            <strong>ملاحظات:</strong>
             <%= product.note %>
           </p>
         </div>
         <!-- =============================================================== -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" id="my_show_product_close">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="my_show_product_close">إغلاق</button>
         </div>
       </div>
     </div>

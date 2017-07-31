@@ -15,7 +15,7 @@
       <% end %>
 
       <% if can? :destroy, Document %>
-        <%= link_to document, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "btn btn-danger btn-xs"  do %>
+        <%= link_to document, method: :delete, data: { confirm: 'هل أنت متأكد؟' }, remote: true, class: "btn btn-danger btn-xs"  do %>
         <i class="fa fa-trash-o"></i>
         <% end %>
       <% end %>

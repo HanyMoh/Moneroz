@@ -14,13 +14,13 @@
 <div class="raw">
   <div class="col-md-6">
     <div class="form-group">
-      <label class="control-label"><%= f.label :code %></label>
+      <label class="control-label"><%= f.label :code, "المسلسل" %></label>
       <%= f.number_field :code, class: "form-control" %>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <label class="control-label"><%= f.label :barcode %></label>
+      <label class="control-label"><%= f.label :barcode, "الباركود" %></label>
       <%= f.text_field :barcode, placeholder: "Enter your barcode", class: "form-control" %>
     </div>
   </div>
@@ -29,14 +29,14 @@
 <div class="raw">
   <div class="col-md-6">
     <div class="form-group">
-      <label class="control-label"><%= f.label :section_id %></label>
+      <label class="control-label"><%= f.label :section_id, "اسم القسم" %></label>
       <%= f.collection_select(:section_id, Section.all, :id, :name, { include_blank: true }, { :class => "form-control" }) %>
     </div>
   </div>
 
   <div class="col-md-6">
     <div class="form-group">
-      <label class="control-label"><%= f.label :name %></label>
+      <label class="control-label"><%= f.label :name, "اسم الصنف" %></label>
       <%= f.text_field :name, placeholder: "Enter your product", class: "form-control" %>
     </div>
   </div>
@@ -45,19 +45,19 @@
 <div class="raw">
   <div class="col-md-5">
     <div class="form-group">
-      <label class="control-label"><%= f.label :unit_id %></label>
+      <label class="control-label"><%= f.label :unit_id, "وحدة" %></label>
       <%= f.collection_select(:unit_id, Unit.all, :id, :name, { :selected => 1 }, { :class => "form-control" }) %>
     </div>
   </div>
   <div class="col-md-2">
     <div class="form-group">
-      <label class="control-label"><%= f.label :refill %></label>
+      <label class="control-label"><%= f.label :refill, "عدد" %></label>
       <%= f.number_field :refill, class: "form-control" %>
     </div>
   </div>
   <div class="col-md-5">
     <div class="form-group">
-      <label class="control-label"><%= f.label :unit_refill_id %></label>
+      <label class="control-label"><%= f.label :unit_refill_id, "قطعة" %></label>
       <%= f.collection_select(:unit_refill_id, Unit.all, :id, :name, {:selected => 2}, { :class => "form-control" }) %>
     </div>
   </div>
@@ -67,26 +67,26 @@
   <div class="col-md-3">
     <div class="form-group">
       <% if current_user.admin? %>
-        <label class="control-label"><%= f.label :price_in %></label>
+        <label class="control-label"><%= f.label :price_in, "سعر الشراء" %></label>
         <%= f.text_field :price_in, class: "form-control" %>
       <% end %>
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
-      <label class="control-label"><%= f.label :price_out %></label>
+      <label class="control-label"><%= f.label :price_out, "سعر البيع" %></label>
       <%= f.text_field :price_out, class: "form-control" %>
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
-      <label class="control-label"><%= f.label :discount_value %></label>
+      <label class="control-label"><%= f.label :discount_value, "قيمة الخصم" %></label>
       <%= f.text_field :discount_value, class: "form-control" %>
     </div>
   </div>
   <div class="col-md-3">
     <div class="form-group">
-      <label class="control-label"><%= f.label :tax %></label>
+      <label class="control-label"><%= f.label :tax, "قيمة الضريبة" %></label>
       <%= f.text_field :tax, class: "form-control" %>
     </div>
   </div>
@@ -94,17 +94,17 @@
 
 <div class="form-group">
   <%= f.check_box :service %>
-  <%= f.label :service %>
+  <%= f.label :service, "خدمة" %>
 </div>
 
 <div class="form-group">
-  <%= f.label :note %>
+  <%= f.label :note, "ملاحظات" %>
   <%= f.text_area :note, class: "form-control" %>
 </div>
 
 <div class="actions">
   <%= button_tag( :class => "btn btn-primary") do %>
-  <i class="fa fa-fw fa-lg fa-check-circle"></i> Create Product
+  <i class="fa fa-fw fa-lg fa-check-circle"></i> تسجيل الصنف
   <% end %>
 </div>
 <% end %>

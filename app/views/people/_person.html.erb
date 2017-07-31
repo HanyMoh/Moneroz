@@ -16,7 +16,7 @@
 
       <% if can? :destroy, Person %>
         <% unless person.id == 1 || person.id == 2 || person.id == 3 # Don't detete id no.[1,2,3]  %>
-          <%= link_to person, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "btn btn-danger btn-xs"  do %>
+          <%= link_to person, method: :delete, data: { confirm: 'هل أنت متأكد؟' }, remote: true, class: "btn btn-danger btn-xs"  do %>
             <i class="fa fa-trash-o"></i>
           <% end %>
         <% end %>
@@ -34,36 +34,36 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title" id="myModalLabel"><%= "Edit #{@single_word} ::> #{person.name}" %></h4>
+            <h4 class="modal-title" id="myModalLabel"><%= "تعديل #{@single_word} ::> #{person.name}" %></h4>
           </div>
           <div class="modal-body">
             <!-- =============================================================== -->
             <div class="field">
-              <%= f.label :code %><br>
+              <%= f.label :code, "الكود" %><br>
               <%= f.text_field :code, class: "form-control"  %>
             </div>
             <div class="field">
-              <%= f.label :name,"#{@single_word} Name" %><br>
+              <%= f.label :name,"اسم ال#{@single_word}" %><br>
               <%= f.text_field :name, class: "form-control require", data_type: "text"  %>
             </div>
             <div class="field">
-              <%= f.label :phone %><br>
+              <%= f.label :phone, "الهاتف" %><br>
               <%= f.text_field :phone, class: "form-control" %>
             </div>
             <div class="field">
-              <%= f.label :address %><br>
+              <%= f.label :address, "العنوان" %><br>
               <%= f.text_field :address, class: "form-control", data_type: "address" %>
             </div>
             <div class="field">
-              <%= f.label :note %><br>
+              <%= f.label :note, "ملاحظات" %><br>
               <%= f.text_field :note, class: "form-control" %>
             </div>
             <!-- =============================================================== -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" id="my_update_person_close">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="my_update_person_close">إغلاق</button>
             <%= button_tag( :class => "btn btn-primary") do %>
-              <i class="fa fa-fw fa-lg fa-check-circle"></i> Update
+              <i class="fa fa-fw fa-lg fa-check-circle"></i> تعديل
             <% end %>
           </div>
         </div>
@@ -88,34 +88,34 @@
          <div class="modal-body">
            <!-- =============================================================== -->
            <p>
-             <span class="fa fa-angle-double-right text-primary"></span>
-             <strong>Code:</strong>
+             <span class="fa fa-angle-double-left text-primary"></span>
+             <strong>الكود:</strong>
              <span class="text-info"><%= person.code %></span>
            </p>
            <p>
-             <span class="fa fa-angle-double-right text-primary"></span>
-             <strong><%= "#{@single_word} Name: " %></strong>
+             <span class="fa fa-angle-double-left text-primary"></span>
+             <strong><%= "اسم ال#{@single_word}: " %></strong>
              <span class="text-info"><%= person.name %></span>
            </p>
            <p>
-             <span class="fa fa-angle-double-right text-primary"></span>
-             <strong>Phone:</strong>
+             <span class="fa fa-angle-double-left text-primary"></span>
+             <strong>الهاتف:</strong>
              <span class="text-info"><%= person.phone %></span>
            </p>
            <p>
-             <span class="fa fa-angle-double-right text-primary"></span>
-             <strong>Address:</strong>
+             <span class="fa fa-angle-double-left text-primary"></span>
+             <strong>العنوان:</strong>
              <span class="text-info"><%= person.address %></span>
            </p>
            <p>
-             <span class="fa fa-angle-double-right text-primary"></span>
-             <strong>Note:</strong>
+             <span class="fa fa-angle-double-left text-primary"></span>
+             <strong>ملاحظات:</strong>
              <span class="text-info"><%= person.note %></span>
            </p>
            <!-- =============================================================== -->
          </div>
          <div class="modal-footer">
-           <button type="button" class="btn btn-default" data-dismiss="modal" id="my_show_person_close">Close</button>
+           <button type="button" class="btn btn-default" data-dismiss="modal" id="my_show_person_close">إغلاق</button>
          </div>
        </div>
      </div>

@@ -1,5 +1,5 @@
 <% if can? :create, Section %>
-  <%= link_to 'Add New Section', new_section_path, class: "btn btn-primary" %>
+  <%= link_to 'إضافة قسم جديد', new_section_path, class: "btn btn-primary" %>
   <hr>
 <% end %>
 
@@ -7,7 +7,7 @@
   <thead>
     <tr>
       <th></th>
-      <th>Section Name</th>
+      <th>اسم القسم</th>
     </tr>
   </thead>
 
@@ -22,7 +22,7 @@
               <% end %>
             <% end %>
             <% if can? :destroy, Section %>
-              <%= link_to section, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"  do %>
+              <%= link_to section, method: :delete, data: { confirm: 'هل أنت متأكد؟' }, class: "btn btn-danger btn-xs"  do %>
                 <i class="fa fa-trash-o"></i>
               <% end %>
             <% end %>
@@ -40,5 +40,5 @@
 </table>
 
 <% if can? :create, Section %>
-  <div class="card-footer"><%= link_to 'Add New Section', new_section_path, class: "btn btn-primary" %></div>
+  <div class="card-footer"><%= link_to 'إضافة قسم جديد', new_section_path, class: "btn btn-primary" %></div>
 <% end %>

@@ -13,132 +13,132 @@
     <ul class="sidebar-menu">
       <li class="<%= active_class(root_path) %>">
         <%= link_to root_path do %>
-          <i class="fa fa-dashboard"></i> Dashboard
+          <i class="fa fa-dashboard"></i> الرئيسية
         <% end %>
       </li>
-      <li class="treeview <%= active_class(sale_cash_documents_path) %> <%= active_class(selling_futures_documents_path) %> <%= active_class(returned_sale_documents_path) %> <%= active_class(customers_people_path) %>"><a href="#"><i class="fa fa-edit"></i><span>Sales</span><i class="fa fa-angle-right"></i></a>
+      <li class="treeview <%= active_class(sale_cash_documents_path) %> <%= active_class(selling_futures_documents_path) %> <%= active_class(returned_sale_documents_path) %> <%= active_class(customers_people_path) %>"><a href="#"><i class="fa fa-edit"></i><span>المبيعات</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
           <% if can? :sale_cash, Document %>
             <li>
               <%= link_to sale_cash_documents_path do %>
-              <i class="fa fa-circle-o"></i> Sale Cash
+              <i class="fa fa-circle-o"></i> بون البيع النقدى
               <% end %>
             </li>
           <% end %>
           <% if can? :selling_futures, Document %>
             <li>
               <%= link_to selling_futures_documents_path do %>
-              <i class="fa fa-circle-o"></i> Selling Futures
+              <i class="fa fa-circle-o"></i> بون البيع الآجل
               <% end %>
             </li>
           <% end %>
           <% if can? :returned_sale, Document %>
             <li>
               <%= link_to returned_sale_documents_path do %>
-              <i class="fa fa-circle-o"></i> Returned Sale
+              <i class="fa fa-circle-o"></i> مرتجع مبيعات
               <% end %>
             </li>
           <% end %>
           <% if can? :customer, Person %>
             <li>
               <%= link_to customers_people_path do %>
-              <i class="fa fa-circle-o"></i> Customers
+              <i class="fa fa-circle-o"></i> إضافة العملاء
               <% end %>
             </li>
           <% end %>
         </ul>
       </li>
-      <li class="treeview <%= active_class(purchase_documents_path) %> <%= active_class(returned_buy_documents_path) %> <%= active_class(suppliers_people_path) %>"><a href="#"><i class="fa fa-th-list"></i><span>Procurement</span><i class="fa fa-angle-right"></i></a>
+      <li class="treeview <%= active_class(purchase_documents_path) %> <%= active_class(returned_buy_documents_path) %> <%= active_class(suppliers_people_path) %>"><a href="#"><i class="fa fa-th-list"></i><span>المشتريات</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
           <% if can? :purchase, Document %>
             <li>
               <%= link_to purchase_documents_path do %>
-              <i class="fa fa-circle-o"></i> Purchases
+              <i class="fa fa-circle-o"></i> فاتورة شراء بضاعة
               <% end %>
             </li>
           <% end %>
           <% if can? :returned_buy, Document %>
             <li>
               <%= link_to returned_buy_documents_path do %>
-              <i class="fa fa-circle-o"></i> Returned Buy
+              <i class="fa fa-circle-o"></i> مرتجع شراء بضاعة
               <% end %>
             </li>
           <% end %>
           <% if can? :supplier, Person %>
             <li>
               <%= link_to suppliers_people_path do %>
-              <i class="fa fa-circle-o"></i> Suppliers
+              <i class="fa fa-circle-o"></i> إضافة الموردين
               <% end %>
             </li>
           <% end %>
         </ul>
       </li>
-      <li class="treeview <%= active_class(storages_people_path) %> <%= active_class(fees_people_path) %> <%= active_class(cash_in_payments_path) %> <%= active_class(cash_out_payments_path) %>"><a href="#"><i class="fa fa-file-text"></i><span>Accounts</span><i class="fa fa-angle-right"></i></a>
+      <li class="treeview <%= active_class(storages_people_path) %> <%= active_class(fees_people_path) %> <%= active_class(cash_in_payments_path) %> <%= active_class(cash_out_payments_path) %>"><a href="#"><i class="fa fa-file-text"></i><span>الحسابان</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
           <% if can? :cash_in, Payment %>
             <li>
               <%= link_to cash_in_payments_path do %>
-              <i class="fa fa-circle-o"></i> Cash In
+              <i class="fa fa-circle-o"></i> ايصال استلام نقدية
               <% end %>
             </li>
           <% end %>
           <% if can? :cash_out, Payment %>
             <li>
               <%= link_to cash_out_payments_path do %>
-              <i class="fa fa-circle-o"></i> Cash out
+              <i class="fa fa-circle-o"></i> ايصال صرف نقدية
               <% end %>
             </li>
           <% end %>
           <% if can? :fee, Person %>
             <li>
               <%= link_to fees_people_path do %>
-              <i class="fa fa-circle-o"></i> Expenses
+              <i class="fa fa-circle-o"></i> إضافة المصروفات
               <% end %>
             </li>
           <% end %>
           <% if can? :storage, Person %>
           <li>
             <%= link_to storages_people_path do %>
-            <i class="fa fa-circle-o"></i> Storages
+            <i class="fa fa-circle-o"></i> إضافة خزائن
             <% end %>
           </li>
           <% end %>
         </ul>
       </li>
-      <li class="treeview <%= active_class(sections_path) %> <%= active_class(units_path) %> <%= active_class(products_path) %> <%= active_class(first_term_documents_path) %> <%= active_class(barcode_documents_path) %>"><a href="#"><i class="fa fa-laptop"></i><span>Basic Data</span><i class="fa fa-angle-right"></i></a>
+      <li class="treeview <%= active_class(sections_path) %> <%= active_class(units_path) %> <%= active_class(products_path) %> <%= active_class(first_term_documents_path) %> <%= active_class(barcode_documents_path) %>"><a href="#"><i class="fa fa-laptop"></i><span>البيانات الأساسية</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
           <li>
             <%= link_to products_path do %>
-            <i class="fa fa-circle-o"></i> Products
+            <i class="fa fa-circle-o"></i> إضافة الأصناف
             <% end %>
           </li>
           <li>
             <%= link_to sections_path do %>
-            <i class="fa fa-circle-o"></i> Sections
+            <i class="fa fa-circle-o"></i> إضافة الأقسام
             <% end %>
           </li>
           <li>
             <%= link_to units_path do %>
-            <i class="fa fa-circle-o"></i> Units
+            <i class="fa fa-circle-o"></i> إضافة الوحدات
             <% end %>
           </li>
           <% if can? :first_term, Document %>
             <li>
               <%= link_to first_term_documents_path do %>
-              <i class="fa fa-circle-o"></i> First Term
+              <i class="fa fa-circle-o"></i> بضاعة أول المدة
               <% end %>
             </li>
           <% end %>
           <% if can? :barcode, Document %>
             <li>
               <%= link_to barcode_documents_path do %>
-              <i class="fa fa-circle-o"></i> Barcode
+              <i class="fa fa-circle-o"></i> طباعة الباركود
               <% end %>
             </li>
           <% end %>
         </ul>
       </li>
-      <li class="treeview"><a href="#"><i class="fa fa-pie-chart"></i><span>Reports</span><i class="fa fa-angle-right"></i></a>
+      <li class="treeview"><a href="#"><i class="fa fa-pie-chart"></i><span>التقارير</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
 
         </ul>

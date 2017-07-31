@@ -288,6 +288,9 @@ legend {
 .widget-small .info {padding-right: 20px !important;}
 
 .btn-xs {border-radius: 0px;}
-th {
+.table > thead > tr > th {
   text-align: right;
+}
+.alert {
+  margin-left: 50px;
 }

@@ -15,7 +15,7 @@
       <% end %>
 
       <% if can? :destroy, Payment %>
-        <%= link_to payment, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "btn btn-danger btn-xs"  do %>
+        <%= link_to payment, method: :delete, data: { confirm: 'هل أنت متأكد؟' }, remote: true, class: "btn btn-danger btn-xs"  do %>
         <i class="fa fa-trash-o"></i>
         <% end %>
       <% end %>
@@ -32,7 +32,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title" id="myModalLabel"><%= "Edit #{@single_word}" %></h4>
+            <h4 class="modal-title" id="myModalLabel"><%= "تعديل #{@single_word}" %></h4>
           </div>
           <div class="modal-body">
             <!-- =============================================================== -->
@@ -67,7 +67,7 @@
             <!-- =============================================================== -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" id="my_new_payment_close">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="my_new_payment_close">إغلاق</button>
             <%= button_tag( :class => "btn btn-primary") do %>
               <i class="fa fa-fw fa-lg fa-check-circle"></i> Update
             <% end %>
