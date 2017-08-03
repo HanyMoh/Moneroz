@@ -15,4 +15,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require plugins/pace.min
+//= require plugins/bootstrap-datepicker.min
 //= require_tree .
