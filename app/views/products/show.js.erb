@@ -1,0 +1,14 @@
+$('.barcode').val('<%= @product.barcode %>')
+//
+// < %= j @product.barcode %>
+// < %= j @product.name %>
+//
+// < % if current_user.admin? %>
+// < %= j @product.price_in.to_f %>
+// < % else %>
+// < %= j @product.price_out.to_f %>
+// < % end %>
+//
+//   < %= j @product.unit.name if @product.unit %>
+//   <span class="badge">< %= j @product.refill %></span>
+//   < %= j @product.unit_refill.name if @product.unit_refill %>

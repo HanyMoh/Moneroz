@@ -1,30 +1,28 @@
 <div class="login-form">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
+  <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>تسجيل الدخول</h3>
 
   <%= render "layouts/notice"%>
 
   <div class="form-group">
-    <label class="control-label">USERNAME</label>
+    <label class="control-label">اسم المستخدم</label>
     <%= f.text_field :user_name, autofocus: true, placeholder: "User Name", class: 'form-control'  %>
   </div>
   <div class="form-group">
-    <label class="control-label">PASSWORD</label>
+    <label class="control-label">كلمة المرور</label>
     <%= f.password_field :password, autocomplete: "off", placeholder:"Password", class: "form-control"  %>
   </div>
   <div class="form-group btn-container">
     <%= button_tag( :class => "btn btn-primary btn-block") do %>
-      <i class="fa fa-sign-in fa-lg fa-fw"></i> Log in
+      <i class="fa fa-sign-in fa-lg fa-fw"></i> تسجيل الدخول
     <% end %>
   </div>
 <% end %>
   <div >
     <br>
     <div>
-      <p>
-        <span class="text-info">Call us at: +2 01125039123</span>
-        <br/>
-        <strong>Copyright</strong> IQAdv &copy; 2017-2018
+      <p class="text-center">
+        Copyright <strong>IQAdv&copy; 2017-2018</strong> <span class="text-info">+201125039123</span>
       </p>
     </div>
   </div>

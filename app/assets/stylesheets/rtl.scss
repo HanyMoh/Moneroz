@@ -19,10 +19,16 @@ p {margin: 0 0 10px;line-height: 2;font-size: 14px;}
 @media (min-width: 1200px) {
   .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
     float: right;
-    } }
+    }
+  }
 
 .dropdown-menu {
-    float: right; }
+    float: right;
+    text-align:right;
+    left: 0;
+    right: auto;
+    transform-origin: 0 0;
+ }
 
 .btn-group > .btn,
 .btn-group-vertical > .btn {

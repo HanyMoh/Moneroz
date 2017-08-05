@@ -6,32 +6,32 @@
   <%= devise_error_messages! %>
 
   <div class="form-group">
-    <label class="control-label">USERNAME</label>
+    <label class="control-label">اسم المستخدم</label>
     <%= f.text_field :user_name, autofocus: true, placeholder: "User Name", autofocus: true, class: 'form-control'  %>
   </div>
 
   <div class="form-group">
-    <label class="control-label">EMAIL</label>
+    <label class="control-label">الإيميل</label>
     <%= f.email_field :email, autofocus: true, placeholder: "Email", autofocus: true, class: 'form-control'  %>
   </div>
 
   <div class="form-group">
-    <label class="control-label">PASSWORD
+    <label class="control-label">كلمة المرور
       <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <em>(لا يقل عن<%= @minimum_password_length %> على الأقل)</em>
       <% end %>
     </label>
     <%= f.password_field :password, autocomplete: "off", placeholder:"Password", class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <label class="control-label">PASSWORD CONFIRMATION</label>
+    <label class="control-label">تأكيد كلمة المرور</label>
     <%= f.password_field :password_confirmation, autocomplete: "off", placeholder:"Password", class: "form-control" %>
   </div>
 
   <div class="form-group btn-container">
     <%= button_tag( :class => "btn btn-primary btn-block") do %>
-      <i class="fa fa-sign-in fa-lg fa-fw"></i> Sign up
+      <i class="fa fa-sign-in fa-lg fa-fw"></i> تسجيل
     <% end %>
   </div>
 <% end %>

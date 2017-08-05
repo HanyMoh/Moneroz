@@ -1,5 +1,5 @@
 <% if can? :create, User %>
-  <%= link_to 'Add New User', new_user_path, class: "btn btn-primary" %>
+  <%= link_to 'إضافة مستخدم جديد', new_user_path, class: "btn btn-primary" %>
   <hr>
 <% end %>
 
@@ -7,10 +7,10 @@
   <thead>
     <tr>
       <th></th>
-      <th>User Name</th>
-      <th>Email</th>
-      <th>Admin</th>
-      <th>Active</th>
+      <th>اسم المستخدم</th>
+      <th>البريد الإليكترونى</th>
+      <th>هل مدير؟</th>
+      <th>هل نشط؟</th>
     </tr>
   </thead>
 
@@ -26,13 +26,13 @@
       </td>
       <td><%= user.user_name %></td>
       <td><%= user.email %></td>
-      <td><%= user.admin ? "<span class='text-success'>Yes</span>".html_safe : "<span class='text-danger'>No</span>".html_safe  %></td>
-      <td><%= user.active ? "<span class='text-success'>Yes</span>".html_safe : "<span class='text-danger'>No</span>".html_safe  %></td>
+      <td><%= user.admin ? "<span class='text-success'>نعم</span>".html_safe : "<span class='text-danger'>لا</span>".html_safe  %></td>
+      <td><%= user.active ? "<span class='text-success'>نعم</span>".html_safe : "<span class='text-danger'>لا</span>".html_safe  %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
 
 <% if can? :create, User %>
-  <div class="card-footer"><%= link_to 'Add New User', new_user_path, class: "btn btn-primary" %></div>
+  <div class="card-footer"><%= link_to 'إضافة مستخدم جديد', new_user_path, class: "btn btn-primary" %></div>
 <% end %>

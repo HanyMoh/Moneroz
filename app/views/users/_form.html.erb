@@ -13,40 +13,40 @@
 <% end %>
 
 <div class="form-group">
-  <%= f.label :user_name %>
+  <%= f.label :user_name,"اسم المستخدم" %>
   <%= f.text_field :user_name, readonly: false, class: 'require form-control' %>
 </div>
 
 <div class="row">
   <div class="form-group col-xs-12 col-sm-12 col-md-6">
-    <%= f.label :active, class: 'control-label' %>
-    <%= f.select :active, [["Yes", true], ["No", false]], {:include_blank => true},{class: 'require form-control'} %>
+    <%= f.label :active, "هل حسابه نشط؟", class: 'control-label' %>
+    <%= f.select :active, [["نعم", true], ["لا", false]], {:include_blank => true},{class: 'require form-control'} %>
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-6">
-    <%= f.label :admin, class: 'control-label' %>
-    <%= f.select :admin, [["Yes", true], ["No", false]], {:include_blank => true},{class: 'require form-control'} %>
+    <%= f.label :admin, "هل هو مدير؟", class: 'control-label' %>
+    <%= f.select :admin, [["نعم", true], ["لا", false]], {:include_blank => true},{class: 'require form-control'} %>
   </div>
 </div>
 
 <div class="row">
   <div class="form-group col-xs-12 col-sm-12 col-md-6">
-    <%= f.label :password %>
+    <%= f.label :password, "كلمة المرور" %>
     <%= f.password_field :password, class: 'form-control' %>
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-6">
-    <%= f.label :password_confirmation %>
+    <%= f.label :password_confirmation, "تأكيد كلمة المرور" %>
     <%= f.password_field :password_confirmation, class: 'form-control' %>
   </div>
 </div>
 
 <div class="form-group">
-  <%= f.label :email %>
+  <%= f.label :email,"البريد الإليكترونى" %>
   <%= f.email_field :email, class: 'form-control' %>
 </div>
 
 <div class="actions">
   <%= button_tag( :class => "btn btn-primary") do %>
-    <i class="fa fa-fw fa-lg fa-check-circle"></i> Save
+    <i class="fa fa-fw fa-lg fa-check-circle"></i> تسجيل
   <% end %>
 </div>
 <% end %>

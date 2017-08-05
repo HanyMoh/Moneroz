@@ -12,6 +12,9 @@ class ProductsController < ApplicationController
 
   def show
     authorize! :read, Product
+    respond_to do |format|
+       format.js
+    end
   end
 
   # GET /products/new

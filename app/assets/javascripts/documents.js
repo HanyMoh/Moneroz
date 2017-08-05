@@ -45,4 +45,12 @@ $(document).ready(function() {
     $('.invoice_total').val(all);
     invoice();
   });
+
+  $('#product_selection').live('change', function() {
+  $.ajax({
+    url: "products/show",
+    type: "GET",
+    data: {'product=' + $('#product_selection option:selected').value() }
+  })
+});
 });

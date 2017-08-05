@@ -2,7 +2,8 @@
   <div class="pull-left">
     <%= link_to "×", '#', class: "close remove_fields" %>
   </div>
-  <%= f.collection_select(:product_id, Product.all, :id, :name, {include_blank: true, :selected => 0}, { :class => "form-control product" }) %>
+  <%= f.text_field :barcode, class: "form-control barcode" %>
+  <%= f.collection_select(:product_id, Product.all, :id, :name, {include_blank: true, :selected => 0}, { :class => "form-control product", :id=> 'product_selection' }) %>
   <%= f.text_field :quantity, class: "form-control quantity blur" %>
   <%= f.text_field :price, class: "form-control price blur" %>
   <%= f.hidden_field :effect, :value => @document.effect %>
