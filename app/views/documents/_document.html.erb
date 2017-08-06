@@ -63,8 +63,8 @@
         ======================================================================= -->
 
   </td>
-    <td><%= document.doc_date %></td>
-    <td><%= link_to document.code, document %></td>
+    <td><%= link_to document.doc_date, document %></td>
+    <td><%= document.code %></td>
     <td><%= document.storage.name if document.storage %></td>
     <td><%= document.person.name if document.person %></td>
     <td><span class="label label-success"><%= document.payment %></span> ج.م</td>
