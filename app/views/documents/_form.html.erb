@@ -107,7 +107,7 @@
           <%= f.fields_for :doc_items do |builder| %>
             <%= render "doc_item_fields", f: builder %>
           <% end %>
-          <tr><td colspan="6"><%= link_to_add_some_fields "إضافة صنف جديد", f, :doc_items %></td></tr>
+          <tr><td colspan="7"><%= link_to_add_some_fields "إضافة صنف جديد", f, :doc_items %></td></tr>
         </tbody>
       </table>
     </div>
