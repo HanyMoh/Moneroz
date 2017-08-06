@@ -16,14 +16,14 @@ class Product < ApplicationRecord
     "#{(product.section.id.to_s).rjust(3, '0')}#{(product.code.to_s).rjust(6, '0')}"
   }
 
-  # scope :get_product_by_barcode, lambda{ |barcode|
-  #   barcode = barcode.gsub(' ', '')
-  #   where('barcode = ?', barcode)
-  # }
-  #
-  # scope :get_product_by_name, lambda{ |name|
-  #   name = name.gsub(' ', '')
-  #   name = "%#{name}%"
-  #   where('name like ?', name)
-  # }
+  scope :get_product_by_barcode, lambda{ |barcode|
+    barcode = barcode.gsub(' ', '')
+    where('barcode = ?', barcode)
+  }
+
+  scope :get_product_by_name, lambda{ |name|
+    name = name.gsub(' ', '')
+    name = "%#{name}%"
+    where('name like ?', name)
+  }
 end

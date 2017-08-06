@@ -89,11 +89,30 @@
   <hr>
 
     <!-- [Nested doc_items] -->
+  <div class="row">
+    <div class="col-xs-12 table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th></th>
+            <th>بركود</th>
+            <th>اسم الصنف</th>
+            <th>الكمية</th>
+            <th>السعر</th>
+            <th>الخصم</th>
+            <th>الإجمالى</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= f.fields_for :doc_items do |builder| %>
+            <%= render "doc_item_fields", f: builder %>
+          <% end %>
+          <tr><td colspan="6"><%= link_to_add_some_fields "إضافة صنف جديد", f, :doc_items %></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-    <%= f.fields_for :doc_items do |builder| %>
-      <%= render "doc_item_fields", f: builder %>
-    <% end %>
-    <%= link_to_add_some_fields "إضافة صنف جديد", f, :doc_items %>
   <hr>
 
   <div class="row">

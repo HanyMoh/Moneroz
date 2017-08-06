@@ -46,11 +46,14 @@ $(document).ready(function() {
     invoice();
   });
 
-  $('#product_selection').live('change', function() {
-  $.ajax({
-    url: "products/show",
-    type: "GET",
-    data: {'product=' + $('#product_selection option:selected').value() }
-  })
-});
+  $(function() {
+    $("#product_selection").on("change", function() {
+        $.ajax({
+            url:  "give_me_barcode",
+            type: "GET",
+            data: { product: $("#product_selection").val() }
+        });
+    });
+  });
+
 });

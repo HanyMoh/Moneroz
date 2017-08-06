@@ -4,7 +4,7 @@ class DocItem < ApplicationRecord
 
   attr_accessor :barcode
 
-  # scope :invoice_total, lambda { |document_id|
-  #   where('document_id = ?', document_id).sum('(qty * price)- discount').to_f
-  # }
+  scope :invoice_total, lambda { |document_id|
+    where('document_id = ?', document_id).sum('(qty * price)- discount').to_f
+  }
 end

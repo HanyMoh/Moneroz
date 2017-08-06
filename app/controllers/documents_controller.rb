@@ -134,6 +134,13 @@ class DocumentsController < ApplicationController
     set_document_type(4, 7, "طباعة باركود")
   end
 
+  def give_me_barcode
+    @product = Product.find(params[:product])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # DELETE /documents/1
   # DELETE /documents/1.json
   def destroy
@@ -173,6 +180,7 @@ class DocumentsController < ApplicationController
       @document.store = Person.find(2)
       @document.doc_items.build
     end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
