@@ -90,28 +90,24 @@
 
     <!-- [Nested doc_items] -->
   <div class="row">
-    <div class="col-xs-12 table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th></th>
-            <th>بركود</th>
-            <th>اسم الصنف</th>
-            <th>الكمية</th>
-            <th>السعر</th>
-            <th>الخصم</th>
-            <th>الإجمالى</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%= f.fields_for :doc_items do |builder| %>
-            <%= render "doc_item_fields", f: builder %>
-          <% end %>
-          <tr><td colspan="7"><%= link_to_add_some_fields "إضافة صنف جديد", f, :doc_items %></td></tr>
-        </tbody>
-      </table>
-    </div>
+<div class="div-table">
+  <div class="div-table-row">
+    <div class="div-table-col div-table-col-20 div-table-col-th">&nbsp;</div>
+    <div class="div-table-col div-table-col-200 div-table-col-th">باركود</div>
+    <div class="div-table-col div-table-col-300 div-table-col-th">اسم الصنف</div>
+    <div class="div-table-col div-table-col-th">الكمية</div>
+    <div class="div-table-col div-table-col-th">السعر</div>
+    <div class="div-table-col div-table-col-th">الخصم</div>
+    <div class="div-table-col div-table-col-th">الإجمالى</div>
   </div>
+
+  <%= f.fields_for :doc_items do |builder| %>
+  <%= render "doc_item_fields", f: builder %>
+  <% end %>
+
+  <%= link_to_add_some_fields "إضافة صنف جديد", f, :doc_items %>
+
+</div>
 
   <hr>
 

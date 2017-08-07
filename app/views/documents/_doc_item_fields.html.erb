@@ -1,26 +1,12 @@
-<tr class="nested nested_box">
-  <td>
-    <div class="pull-left">
-      <%= link_to "×", '#', class: "close remove_fields" %>
-    </div>
-  </td>
-  <td>
-    <%= f.text_field :barcode, class: "form-control barcode" %>
-  </td>
-  <td>
-    <%= f.collection_select(:product_id, Product.all, :id, :name, {include_blank: true, :selected => 0}, { :class => "form-control product", :id=> 'product_selection' }) %>
-  </td>
-  <td>
-    <%= f.text_field :quantity, class: "form-control quantity blur" %>
-  </td>
-  <td>
-    <%= f.text_field :price, class: "form-control price blur" %>
-  </td>
-  <td>
-    <%= f.text_field :discount_value, class: "form-control discount_value blur" %>
-  </td>
-  <td>
-    <input class="total" id="invoice_total" type="text" placeholder="0.00" disabled>
+<div class="div-table-row nested nested_box">
+  <div class="div-table-col div-table-col-20 pull-left">
+    <%= link_to "×", '#', class: "close remove_fields" %>
     <%= f.hidden_field :effect, :value => @document.effect %>
-  </td>
-</tr>
+  </div>
+  <div class="div-table-col div-table-col-200"><%= f.text_field :barcode, class: "form-control barcode" %></div>
+  <div class="div-table-col div-table-col-300"><%= f.collection_select(:product_id, Product.all, :id, :name, {include_blank: true, :selected => 0}, { :class => "form-control product", :id=> 'product_selection' }) %></div>
+  <div class="div-table-col"><%= f.text_field :quantity, class: "form-control quantity blur" %></div>
+  <div class="div-table-col"><%= f.text_field :price, class: "form-control price blur" %></div>
+  <div class="div-table-col"><%= f.text_field :discount_value, class: "form-control discount_value blur" %></div>
+  <div class="div-table-col"><input class="form-control total" id="invoice_total" type="text" placeholder="0.00" disabled></div>
+</div>
