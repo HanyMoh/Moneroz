@@ -56,4 +56,14 @@ $(document).ready(function() {
     });
   });
 
+  $(function() {
+    $("barcode").on('blur', '.blur', function() {
+        $.ajax({
+            url:  "give_me_product",
+            type: "GET",
+            data: { product: $(this).val() }
+        });
+    });
+  });
+
 });
