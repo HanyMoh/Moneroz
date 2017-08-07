@@ -139,7 +139,48 @@
       </li>
       <li class="treeview"><a href="#"><i class="fa fa-pie-chart"></i><span>التقارير</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
-
+          <% if can? :barcode, Document %>
+            <li>
+              <%= link_to "#" do %>
+              <i class="fa fa-circle-o"></i> حركة الخزينة
+              <% end %>
+            </li>
+          <% end %>
+          <% if can? :barcode, Document %>
+            <li>
+              <%= link_to "#" do %>
+              <i class="fa fa-circle-o"></i> حركة الأصناف
+              <% end %>
+            </li>
+          <% end %>
+          <% if can? :barcode, Document %>
+            <li>
+              <%= link_to "#" do %>
+              <i class="fa fa-circle-o"></i> جرد الأصناف
+              <% end %>
+            </li>
+          <% end %>
+          <% if can? :barcode, Document %>
+            <li>
+              <%= link_to "#" do %>
+              <i class="fa fa-circle-o"></i> حسابات مورد
+              <% end %>
+            </li>
+          <% end %>
+          <% if can? :barcode, Document %>
+            <li>
+              <%= link_to "#" do %>
+              <i class="fa fa-circle-o"></i> حسابات عميل
+              <% end %>
+            </li>
+          <% end %>
+          <% if can? :barcode, Document %>
+            <li>
+              <%= link_to "#" do %>
+              <i class="fa fa-circle-o"></i> أصناف على وشك النفاد
+              <% end %>
+            </li>
+          <% end %>
         </ul>
       </li>
     </ul>
