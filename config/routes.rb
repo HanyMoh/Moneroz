@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  get 'documents/give_me_barcode'  
+  get 'home/new'  
+  get 'documents/give_me_barcode'
   resources :documents do
     resources :doc_items
     collection do
