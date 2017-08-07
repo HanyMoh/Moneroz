@@ -1,3 +1,32 @@
-<h1>مرحباً, كيف حالك؟</h1>
-<p>تعلمت أن المتسلق الجيد يركز على هدفه ولا ينظر إلى الاسفل … حيث المخاطر التي تشتت الذهن
-</p>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>التاريخ</th>
+      <th>م</th>
+      <th>الخزينة</th>
+      <th>التداول</th>
+      <th>المدفوع</th>
+      <th>الإجمالى</th>
+      <th>المستخدم</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @documents.each do |document| %>
+    <tr>
+      <td><%= doc_type_tag document.doc_type %></td>
+      <td><%= link_to document.doc_date, document %></td>
+      <td><%= document.code %></td>
+      <td><%= document.storage.name if document.storage %></td>
+      <td><%= document.person.name if document.person %></td>
+      <td><span class="label label-success"><%= document.payment %></span> ج.م</td>
+      <td><%= document.discount_value %> ج.م</td>
+      <td><%= document.tax %> ج.م</td>
+      <td><span class="label label-danger"><%= document.payment %></span>
+    ج.م</td>
+      <td><%= document.user.user_name if document.user %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

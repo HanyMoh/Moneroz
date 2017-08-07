@@ -1,11 +1,11 @@
 class Document < ApplicationRecord
-  DOC_TYPE = { 1 => "first_term",
-               2 => "purchase",
-               3 => "sale_cash",
-               4 => "selling_futures",
-               5 => "returned_sale",
-               6 => "returned_buy",
-               7 => "barcode" }.freeze
+  DOC_TYPE = { 1 => "أول المدة",
+               2 => "مشتريات",
+               3 => "بيع نقدى",
+               4 => "بيع آجل",
+               5 => "مرتجع بيع",
+               6 => "مرتجع شراء",
+               7 => "باركود" }.freeze
 
   has_many   :doc_items, inverse_of: :document, dependent: :destroy
   belongs_to :person
