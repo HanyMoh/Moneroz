@@ -40,13 +40,13 @@ class PaymentsController < ApplicationController
   # DELETE /payments/cash_in
   def cash_in
     authorize! :cash_in, Payment
-    set_pay_type(1, 1, "إيصال استلام نقدية", "Cash In")
+    set_pay_type(1, 1, "إيصال استلام نقدية", "استلام")
   end
 
   # DELETE /payments/cash_out
   def cash_out
     authorize! :cash_out, Payment
-    set_pay_type(2, 2, "إيصال صرف نقدية", "Cash Out")
+    set_pay_type(2, 2, "إيصال صرف نقدية", "صرف")
   end
 
   # DELETE /payments/1

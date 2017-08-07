@@ -2,7 +2,7 @@
        index content panel
      ======================================================================= -->
      <% if (can? :cash_in, Payment) || (can? :cash_out, Payment) %>
-       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my_new_payment"><%= "Add New #{@single_word}" %></button>
+       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my_new_payment"><%= "إضافة إيصال #{@single_word} جديد" %></button>
        <hr>
      <% end %>
 
@@ -10,13 +10,13 @@
       <thead>
         <tr>
           <th>&nbsp;</th>
-          <th>Date</th>
-          <th>Code</th>
-          <th>Storage</th>
-          <th>Account</th>
-          <th>Money</th>
-          <th>Description</th>
-          <th>User</th>
+          <th>التاريخ</th>
+          <th>مسلسل</th>
+          <th>الخزينة</th>
+          <th>الحساب</th>
+          <th>المبلغ</th>
+          <th>البيان</th>
+          <th>المستخدم</th>
         </tr>
       </thead>
       <tbody class="all_payments">
@@ -26,7 +26,7 @@
 
     <% if (can? :cash_in, Payment) || (can? :cash_out, Payment) %>
       <div class="card-footer">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my_new_payment"><%= "Add New #{@single_word}" %></button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my_new_payment"><%= "إضافة إيصال #{@single_word} جديد" %></button>
       </div>
     <% end %>
 
@@ -50,12 +50,12 @@
       <div class="modal-body">
         <!-- ============================================================= -->
         <div class="field">
-          <%= f.label :code %><br>
+          <%= f.label :code, "المسلسل" %><br>
           <%= f.text_field :code, class: "form-control payment_code"  %>
         </div>
         <div class="field">
-          <%= f.label :pay_date, "Date" %><br>
-          <%= f.text_field :pay_date, class: "form-control datepicker require payment_pay_date" %>
+          <%= f.label :pay_date, "التاريخ" %><br>
+          <%= f.text_field :pay_date, class: "form-control payment_pay_date", id: "demoDate" %>
         </div>
         <div class="field">
           <!-- hidden field pass value -->
@@ -63,23 +63,23 @@
           <%= f.hidden_field :effect, :value => @payment.effect %>
         </div>
         <div class="field">
-          <%= f.label :storage_id %><br>
+          <%= f.label :storage_id, "الخزينة" %><br>
           <%= f.collection_select(:storage_id, Person.people_by_type(4), :id, :name, {:selected => 1}, { :class => "form-control require" }) %>
         </div>
         <div class="field">
-          <%= f.label :person_id,"Account Name" %><br>
+          <%= f.label :person_id,"اسم الحساب" %><br>
           <%= f.collection_select(:person_id, Person.all, :id, :full_description, {include_blank: true, :selected => 0}, { :class => "form-control require" }) %>
         </div>
         <div class="field">
-            <%= f.label :money %><br>
+            <%= f.label :money, "المبلغ" %><br>
           <%= f.text_field :money,:placeholder => "0.00", :class => "form-control require import payment_money", :data_type => "double" %>
         </div>
         <div class="field">
-          <%= f.label :description %><br>
+          <%= f.label :description, "البيان" %><br>
           <%= f.text_field :description, class: "form-control require payment_description" %>
         </div>
         <div class="field">
-          <%= f.label :note %><br>
+          <%= f.label :note, "ملاحظات" %><br>
           <%= f.text_field :note, class: "form-control payment_note" %>
         </div>
         <!-- ============================================================= -->
@@ -87,7 +87,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" id="my_new_payment_close">إغلاق</button>
         <%= button_tag( :class => "btn btn-primary") do %>
-          <i class="fa fa-fw fa-lg fa-check-circle"></i> Save
+          <i class="fa fa-fw fa-lg fa-check-circle"></i> تسجيل
         <% end %>
       </div>
     </div>

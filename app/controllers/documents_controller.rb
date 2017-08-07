@@ -173,11 +173,11 @@ class DocumentsController < ApplicationController
     def set_document_type(effect, doc_type, title)
       @page_title = title
       @document = Document.new
-      set_field
       @document.doc_type = doc_type
       @document.effect = effect
       @document.user = current_user
       @document.store = Person.find(2)
+      set_field
       @document.doc_items.build
     end
 

@@ -31,30 +31,70 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title" id="myModalLabel"><%= "عرض بيانات #{@single_word}" %></h4>
+            <h4 class="modal-title" id="myModalLabel">زلط .. لمفروشات العرائس <small class="pull-right">التاريخ: <%= document.doc_date %></small></h4>
           </div>
           <div class="modal-body">
             <!-- =============================================================== -->
 
-            <div class="field">
-              <p><%= document.code %></p>
-            </div>
-            <div class="field">
-              <p><%= document.storage.name if document.storage %></p>
-            </div>
-            <div class="field">
-              <p><%= document.person.name if document.person  %></p>
-            </div>
-            <div class="field">
-              <p>< %= document.description %></p>
-            </div>
-            <div class="field">
-              <p><%= document.note %></p>
-            </div>
+            <section class="invoice">
+              <div class="row invoice-info">
+
+                <div class="col-xs-4">
+                  <b>مسلسل #<%= document.code %></b><br><br><b>الفرع:</b> <%= document.store.name if document.store %><br><b>الخزينة:</b> <%= document.storage.name if document.storage %><br><b>المستخدم:</b> <%= document.user.user_name if  document.user %>
+                </div>
+
+                <div class="col-xs-4">
+                  <b>المتداول:</b> <%= document.person.name if document.person %><br><br>
+                  <b>ملاحظات:</b><p><%= document.note %></p>
+                </div>
+
+                <div class="col-xs-4">
+                  <b>الإجمالى:</b> <%= document.payment.to_f %><br><br>
+                  <b>الخصم:</b> <%= document.payment.to_f %><br>
+                  <b>الضريبة:</b><%= document.tax.to_f %><br>
+                  <b>المدفوع:</b><%= document.payment.to_f %><br>
+                  <b>الباقى:</b><%= document.payment.to_f %>
+                </div>
+
+            <div class="clearfix"></div>
+            <br><br>
+
+              <div class="row">
+                <div class="col-xs-12 table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>الباركود</th>
+                        <th>اسم الصنف</th>
+                        <th>الكمية</th>
+                        <th>السعر</th>
+                        <th>الخصم</th>
+                        <th>الإجمالى</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% document.doc_items.each do |item| %>
+                      <tr>
+                        <td><%= item.product.barcode if item.product %></td>
+                        <td><%= item.product.name if item.product %></td>
+                        <td><%= item.quantity %></td>
+                        <td><%= item.price.to_f %></td>
+                        <td><%= item.discount_value.to_f %></td>
+                        <td><%= item.quantity * item.price.to_f - item.discount_value.to_f %></td>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
             <!-- =============================================================== -->
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer hidden-print">
+            <div class="col-xs-12 text-right"><a class="btn btn-primary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> طباعة</a>
+
             <button type="button" class="btn btn-default" data-dismiss="modal" id="my_show_document_close">إغلاق</button>
+
+            </div>
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@
           <i class="fa fa-dashboard"></i> الرئيسية
         <% end %>
       </li>
-      <li class="treeview <%= active_class(sale_cash_documents_path) %> <%= active_class(selling_futures_documents_path) %> <%= active_class(returned_sale_documents_path) %> <%= active_class(customers_people_path) %>"><a href="#"><i class="fa fa-edit"></i><span>المبيعات</span><i class="fa fa-angle-right"></i></a>
+      <li class="treeview <%= active_class(sale_cash_documents_path) %> <%= active_class(selling_futures_documents_path) %> <%= active_class(returned_sale_documents_path) %> <%= active_class(customers_people_path) %> <%= active_class(add_sale_cash_documents_path) %> <%= active_class(add_selling_futures_documents_path) %> <%= active_class(add_returned_sale_documents_path) %>"><a href="#"><i class="fa fa-edit"></i><span>المبيعات</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
           <% if can? :sale_cash, Document %>
             <li>
@@ -47,7 +47,7 @@
           <% end %>
         </ul>
       </li>
-      <li class="treeview <%= active_class(purchase_documents_path) %> <%= active_class(returned_buy_documents_path) %> <%= active_class(suppliers_people_path) %>"><a href="#"><i class="fa fa-th-list"></i><span>المشتريات</span><i class="fa fa-angle-right"></i></a>
+      <li class="treeview <%= active_class(purchase_documents_path) %> <%= active_class(returned_buy_documents_path) %> <%= active_class(suppliers_people_path) %> <%= active_class(add_purchase_documents_path) %> <%= active_class(add_returned_buy_documents_path) %>"><a href="#"><i class="fa fa-th-list"></i><span>المشتريات</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
           <% if can? :purchase, Document %>
             <li>
@@ -104,7 +104,7 @@
           <% end %>
         </ul>
       </li>
-      <li class="treeview <%= active_class(sections_path) %> <%= active_class(units_path) %> <%= active_class(products_path) %> <%= active_class(first_term_documents_path) %> <%= active_class(barcode_documents_path) %>"><a href="#"><i class="fa fa-laptop"></i><span>البيانات الأساسية</span><i class="fa fa-angle-right"></i></a>
+      <li class="treeview <%= active_class(sections_path) %> <%= active_class(units_path) %> <%= active_class(products_path) %> <%= active_class(first_term_documents_path) %> <%= active_class(barcode_documents_path) %> <%= active_class(add_first_term_documents_path) %> <%= active_class(add_barcode_documents_path) %>"><a href="#"><i class="fa fa-laptop"></i><span>البيانات الأساسية</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
           <li>
             <%= link_to products_path do %>
