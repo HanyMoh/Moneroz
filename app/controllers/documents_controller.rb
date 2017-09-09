@@ -136,9 +136,7 @@ class DocumentsController < ApplicationController
 
   def give_me_barcode
     @product = Product.find(params[:product])
-    respond_to do |format|
-      format.js
-    end
+    render json: @product
   end
 
   # DELETE /documents/1

@@ -24,13 +24,15 @@ $(document).ready(function() {
 
   function invoice() {
     var net = parseFloat($('.invoice_total').val()) + parseFloat($('.tax').val()) - parseFloat($('.discount_value').val());
-    $('.net').val(net);
+    var discount_percent = parseFloat($('.discount_percent').val()) * parseFloat($('.invoice_total').val()) / 100;
+    console.log($('.discount_percent').val())
+    console.log((discount_percent));
+    $('.net').val((net-discount_percent));
     var rest = parseFloat($('.net').val()) - parseFloat($('.payment').val());
     $('.rest').val(rest);
   }
 
-
-  $('discount_or_tax').blur(function() {
+  $(document).on('blur', '.discount_or_tax, .payment', function() {
     invoice();
   });
 
@@ -47,13 +49,31 @@ $(document).ready(function() {
   });
 
   $(function() {
-    $("#product_selection").on("change", function() {
+    $(document).on('change', '.product', function() {
+        var product_value = $(this).val();
+        var price = $(this).closest(".nested_box").find('.price');
+        var barcode = $(this).closest(".nested_box").find('.barcode');
         $.ajax({
             url:  "give_me_barcode",
             type: "GET",
-            data: { product: $("#product_selection").val() }
+            data: { product: product_value },
+            success: function(data) {
+               price.val(data.price_out);
+               barcode.val(data.barcode);
+            }
         });
     });
   });
 
+});
+
+
+$(document).on('click', '.hidden-print .ga-print', function(e) {
+  e.preventDefault;
+  var modal = $('.modal-dialog').html();
+  var wrapper = $('.wrapper').html();
+  $('.wrapper').html(modal);
+  $('.pace-inactive').hide();
+  window.print();
+  location.reload();
 });
