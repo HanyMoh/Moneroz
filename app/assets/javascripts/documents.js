@@ -65,6 +65,26 @@ $(document).ready(function() {
     });
   });
 
+  $(function() {
+    // $(document).on('blur', '.barcode', function() {
+      $('.barcode').blur(function() {
+        var barcode_value = $(this).val();
+        var price = $(this).closest(".nested_box").find('.price');
+        var product = $(this).closest(".nested_box").find('.product');
+        var barcode = $(this).closest(".nested_box").find('.barcode');
+        $.ajax({
+            url:  "give_me_product",
+            type: "GET",
+            data: { barcode: barcode_value },
+            success: function(data) {
+               price.val(data.price_out);
+               barcode.val(data.barcode);
+               product.text(data.name);
+            }
+        });
+    });
+  });
+
 });
 
 
