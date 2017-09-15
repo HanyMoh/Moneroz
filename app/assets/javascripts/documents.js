@@ -66,20 +66,24 @@ $(document).ready(function() {
   });
 
   $(function() {
-    // $(document).on('blur', '.barcode', function() {
-      $('.barcode').blur(function() {
+    $(document).on('blur', '.barcode', function() {
+      // $('.barcode').blur(function() {
         var barcode_value = $(this).val();
+        console.log(barcode_value);
         var price = $(this).closest(".nested_box").find('.price');
         var product = $(this).closest(".nested_box").find('.product');
-        var barcode = $(this).closest(".nested_box").find('.barcode');
+        // var barcode = $(this).closest(".nested_box").find('.barcode');
         $.ajax({
             url:  "give_me_product",
             type: "GET",
             data: { barcode: barcode_value },
             success: function(data) {
+            console.log(data);
+            console.log('haNY');
                price.val(data.price_out);
-               barcode.val(data.barcode);
-               product.text(data.name);
+              //  barcode.val(data.barcode);
+
+               product.val(data.id);
             }
         });
     });
@@ -87,6 +91,12 @@ $(document).ready(function() {
 
 });
 
+$(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+});
 
 $(document).on('click', '.hidden-print .ga-print', function(e) {
   e.preventDefault;
@@ -97,3 +107,20 @@ $(document).on('click', '.hidden-print .ga-print', function(e) {
   window.print();
   location.reload();
 });
+
+
+$(document).on('click', '.invoice-print', function(e) {
+  e.preventDefault;
+  console.log('zalat');
+  var modal = $('.invoice').html();
+  var wrapper = $('.wrapper').html();
+  $('.wrapper').html(modal);
+  $('.pace-inactive').hide();
+  window.print();
+  console.log('yyyy');
+  location.replace("https://www.w3schools.com");
+});
+
+window.onafterprint = function(){
+    location.replace("https://www.w3schools.com");
+}
