@@ -7,8 +7,7 @@ class Document < ApplicationRecord
                6 => "مرتجع شراء",
                7 => "باركود" }.freeze
 
-  has_many   :doc_items, dependent: :destroy
-  has_many   :products, :through => :doc_items
+  has_many   :doc_items, inverse_of: :document, dependent: :destroy
   belongs_to :person
   belongs_to :store,   class_name: 'Person'
   belongs_to :storage, class_name: 'Person'

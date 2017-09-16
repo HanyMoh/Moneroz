@@ -1,5 +1,5 @@
 class DocItem < ApplicationRecord
-  belongs_to :document
+  belongs_to :document, inverse_of: :doc_items
   belongs_to :product
 
   attr_accessor :barcode
