@@ -8,11 +8,13 @@
   border-spacing: 0;
   margin: auto;
 }
+
 .div-table-row {
   display: table-row;
   // width: auto;
   // clear: both;
 }
+
 .div-table-col {
   padding: 3px;
   line-height: 1.428571429;
@@ -20,17 +22,21 @@
   border-top: 1px solid #ddd;
   float: right;
   display: table-column;
-  width:80px;
+  width: 80px;
 }
+
 .div-table-col-300 {
-  width:300px;
+  width: 300px;
 }
+
 .div-table-col-200 {
-  width:200px;
+  width: 200px;
 }
+
 .div-table-col-20 {
-  width:20px;
+  width: 20px;
 }
+
 .div-table-col-th {
   border-top: 0;
   border-bottom: 1px solid #ddd;
