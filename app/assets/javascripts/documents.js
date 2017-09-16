@@ -67,12 +67,10 @@ $(document).ready(function() {
 
   $(function() {
     $(document).on('blur', '.barcode', function() {
-      // $('.barcode').blur(function() {
         var barcode_value = $(this).val();
         console.log(barcode_value);
         var price = $(this).closest(".nested_box").find('.price');
         var product = $(this).closest(".nested_box").find('.product');
-        // var barcode = $(this).closest(".nested_box").find('.barcode');
         $.ajax({
             url:  "give_me_product",
             type: "GET",
@@ -81,8 +79,6 @@ $(document).ready(function() {
             console.log(data);
             console.log('haNY');
                price.val(data.price_out);
-              //  barcode.val(data.barcode);
-
                product.val(data.id);
             }
         });
@@ -105,7 +101,7 @@ $(document).on('click', '.hidden-print .ga-print', function(e) {
   $('.wrapper').html(modal);
   $('.pace-inactive').hide();
   window.print();
-  location.reload();
+  window.location.reload();
 });
 
 
@@ -117,10 +113,5 @@ $(document).on('click', '.invoice-print', function(e) {
   $('.wrapper').html(modal);
   $('.pace-inactive').hide();
   window.print();
-  console.log('yyyy');
-  location.replace("https://www.w3schools.com");
+  window.location.reload();
 });
-
-window.onafterprint = function(){
-    location.replace("https://www.w3schools.com");
-}

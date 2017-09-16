@@ -140,9 +140,7 @@ class DocumentsController < ApplicationController
   end
 
   def give_me_product
-    # @product = Product.get_product_by_barcode(params[:barcode])
-    # byebug
-    @product = Product.find 1 #(params[:barcode])
+    @product = Product.get_product_by_barcode(params[:barcode])
     render json: @product
   end
 

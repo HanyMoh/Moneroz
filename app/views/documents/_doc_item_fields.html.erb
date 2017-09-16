@@ -4,7 +4,7 @@
     <%= f.hidden_field :effect, :value => @document.effect %>
   </div>
   <div class="div-table-col div-table-col-200"><%= f.text_field :barcode, class: "form-control barcode" %></div>
-  <div class="div-table-col div-table-col-300"><%= f.collection_select(:product_id, Product.all, :id, :name, {include_blank: true, :selected => 0}, { :class => "form-control product", :id=> 'product_selection' }) %></div>
+  <div class="div-table-col div-table-col-300"><%= f.collection_select(:product_id, Product.all, :id, :name, {include_blank: true}, { :class => "form-control product", :id=> 'product_selection' }) %></div>
   <div class="div-table-col"><%= f.text_field :quantity, class: "form-control quantity blur" %></div>
   <div class="div-table-col"><%= f.text_field :price, class: "form-control price blur" %></div>
   <div class="div-table-col"><%= f.text_field :discount_value, class: "form-control discount_value blur" %></div>

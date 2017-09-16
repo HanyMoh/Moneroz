@@ -9,7 +9,7 @@ default: &default
 
 development:
   <<: *default
-  database: moneroz
+  database: Moneroz
 
 production:
   <<: *default
