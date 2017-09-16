@@ -17,9 +17,9 @@ $(document).ready(function() {
   });
 
   $('#demoDate').datepicker({
-      	format: "yyyy-mm-dd",
-      	autoclose: true,
-      	todayHighlight: true
+    format: "yyyy-mm-dd",
+    autoclose: true,
+    todayHighlight: true
   });
 
   function invoice() {
@@ -27,7 +27,7 @@ $(document).ready(function() {
     var discount_percent = parseFloat($('.discount_percent').val()) * parseFloat($('.invoice_total').val()) / 100;
     console.log($('.discount_percent').val())
     console.log((discount_percent));
-    $('.net').val((net-discount_percent));
+    $('.net').val((net - discount_percent));
     var rest = parseFloat($('.net').val()) - parseFloat($('.payment').val());
     $('.rest').val(rest);
   }
@@ -50,48 +50,51 @@ $(document).ready(function() {
 
   $(function() {
     $(document).on('change', '.product', function() {
-        var product_value = $(this).val();
-        var price = $(this).closest(".nested_box").find('.price');
-        var barcode = $(this).closest(".nested_box").find('.barcode');
-        $.ajax({
-            url:  "give_me_barcode",
-            type: "GET",
-            data: { product: product_value },
-            success: function(data) {
-               price.val(data.price_out);
-               barcode.val(data.barcode);
-            }
-        });
+      var product_value = $(this).val();
+      var price = $(this).closest(".nested_box").find('.price');
+      var barcode = $(this).closest(".nested_box").find('.barcode');
+      $.ajax({
+        url: "give_me_barcode",
+        type: "GET",
+        data: {
+          product: product_value
+        },
+        success: function(data) {
+          price.val(data.price_out);
+          barcode.val(data.barcode);
+        }
+      });
     });
   });
 
   $(function() {
     $(document).on('blur', '.barcode', function() {
-        var barcode_value = $(this).val();
-        console.log(barcode_value);
-        var price = $(this).closest(".nested_box").find('.price');
-        var product = $(this).closest(".nested_box").find('.product');
-        $.ajax({
-            url:  "give_me_product",
-            type: "GET",
-            data: { barcode: barcode_value },
-            success: function(data) {
-            console.log(data);
-            console.log('haNY');
-               price.val(data.price_out);
-               product.val(data.id);
-            }
-        });
+      var barcode_value = $(this).val();
+      console.log(barcode_value);
+      var price = $(this).closest(".nested_box").find('.price');
+      var product = $(this).closest(".nested_box").find('.product');
+      $.ajax({
+        url: "give_me_product",
+        type: "GET",
+        data: {
+          barcode: barcode_value
+        },
+        success: function(data) {
+          console.log(data);
+          price.val(data.price_out);
+          product.val(data.id);
+        }
+      });
     });
   });
 
 });
 
-$(window).keydown(function(event){
-    if(event.keyCode == 13) {
-      event.preventDefault();
-      return false;
-    }
+$(window).keydown(function(event) {
+  if (event.keyCode == 13) {
+    event.preventDefault();
+    return false;
+  }
 });
 
 $(document).on('click', '.hidden-print .ga-print', function(e) {
