@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: sections
+#
+#  id   :integer          not null, primary key
+#  code :integer
+#  name :string(60)       not null
+#
+
 class Section < ApplicationRecord
   has_many :products
 

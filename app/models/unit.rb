@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: units
+#
+#  id   :integer          not null, primary key
+#  code :string
+#  name :string(20)       not null
+#
+
 class Unit < ApplicationRecord
   has_many :products,     class_name: "Product", foreign_key: 'unit_id'
   has_many :unit_refills, class_name: "Product", foreign_key: 'unit_refill_id'
