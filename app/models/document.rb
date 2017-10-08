@@ -1,3 +1,33 @@
+# == Schema Information
+#
+# Table name: documents
+#
+#  id             :integer          not null, primary key
+#  doc_date       :date
+#  code           :integer
+#  store_id       :integer
+#  storage_id     :integer
+#  person_id      :integer
+#  user_id        :integer
+#  payment        :decimal(11, 2)   default(0.0)
+#  doc_type       :integer          default(0)
+#  effect         :integer          default(0)
+#  discount_value :decimal(8, 2)    default(0.0)
+#  discount_ratio :decimal(8, 2)    default(0.0)
+#  tax            :decimal(8, 2)    default(0.0)
+#  hold           :boolean          default(FALSE)
+#  note           :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+# Indexes
+#
+#  index_documents_on_person_id   (person_id)
+#  index_documents_on_storage_id  (storage_id)
+#  index_documents_on_store_id    (store_id)
+#  index_documents_on_user_id     (user_id)
+#
+
 class Document < ApplicationRecord
   DOC_TYPE = { 1 => "أول المدة",
                2 => "مشتريات",

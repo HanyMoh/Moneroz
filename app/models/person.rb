@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: people
+#
+#  id          :integer          not null, primary key
+#  code        :integer
+#  name        :string(60)       not null
+#  person_type :integer          default(1)
+#  phone       :string(25)
+#  address     :string
+#  note        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Person < ApplicationRecord
   PERSON_TYPE = { 1 => "customer",
                   2 => "supplier",

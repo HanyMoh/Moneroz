@@ -1,3 +1,28 @@
+# == Schema Information
+#
+# Table name: payments
+#
+#  id          :integer          not null, primary key
+#  code        :integer
+#  pay_date    :date
+#  pay_type    :integer
+#  effect      :integer
+#  storage_id  :integer
+#  person_id   :integer
+#  money       :decimal(8, 2)
+#  description :string
+#  user_id     :integer
+#  note        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+# Indexes
+#
+#  index_payments_on_person_id   (person_id)
+#  index_payments_on_storage_id  (storage_id)
+#  index_payments_on_user_id     (user_id)
+#
+
 class Payment < ApplicationRecord
   belongs_to :storage, class_name: 'Person'
   belongs_to :person
