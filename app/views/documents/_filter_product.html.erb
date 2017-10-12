@@ -1,0 +1,49 @@
+<%= form_for :filter, :url => product_documents_documents_path, html: { method: :get } do |f| %>
+  
+  <div class="row">
+    <div class="form-group col-sm-1">
+      <%= f.label :name, "أسم الصنف" %>
+    </div>
+    <div class="form-group col-sm-3">
+      <!--<%= f.text_field :'products.name', placeholder: "Enter product name", class: "form-control" %>-->
+      <%= f.autocomplete_field :'products.name', autocomplete_product_name_documents_path, :id_element => '#filter_product_id', value: (params[:filter].present? ? params[:filter]['products.name'] : ''), placeholder: "Enter product name", class: "form-control" %>
+      <%= f.hidden_field :'products.id', id: "filter_product_id", value: (params[:filter].present? ? params[:filter]['products.id'] : '') %>
+    </div>
+    <div class="form-group col-sm-1">
+      <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+        <i class="fa fa-search"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-1">
+      <%= f.label :barcode, "الباركود" %>
+    </div>
+    <div class="form-group col-sm-3">
+      <%= f.text_field :'products.barcode', value: (params[:filter].present? ? params[:filter]['products.barcode'] : ''), placeholder: "Enter barcode", class: "form-control" %>
+    </div>
+    <div class="form-group col-sm-1">
+      <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+        <i class="fa fa-search"></i>
+      <% end %>
+    </div>
+    
+  </div>
+
+  <div class= "row">
+    <div class="form-group col-sm-1">
+      <%= f.label :doc_date_from, "الفترة من" %>
+    </div>
+    <div class="form-group col-sm-3">
+      <%= f.text_field :doc_date_from, value: (params[:filter].present? ? params[:filter][:doc_date_from] : ''), placeholder: "Enter start date", class: "form-control", id: "demoDate" %>
+    </div>
+    <div class="form-group col-sm-1">
+      <%= f.label :doc_date_to, "إلي" %>
+    </div>
+    <div class="form-group col-sm-3">
+      <%= f.text_field :doc_date_to, value: (params[:filter].present? ? params[:filter][:doc_date_to] : ''), placeholder: "Enter end date", class: "form-control", id: "demoDate2" %>
+    </div>
+  </div>
+
+<% end %>

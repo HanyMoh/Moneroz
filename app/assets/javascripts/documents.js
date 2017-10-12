@@ -22,6 +22,12 @@ $(document).ready(function() {
     todayHighlight: true
   });
 
+  $('#demoDate2').datepicker({
+    format: "yyyy-mm-dd",
+    autoclose: true,
+    todayHighlight: true
+  });
+
   function invoice() {
     var net = parseFloat($('.invoice_total').val()) + parseFloat($('.tax').val()) - parseFloat($('.discount_value').val());
     var discount_percent = parseFloat($('.discount_percent').val()) * parseFloat($('.invoice_total').val()) / 100;

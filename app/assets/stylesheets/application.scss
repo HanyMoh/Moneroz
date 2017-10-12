@@ -2,3 +2,24 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "*";
+
+.ui-autocomplete {
+    background-clip: padding-box;
+    background-color: #ffffff;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    float: left;
+    left: 0;
+    list-style: outside none none;
+    margin: 2px 0 0;
+    min-width: 160px;
+    padding: 4px 0;
+    position: absolute;
+    top: 100%;
+    z-index: 1000;
+}
+

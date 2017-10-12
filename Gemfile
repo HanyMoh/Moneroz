@@ -21,6 +21,7 @@ gem 'devise'
 gem 'cancancan', '~> 2.0'
 gem 'react-rails'
 gem 'annotate', '~> 2.7', '>= 2.7.2'
+gem 'rails-jquery-autocomplete'
 
 group :development, :test do
   gem 'byebug', platform: :mri

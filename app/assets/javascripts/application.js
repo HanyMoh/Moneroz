@@ -13,6 +13,8 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
+//= require jquery-ui/widgets/autocomplete
+//= require autocomplete-rails
 //= require turbolinks
 //= require plugins/pace.min
 //= require plugins/bootstrap-datepicker.min

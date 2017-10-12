@@ -8,6 +8,9 @@ class DocumentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_document, only: [:show, :edit, :update, :destroy]
 
+
+  autocomplete :product, :name
+
   # GET /documents/1
   # GET /documents/1.json
   def show
@@ -152,6 +155,23 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to documents_url, notice: 'Document was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # GET /documents/product_documents
+  def product_documents
+    @page_title = "حركة الصنف"
+    @documents = []
+    if params[:filter].present?
+      ## delete empty filter params
+      filter = params[:filter].to_unsafe_h.clone.delete_if { |k, v| v.blank? }
+      ## call scope to filter documents
+      @documents = Document.product_filter(filter)
+      ## create hash[document id] => quantity of product filtered
+      @doc_items = Hash.new
+      @documents.each do |document|
+        @doc_items[document.id] = document.doc_items.where(product_id: filter["products.id"]).first.quantity
+      end
     end
   end
 

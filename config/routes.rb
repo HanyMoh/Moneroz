@@ -23,6 +23,9 @@ Rails.application.routes.draw do
       get :returned_sale
       get :returned_buy
       get :barcode
+      ## reports
+      get :autocomplete_product_name
+      get :product_documents
     end
   end
 

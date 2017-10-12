@@ -21,19 +21,15 @@
 #
 # Indexes
 #
+#  index_products_on_name            (name)
 #  index_products_on_section_id      (section_id)
 #  index_products_on_unit_id         (unit_id)
 #  index_products_on_unit_refill_id  (unit_refill_id)
 #
-# Foreign Keys
-#
-#  fk_rails_...  (section_id => sections.id)
-#  fk_rails_...  (unit_id => units.id)
-#
 
 class Product < ApplicationRecord
   has_many   :doc_items
-  # has_many   :document, :through => :doc_items
+  has_many   :document, :through => :doc_items
   belongs_to :section
   belongs_to :unit,        class_name: 'Unit'
   belongs_to :unit_refill, class_name: 'Unit', foreign_key: 'unit_refill_id'
