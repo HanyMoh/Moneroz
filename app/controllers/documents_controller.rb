@@ -144,7 +144,7 @@ class DocumentsController < ApplicationController
 
   def give_me_product
     @product = Product.get_product_by_barcode(params[:barcode])
-    render json: @product
+    render json: @product.present? ? @product.first : {}
   end
 
   # DELETE /documents/1

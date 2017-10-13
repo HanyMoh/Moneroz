@@ -31,34 +31,50 @@ $(document).ready(function() {
   function invoice() {
     var net = parseFloat($('.invoice_total').val()) + parseFloat($('.tax').val()) - parseFloat($('.discount_value').val());
     var discount_percent = parseFloat($('.discount_percent').val()) * parseFloat($('.invoice_total').val()) / 100;
-    console.log($('.discount_percent').val())
+    console.log($('.discount_percent').val());
     console.log((discount_percent));
     $('.net').val((net - discount_percent));
     var rest = parseFloat($('.net').val()) - parseFloat($('.payment').val());
     $('.rest').val(rest);
   }
 
-  $(document).on('blur', '.discount_or_tax, .payment', function() {
-    invoice();
-  });
-
-  $(document).on('blur', '.blur', function() {
-    var box = $(this).closest(".nested_box");
+  function calculate_total_per_product(box){
     var total = (box.find('.quantity').val() * box.find('.price').val()) - box.find('.discount_value').val();
     box.find('.total').val(total);
+  }
+
+  function calculate_total_price(){
     var all = 0;
     $('.total').each(function() {
       all += parseFloat($(this).val());
     });
     $('.invoice_total').val(all);
+  }
+
+  $(document).on('blur', '.discount_or_tax, .payment', function() {
+    invoice();
+  });
+
+
+  $(document).on('blur', '.blur', function() {
+    var box = $(this).closest(".nested_box");
+    // var total = (box.find('.quantity').val() * box.find('.price').val()) - box.find('.discount_value').val();
+    calculate_total_per_product(box);
+    // var all = 0;
+    // $('.total').each(function() {
+    //   all += parseFloat($(this).val());
+    // });
+    // $('.invoice_total').val(all);
+    calculate_total_price();
     invoice();
   });
 
   $(function() {
     $(document).on('change', '.product', function() {
+      var box = $(this).closest(".nested_box");
       var product_value = $(this).val();
-      var price = $(this).closest(".nested_box").find('.price');
-      var barcode = $(this).closest(".nested_box").find('.barcode');
+      var price = box.find('.price');
+      var barcode = box.find('.barcode');
       $.ajax({
         url: "give_me_barcode",
         type: "GET",
@@ -68,6 +84,9 @@ $(document).ready(function() {
         success: function(data) {
           price.val(data.price_out);
           barcode.val(data.barcode);
+          calculate_total_per_product(box);
+          calculate_total_price();
+          invoice();
         }
       });
     });
@@ -89,6 +108,7 @@ $(document).ready(function() {
           console.log(data);
           price.val(data.price_out);
           product.val(data.id);
+          product.trigger("change");
         }
       });
     });
