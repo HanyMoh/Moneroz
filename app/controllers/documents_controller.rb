@@ -166,11 +166,15 @@ class DocumentsController < ApplicationController
       ## delete empty filter params
       filter = params[:filter].to_unsafe_h.clone.delete_if { |k, v| v.blank? }
       ## call scope to filter documents
-      @documents = Document.product_filter(filter)
-      ## create hash[document id] => quantity of product filtered
-      @doc_items = Hash.new
-      @documents.each do |document|
-        @doc_items[document.id] = document.doc_items.where(product_id: filter["products.id"]).first.quantity
+      if filter["products.id"] || filter["products.barcode"]
+        ## documents will display only when a valid product being choosen (per product dispaly)
+        @documents = Document.product_filter(filter)
+        ## create hash[document id] => quantity of product filtered
+        product_id = filter["products.id"] || Product.find_by_barcode(filter["products.barcode"]).id
+        @doc_items = Hash.new
+        @documents.each do |document|
+          @doc_items[document.id] = document.doc_items.where(product_id: product_id).first.quantity
+        end
       end
     end
   end
