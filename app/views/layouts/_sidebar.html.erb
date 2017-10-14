@@ -141,15 +141,15 @@
         <ul class="treeview-menu">
           <% if can? :barcode, Document %>
             <li>
-              <%= link_to product_documents_documents_path do %>
+              <%= link_to "#" do %>
               <i class="fa fa-circle-o"></i> حركة الخزينة
               <% end %>
             </li>
           <% end %>
           <% if can? :barcode, Document %>
             <li>
-              <%= link_to "#" do %>
-              <i class="fa fa-circle-o"></i> حركة الأصناف
+              <%= link_to product_documents_documents_path do %>
+              <i class="fa fa-circle-o"></i> تقرير حركة صنف
               <% end %>
             </li>
           <% end %>

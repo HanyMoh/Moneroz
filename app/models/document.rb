@@ -29,6 +29,7 @@
 #
 
 
+
 class Document < ApplicationRecord
   DOC_TYPE = { 1 => "أول المدة",
                2 => "مشتريات",
