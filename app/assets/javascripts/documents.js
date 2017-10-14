@@ -1,8 +1,13 @@
 $(document).ready(function() {
 
   $('form').on('click', '.remove_fields', function(event) {
+    var contained_box = $(this).closest('.nested_box');
+    contained_box.find('.total').val('0');
     $(this).prev('input[type=hidden]').val('1');
-    $(this).closest('.nested_box').hide();
+    contained_box.hide();
+    // calculate total after removing a product
+    calculate_total_price();
+    invoice();
     return event.originalEvent.defaultPrevented
     // return event.preventDefault();
   });
