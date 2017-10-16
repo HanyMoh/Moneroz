@@ -19,6 +19,7 @@
 #  note           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  total_price    :decimal(, )
 #
 # Indexes
 #
@@ -27,6 +28,7 @@
 #  index_documents_on_store_id    (store_id)
 #  index_documents_on_user_id     (user_id)
 #
+
 
 
 
@@ -65,7 +67,7 @@ class Document < ApplicationRecord
     end
   }
 
-  scope :product_filter, -> (filter) {
+  scope :period_filter, -> (filter) {
     if filter[:doc_date_from].present? || filter[:doc_date_to].present?
       date_from = filter.delete(:doc_date_from) || Document.minimum(:doc_date).to_s
       date_to = filter.delete(:doc_date_to) || Date.today.to_s
@@ -78,4 +80,5 @@ class Document < ApplicationRecord
   def label
     "#{DOC_TYPE[doc_type]} رقم #{id}"
   end
+
 end

@@ -148,7 +148,7 @@
           <% end %>
           <% if can? :barcode, Document %>
             <li>
-              <%= link_to product_documents_documents_path do %>
+              <%= link_to per_product_documents_path do %>
               <i class="fa fa-circle-o"></i> تقرير حركة صنف
               <% end %>
             </li>
@@ -162,14 +162,14 @@
           <% end %>
           <% if can? :barcode, Document %>
             <li>
-              <%= link_to "#" do %>
+              <%= link_to per_supplier_documents_path do %>
               <i class="fa fa-circle-o"></i> حسابات مورد
               <% end %>
             </li>
           <% end %>
           <% if can? :barcode, Document %>
             <li>
-              <%= link_to "#" do %>
+              <%= link_to per_customer_documents_path do %>
               <i class="fa fa-circle-o"></i> حسابات عميل
               <% end %>
             </li>
