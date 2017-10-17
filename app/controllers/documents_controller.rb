@@ -158,8 +158,8 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # GET /documents/product_documents
-  def product_documents
+  # GET /documents/per_product
+  def per_product
     @page_title = "حركة الصنف"
     @documents = []
     if params[:filter].present?
@@ -168,8 +168,8 @@ class DocumentsController < ApplicationController
       ## call scope to filter documents
       if filter["products.id"] || filter["products.barcode"]
         ## documents will display only when a valid product being choosen (per product dispaly)
-        @documents = Document.product_filter(filter)
-        ## create hash[document id] => quantity of product filtered
+        @documents = Document.period_filter(filter)
+        ## create hash[document id] => quantity of product filtered into the document
         product_id = filter["products.id"] || Product.find_by_barcode(filter["products.barcode"]).id
         @doc_items = Hash.new
         @documents.each do |document|
@@ -177,6 +177,27 @@ class DocumentsController < ApplicationController
         end
       end
     end
+  end
+
+  # GET /documents/per_customer
+  def per_customer
+    @page_title = "حركة حساب عميل"
+    @person_type = 1
+    per_person(@person_type, params)
+  end
+
+  # GET /documents/per_supplier
+  def per_supplier
+    @page_title = "حركة حساب مورد"
+    @person_type = 2
+    per_person(@person_type, params)
+  end
+
+  # GET /documents/autocomplete_person_name
+  def autocomplete_person_name
+    ## retrieve people according to type
+    people = Person.where(person_type: params[:person_type].to_i)
+    render :json => people.map { |person| {:id => person.id, :label => person.name, :value => person.name} }
   end
 
   private
@@ -211,6 +232,32 @@ class DocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:doc_date, :code, :store_id, :storage_id, :person_id, :user_id, :payment, :doc_type, :effect, :discount_value, :discount_ratio, :tax, :hold, :note, doc_items_attributes: [:id, :product_id, :quantity, :price, :effect, :discount_value, :returned, :_destroy])
+      params.require(:document).permit(:doc_date, :code, :store_id, :storage_id, :person_id, :user_id, :payment, :doc_type, :effect, :discount_value, :discount_ratio, :tax, :hold, :note, :total_price, doc_items_attributes: [:id, :product_id, :quantity, :price, :effect, :discount_value, :returned, :_destroy])
+    end
+
+    def per_person(person_type, params)
+      @documents = []
+      if params[:filter].present?
+        ## delete empty filter params
+        filter = params[:filter].to_unsafe_h.clone.delete_if { |k, v| v.blank? }
+        if filter["people.id"]
+          ## documents will display only when a valid person being choosen
+          @documents = Document.period_filter(filter)
+          @finance_hash = Hash.new
+          @documents.each do |document|
+            ## depending on doc_type
+            case person_type
+            when 1
+              ## customer
+              rest = document.total_price - document.payment
+              @finance_hash[document.id] = { 0 => document.payment, 1 => rest.to_i }
+            when 2
+              ## supplier
+              rest = document.total_price - document.payment
+              @finance_hash[document.id] = { 0 => rest.to_i, 1 => document.payment }
+            end
+          end
+        end
+      end
     end
 end

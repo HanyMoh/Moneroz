@@ -1,0 +1,33 @@
+<%= form_for :filter, :action => path, html: { method: :get } do |f| %>
+  
+  <div class="row">
+    <div class="form-group col-sm-1">
+      <%= f.label :name, "أسم الشخص" %>
+    </div>
+    <div class="form-group col-sm-3">
+      <%= f.autocomplete_field :'people.name', autocomplete_person_name_documents_path(person_type: @person_type), :id_element => '#filter_person_id', value: (params[:filter].present? ? params[:filter]['people.name'] : ''), placeholder: "Enter person name", class: "form-control" %>
+      <%= f.hidden_field :'people.id', id: "filter_person_id", value: (params[:filter].present? ? params[:filter]['people.id'] : '') %>
+    </div>
+    <div class="form-group col-sm-1">
+      <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+        <i class="fa fa-search"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div class= "row">
+    <div class="form-group col-sm-1">
+      <%= f.label :doc_date_from, "الفترة من" %>
+    </div>
+    <div class="form-group col-sm-3">
+      <%= f.text_field :doc_date_from, value: (params[:filter].present? ? params[:filter][:doc_date_from] : ''), placeholder: "Enter start date", class: "form-control", id: "demoDate" %>
+    </div>
+    <div class="form-group col-sm-1">
+      <%= f.label :doc_date_to, "إلي" %>
+    </div>
+    <div class="form-group col-sm-3">
+      <%= f.text_field :doc_date_to, value: (params[:filter].present? ? params[:filter][:doc_date_to] : ''), placeholder: "Enter end date", class: "form-control", id: "demoDate2" %>
+    </div>
+  </div>
+
+<% end %>

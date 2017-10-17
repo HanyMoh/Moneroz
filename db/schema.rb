@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171010222741) do
+ActiveRecord::Schema.define(version: 20171014130604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20171010222741) do
     t.string   "note"
     t.datetime "created_at",                                              null: false
     t.datetime "updated_at",                                              null: false
+    t.decimal  "total_price"
     t.index ["person_id"], name: "index_documents_on_person_id", using: :btree
     t.index ["storage_id"], name: "index_documents_on_storage_id", using: :btree
     t.index ["store_id"], name: "index_documents_on_store_id", using: :btree
@@ -135,6 +136,4 @@ ActiveRecord::Schema.define(version: 20171010222741) do
     t.index ["user_name"], name: "index_users_on_user_name", unique: true, using: :btree
   end
 
-  add_foreign_key "products", "sections"
-  add_foreign_key "products", "units"
 end

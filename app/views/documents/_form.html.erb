@@ -123,8 +123,10 @@
     </div>
 
     <div class="form-group col-sm-2">
-      <label class="control-label">الصافى</label><br>
-      <input class="form-control lock-color net" placeholder="0.00" disabled>
+      <!--<label class="control-label">الصافى</label><br>
+      <input class="form-control lock-color net" placeholder="0.00" disabled>-->
+      <%= f.label :total_price, "الصافى" %><br>
+      <%= f.text_field :total_price, :placeholder => "0.00", class: "form-control lock-color net"  , readonly: true %>
     </div>
 
     <div class="form-group col-sm-2">

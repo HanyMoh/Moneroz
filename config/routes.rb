@@ -25,7 +25,10 @@ Rails.application.routes.draw do
       get :barcode
       ## reports
       get :autocomplete_product_name
-      get :product_documents
+      get :autocomplete_person_name
+      get :per_product
+      get :per_customer
+      get :per_supplier
     end
   end
 

@@ -1,0 +1,29 @@
+<%- if @documents.any? %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>التاريخ</th>
+        <th>رقم المستند</th>
+        <th>دائـن</th>
+        <th>مدين</th>
+        <th>اجمالي الفاتورة</th>
+        <th>الرصيد</th>
+        <th>أسم البائع</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%- @documents.each do |document| %>
+        <tr id="document_<%= document.id %>">
+          <td><%= link_to document.doc_date, document %></td>
+          <td><%= document.label %></td>
+          <td><%= @finance_hash[document.id][0] if @finance_hash[document.id][0] > 0 %></td>
+          <td><%= @finance_hash[document.id][1] if @finance_hash[document.id][1] > 0 %></td>
+          <td><%= document.total_price.to_i %></td>
+          <td></td>
+          <td><%= document.user.user_name if document.user %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
