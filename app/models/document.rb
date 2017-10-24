@@ -54,6 +54,8 @@ class Document < ApplicationRecord
   validates :code, uniqueness: { scope: [:doc_type] }
   validates :doc_date, presence: true
 
+  after_save :update_products_quantity
+
   scope :sorted, -> { order('created_at DESC') }
 
   scope :max_code, lambda { |doc_type|
@@ -80,6 +82,18 @@ class Document < ApplicationRecord
 
   def label
     "#{DOC_TYPE[doc_type]} رقم #{id}"
+  end
+
+  def update_products_quantity
+    self.doc_items.includes(:product).each do |item|
+      product = item.product
+      if item.effect == 1 ## increase quantity
+        product.quantity += item.quantity
+      elsif item.effect == 2 ## decrease quantity
+        product.quantity -= item.quantity
+      end 
+      product.save
+    end
   end
 
 end
