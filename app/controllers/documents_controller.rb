@@ -236,28 +236,65 @@ class DocumentsController < ApplicationController
     end
 
     def per_person(person_type, params)
-      @documents = []
+      documents = []
       if params[:filter].present?
         ## delete empty filter params
         filter = params[:filter].to_unsafe_h.clone.delete_if { |k, v| v.blank? }
         if filter["people.id"]
           ## documents will display only when a valid person being choosen
-          @documents = Document.period_filter(filter)
-          @finance_hash = Hash.new
-          @documents.each do |document|
-            ## depending on doc_type
-            case person_type
-            when 1
-              ## customer
-              rest = document.total_price - document.payment
-              @finance_hash[document.id] = { 0 => document.payment, 1 => rest.to_i }
-            when 2
-              ## supplier
-              rest = document.total_price - document.payment
-              @finance_hash[document.id] = { 0 => rest.to_i, 1 => document.payment }
-            end
-          end
+          documents = Document.period_filter(filter)
+          payments = Payment.period_filter(filter)
+          ## creating a hash of documents and payment too then sorting them
+          @finance_hash = create_sorted_finance_report(documents, payments, person_type)
         end
       end
+    end
+
+    def create_sorted_finance_report(documents, payments, person_type)
+      finance = Hash.new
+      documents.each do |document|
+        finance_hash = Hash.new
+        finance_hash[:object_type] = "document"
+        finance_hash[:object_id] = document.id
+        finance_hash[:date] = document.doc_date
+        finance_hash[:label] = document.label
+        finance_hash[:total_price] = document.total_price.to_i
+        finance_hash[:user_name] = document.user.user_name
+        ## depending on doc_type 
+        rest = (document.total_price - document.payment).to_i
+        case person_type
+        when 1
+          ## customer
+          finance_hash[:m] = rest
+        when 2
+          ## supplier 
+          finance_hash[:d] = rest
+        end
+        finance["document_#{document.id}"] = finance_hash
+      end
+
+      payments.each do |payment|
+        finance_hash = Hash.new
+        finance_hash[:object_type] = "payment"
+        finance_hash[:object_id] = payment.id
+        finance_hash[:date] = payment.pay_date
+        finance_hash[:total_price] = payment.money.to_i
+        finance_hash[:user_name] = payment.user.user_name
+
+        case person_type
+        when 1
+          ## customer
+          finance_hash[:d] = payment.money.to_i
+          finance_hash[:label] = "مستند سداد رقم #{payment.id}"
+        when 2
+          ## supplier
+          finance_hash[:m] = payment.money.to_i
+          finance_hash[:label] = "مستند صرف رقم #{payment.id}"
+        end
+        finance["payment_#{payment.id}"] = finance_hash
+      end
+      ## sorting by date => Note: date should be mandatory attribute 
+      sorted = finance.sort_by { |k| k.second[:date] }
+      return sorted
     end
 end

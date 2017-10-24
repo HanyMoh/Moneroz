@@ -1,4 +1,4 @@
-<%- if @documents.any? %>
+<%- if @finance_hash.present? %>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -13,15 +13,23 @@
     </thead>
 
     <tbody>
-      <%- @documents.each do |document| %>
-        <tr id="document_<%= document.id %>">
-          <td><%= link_to document.doc_date, document %></td>
-          <td><%= document.label %></td>
-          <td><%= @finance_hash[document.id][0] if @finance_hash[document.id][0] > 0 %></td>
-          <td><%= @finance_hash[document.id][1] if @finance_hash[document.id][1] > 0 %></td>
-          <td><%= document.total_price.to_i %></td>
+      <%- @finance_hash.each do |document| %>
+        <% document = document.second %>
+        <tr>
+          <td>
+            <% if document[:object_id] == "document" %>
+              <%= link_to document[:date], controller: "documents", action: "show", id: document[:object_id]  %>
+            <% else %>
+              <%= document[:date] %>
+            <% end %>
+          </td>
+          
+          <td><%= document[:label] %></td>
+          <td><%= document[:d] if document[:d].to_i > 0 %></td>
+          <td><%= document[:m] if document[:m].to_i > 0 %></td>
+          <td><%= document[:total_price] %></td>
           <td></td>
-          <td><%= document.user.user_name if document.user %></td>
+          <td><%= document[:user_name] %></td>
         </tr>
       <% end %>
     </tbody>
