@@ -26,9 +26,11 @@ Rails.application.routes.draw do
       ## reports
       get :autocomplete_product_name
       get :autocomplete_person_name
+      get :autocomplete_user_user_name
       get :per_product
       get :per_customer
       get :per_supplier
+      get :per_storage
     end
   end
 

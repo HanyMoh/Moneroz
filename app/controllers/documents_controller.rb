@@ -10,6 +10,7 @@ class DocumentsController < ApplicationController
 
 
   autocomplete :product, :name
+  autocomplete :user, :user_name
 
   # GET /documents/1
   # GET /documents/1.json
@@ -197,6 +198,13 @@ class DocumentsController < ApplicationController
     per_person(@person_type, params)
   end
 
+  # GET /documents/per_storage
+  def per_storage
+    @page_title = "حركة الخزينة"
+    @person_type = 4
+    per_person(@person_type, params)
+  end
+
   # GET /documents/autocomplete_person_name
   def autocomplete_person_name
     ## retrieve people according to type
@@ -245,6 +253,7 @@ class DocumentsController < ApplicationController
         ## delete empty filter params
         filter = params[:filter].to_unsafe_h.clone.delete_if { |k, v| v.blank? }
         if filter["people.id"]
+          @person = Person.find(filter["people.id"])
           ## documents will display only when a valid person being choosen
           documents = Document.period_filter(filter)
           payments = Payment.period_filter(filter)

@@ -1,0 +1,7 @@
+
+<%= render 'filter_person', { path: "per_storage"} %>
+
+<% if @person.present? %>
+	<h4><%= "حركة #{@person.name} في الفترة من #{params[:filter][:doc_date_from]} الي #{params[:filter][:doc_date_to]}" %></h4>
+<% end %>
+<%= render 'document_per_person' %>

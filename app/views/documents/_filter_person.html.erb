@@ -30,4 +30,6 @@
     </div>
   </div>
 
+  <%= render partial: 'filter_storage_additional_data', locals: {f: f} if @person_type == 4 %>
+
 <% end %>

@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="form-group col-sm-1">
+    <%= f.label :name, "أسم البائـع" %>
+  </div>
+  <div class="form-group col-sm-3">
+    <%= f.autocomplete_field :'users.name', autocomplete_user_user_name_documents_path, :id_element => '#filter_user_id', value: (params[:filter].present? ? params[:filter]['users.name'] : ''), placeholder: "Enter user name", class: "form-control" %>
+    <%= f.hidden_field :'users.id', id: "filter_user_id", value: (params[:filter].present? ? params[:filter]['users.id'] : '') %>
+  </div>
+</div>
+
+<div class= "row">
+  <div class="form-group col-sm-1"></div>
+  <div class="form-group col-sm-4">
+    <%= radio_button_tag("method", "all") %>
+    <%= label :all, 'وارد و صادر' %>
+    <%= radio_button_tag("method", "in") %>
+    <%= label :in, 'وارد فقط' %>
+    <%= radio_button_tag("method", "out") %>
+    <%= label :out, 'صادر فقط' %>
+  </div>
+</div>
