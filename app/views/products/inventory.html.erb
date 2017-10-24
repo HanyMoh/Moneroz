@@ -1,0 +1,34 @@
+<%= render 'filter_product' %>
+
+<h4><%= "جرد الأصناف في يوم: #{Date.today.to_s}" %></h2>
+<%- if @products.any? %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>القسم</th>
+        <th>رقم الصنف</th>
+        <th>اسم الصنف</th>
+        <th>الوحدة</th>
+        <th>الرصيد</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%- @products.each do |product| %>
+        <tr id="product_<%= product.id %>">
+          <td><%= product.section.name %></td>
+          <td><%= product.barcode %></td>
+          <td><%= product.name %></td>
+          <td>
+            <%= product.unit.name if product.unit %>
+            <span class="badge"><%= product.refill %></span>
+            <%= product.unit_refill.name if product.unit_refill %>
+          </td>
+          <td>
+            <%= product.quantity %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

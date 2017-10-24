@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
+  autocomplete :product, :name
   # GET /products
   # GET /products.json
   def index
@@ -80,6 +81,15 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def inventory
+    @products = Product.all.includes(:section).includes(:unit).includes(:unit_refill)
+    if params[:filter].present?
+      ## delete empty filter params
+      filter = params[:filter].to_unsafe_h.clone.delete_if { |k, v| v.blank? }
+      @products = @products.where(filter)
     end
   end
 

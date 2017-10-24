@@ -52,7 +52,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :products
+  resources :products do
+    collection do
+      ## reports
+      get :autocomplete_product_name
+      get :inventory
+    end
+  end
   resources :units, :except => [:show]
   resources :sections, :except => [:show]
   root to: 'home#index'
