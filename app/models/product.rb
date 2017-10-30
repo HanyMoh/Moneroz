@@ -18,7 +18,7 @@
 #  note           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  quantity       :integer
+#  quantity       :integer          default(0)
 #
 # Indexes
 #
