@@ -45,6 +45,7 @@ class Document < ApplicationRecord
 
   has_many   :doc_items, inverse_of: :document, dependent: :destroy
   has_many :products, through: :doc_items
+  has_many   :product_transactions
   belongs_to :person
   belongs_to :store,   class_name: 'Person'
   belongs_to :storage, class_name: 'Person'
