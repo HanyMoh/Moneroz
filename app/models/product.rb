@@ -31,7 +31,7 @@
 class Product < ApplicationRecord
   has_many   :doc_items
   has_many   :document, :through => :doc_items
-  has_many   :product_transactions
+  has_many   :sys_transactions, :as => :loggable
   belongs_to :section
   belongs_to :unit,        class_name: 'Unit'
   belongs_to :unit_refill, class_name: 'Unit', foreign_key: 'unit_refill_id'

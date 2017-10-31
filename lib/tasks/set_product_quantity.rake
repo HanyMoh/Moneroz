@@ -12,7 +12,7 @@ task set_product_quantity: :environment do
 				quantity -= item.quantity
 			end
 			if quantity_before_change != quantity ## actual change occured on quantity
-				product.product_transactions.new(document_id: item.document_id, 
+				product.sys_transactions.new(document_id: item.document_id, 
 					quantity_before: quantity_before_change , quantity_after: quantity)
 			end	
 		end

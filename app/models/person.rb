@@ -24,6 +24,7 @@ class Person < ApplicationRecord
   has_many :storage_payments,  :class_name  => 'Payment',  :foreign_key => 'storage_id'
   has_many :storage_documents, :class_name  => 'Document', :foreign_key => 'storage_id'
   has_many :store_documents,   :class_name  => 'Document', :foreign_key => 'store_id'
+  has_many :sys_transactions, :as => :loggable
 
   validates :name, presence: true, length: { within: 3..60 }, uniqueness: { scope: [:person_type] }
 

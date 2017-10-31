@@ -34,6 +34,7 @@
 
 
 
+
 class Document < ApplicationRecord
   DOC_TYPE = { 1 => "أول المدة",
                2 => "مشتريات",
@@ -45,7 +46,7 @@ class Document < ApplicationRecord
 
   has_many   :doc_items, inverse_of: :document, dependent: :destroy
   has_many :products, through: :doc_items
-  has_many   :product_transactions
+  has_many   :sys_transactions
   belongs_to :person
   belongs_to :store,   class_name: 'Person'
   belongs_to :storage, class_name: 'Person'
@@ -89,12 +90,19 @@ class Document < ApplicationRecord
   def update_products_quantity
     self.doc_items.includes(:product).each do |item|
       product = item.product
+      quantity_before_change = product.quantity
       if item.effect == 1 ## increase quantity
         product.quantity += item.quantity
       elsif item.effect == 2 ## decrease quantity
         product.quantity -= item.quantity
       end 
-      product.save
+      if quantity_before_change != product.quantity ## quantity changed
+        product.sys_transactions.new(
+              document_id: item.document_id, quantity_before: quantity_before_change, 
+              quantity_after: product.quantity)
+        product.save
+        
+      end
     end
   end
 

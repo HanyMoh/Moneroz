@@ -174,10 +174,24 @@ class DocumentsController < ApplicationController
       if @product.present?
         ## documents will display only when a valid product being choosen (per product dispaly)
         @documents = Document.period_filter(filter)
-        ## create hash[document id] => quantity of product filtered into the document
-        @doc_items = Hash.new
-        @documents.each do |document|
-          @doc_items[document.id] = document.doc_items.where(product_id: @product.id).first.quantity
+        if @documents.any?
+          ## getting previous quantity through product transactions
+          @prev_quantity = 0
+          ## first document quantity before changes will indicate the prev quantity
+          @prev_quantity = @documents.first.sys_transactions
+                          .where(loggable_id: @product.id, loggable_type: "Product")
+                          .first.quantity_before
+          ## create hash[document id] => quantity of product filtered into the document
+          @doc_items = Hash.new
+          @documents.each do |document|
+            @doc_items[document.id] = Hash.new
+            @doc_items[document.id][:quantity_change] = document.doc_items
+                                                        .where(product_id: @product.id)
+                                                        .first.quantity
+            @doc_items[document.id][:quantity_after_change] = document.sys_transactions
+                                                              .where(loggable_id: @product.id, loggable_type: "Product")
+                                                              .first.quantity_after
+          end
         end
       end
     end
