@@ -2,6 +2,9 @@
 <%= render 'filter_product' %>
 
 <%- if @documents.any? %>
+  <h4>
+    <%= "اسم الصنف: #{@product.name} / الرصيد: #{@product.quantity}" %>
+  </h4>
   <table class="table table-hover">
     <thead>
       <tr>

@@ -35,6 +35,7 @@
 
 
 
+
 class Document < ApplicationRecord
   DOC_TYPE = { 1 => "أول المدة",
                2 => "مشتريات",
@@ -44,9 +45,9 @@ class Document < ApplicationRecord
                6 => "مرتجع شراء",
                7 => "باركود" }.freeze
 
-  has_many   :doc_items, inverse_of: :document, dependent: :destroy
+  has_many :doc_items, inverse_of: :document, dependent: :destroy
   has_many :products, through: :doc_items
-  has_many   :sys_transactions
+  has_many :sys_transactions, :as => :documentable
   belongs_to :person
   belongs_to :store,   class_name: 'Person'
   belongs_to :storage, class_name: 'Person'
@@ -57,7 +58,7 @@ class Document < ApplicationRecord
   validates :code, uniqueness: { scope: [:doc_type] }
   validates :doc_date, presence: true
 
-  after_save :update_products_quantity
+  after_save :update_products_quantity, :create_person_transaction
 
   scope :sorted, -> { order('created_at DESC') }
 
@@ -98,11 +99,17 @@ class Document < ApplicationRecord
       end 
       if quantity_before_change != product.quantity ## quantity changed
         product.sys_transactions.new(
-              document_id: item.document_id, quantity_before: quantity_before_change, 
-              quantity_after: product.quantity)
+              documentable_id: item.document_id, documentable_type: "Product",
+              quantity_before: quantity_before_change, quantity_after: product.quantity)
         product.save
         
       end
+    end
+  end
+
+  def create_person_transaction
+    if self.total_price - self.payment > 0 ## not fully paid document, so changes person balance
+      self.person.create_person_transaction(self)   
     end
   end
 

@@ -31,12 +31,15 @@ class Payment < ApplicationRecord
   belongs_to :storage, class_name: 'Person'
   belongs_to :person
   belongs_to :user
+  has_many   :sys_transactions, :as => :documentable
 
   validates :description, presence: true
   validates :storage_id,  presence: true
   validates :person_id,   presence: true
   validates :money,       presence: true
-  validates :doc_date, presence: true
+  validates :pay_date, presence: true
+
+  after_save :create_person_transaction
 
   scope :sorted, -> { order('created_at DESC') }
 
@@ -61,4 +64,13 @@ class Payment < ApplicationRecord
       includes(:person).includes(:user).where(person_id: filter["people.id"])
     end
   }
+
+  ## Methods
+  def create_person_transaction
+    self.person.create_person_transaction(self)   
+  end
+
+  def label
+    "مستند سداد رقم #{self.id}"
+  end
 end

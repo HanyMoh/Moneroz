@@ -13,11 +13,20 @@
     </thead>
 
     <tbody>
+      <tr>
+        <td>رصيد سابق</td>
+        <td/>
+        <td/>
+        <td/>
+        <td/>
+        <td><%= @prev_balance %></td>
+        <td/>
+      </tr>
       <%- @finance_hash.each do |document| %>
         <% document = document.second %>
         <tr>
           <td>
-            <% if document[:object_id] == "document" %>
+            <% if document[:object_type] == "Document" %>
               <%= link_to document[:date], controller: "documents", action: "show", id: document[:object_id]  %>
             <% else %>
               <%= document[:date] %>
@@ -28,7 +37,7 @@
           <td><%= document[:d] if document[:d].to_i > 0 %></td>
           <td><%= document[:m] if document[:m].to_i > 0 %></td>
           <td><%= document[:total_price] %></td>
-          <td></td>
+          <td><%= document[:balance_after] %></td>
           <td><%= document[:user_name] %></td>
         </tr>
       <% end %>

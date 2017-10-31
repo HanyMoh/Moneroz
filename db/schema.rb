@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171031083156) do
+ActiveRecord::Schema.define(version: 20171031120452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,10 +112,11 @@ ActiveRecord::Schema.define(version: 20171031083156) do
 
   create_table "sys_transactions", force: :cascade do |t|
     t.integer "loggable_id"
-    t.integer "document_id"
+    t.integer "documentable_id"
     t.integer "quantity_before"
     t.integer "quantity_after"
-    t.string  "loggable_type",   default: "Product"
+    t.string  "loggable_type",     default: "Product"
+    t.string  "documentable_type", default: "Document"
   end
 
   create_table "units", force: :cascade do |t|
