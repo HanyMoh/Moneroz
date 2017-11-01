@@ -5,7 +5,7 @@
       <%= f.label :name, "أسم الشخص" %>
     </div>
     <div class="form-group col-sm-3">
-      <%= f.autocomplete_field :'people.name', autocomplete_person_name_documents_path(person_type: @person_type), :id_element => '#filter_person_id', value: (params[:filter].present? ? params[:filter]['people.name'] : ''), placeholder: "Enter person name", class: "form-control" %>
+      <%= f.autocomplete_field :'people.name', autocomplete_person_name_documents_path(person_type: @person_type), :id_element => '#filter_person_id', value: (@person.present? ? @person.name : ''), placeholder: "Enter person name", class: "form-control" %>
       <% if @person_type == 4 %>
         <%= f.hidden_field :storage_id, id: "filter_person_id", value: (params[:filter].present? ? params[:filter]['storage_id'] : '') %>
       <% else %>
