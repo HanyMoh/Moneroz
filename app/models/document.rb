@@ -33,6 +33,9 @@
 
 
 
+
+
+
 class Document < ApplicationRecord
   DOC_TYPE = { 1 => "أول المدة",
                2 => "مشتريات",
@@ -42,8 +45,9 @@ class Document < ApplicationRecord
                6 => "مرتجع شراء",
                7 => "باركود" }.freeze
 
-  has_many   :doc_items, inverse_of: :document, dependent: :destroy
+  has_many :doc_items, inverse_of: :document, dependent: :destroy
   has_many :products, through: :doc_items
+  has_many :sys_transactions, :as => :documentable
   belongs_to :person
   belongs_to :store,   class_name: 'Person'
   belongs_to :storage, class_name: 'Person'
@@ -53,6 +57,8 @@ class Document < ApplicationRecord
 
   validates :code, uniqueness: { scope: [:doc_type] }
   validates :doc_date, presence: true
+
+  after_save :update_products_quantity, :create_person_transaction
 
   scope :sorted, -> { order('created_at DESC') }
 
@@ -80,6 +86,31 @@ class Document < ApplicationRecord
 
   def label
     "#{DOC_TYPE[doc_type]} رقم #{id}"
+  end
+
+  def update_products_quantity
+    self.doc_items.includes(:product).each do |item|
+      product = item.product
+      quantity_before_change = product.quantity
+      if item.effect == 1 ## increase quantity
+        product.quantity += item.quantity
+      elsif item.effect == 2 ## decrease quantity
+        product.quantity -= item.quantity
+      end 
+      if quantity_before_change != product.quantity ## quantity changed
+        product.sys_transactions.new(
+              documentable_id: item.document_id, documentable_type: "Product",
+              quantity_before: quantity_before_change, quantity_after: product.quantity)
+        product.save
+        
+      end
+    end
+  end
+
+  def create_person_transaction
+    if self.total_price - self.payment > 0 ## not fully paid document, so changes person balance
+      self.person.create_person_transaction(self)   
+    end
   end
 
 end

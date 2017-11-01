@@ -175,10 +175,23 @@ class DocumentsController < ApplicationController
       if @product.present?
         ## documents will display only when a valid product being choosen (per product dispaly)
         @documents = Document.period_filter(filter)
-        ## create hash[document id] => quantity of product filtered into the document
-        @doc_items = Hash.new
-        @documents.each do |document|
-          @doc_items[document.id] = document.doc_items.where(product_id: @product.id).first.quantity
+        if @documents.any?
+          ## getting previous quantity through product transactions
+          ## first document quantity before changes will indicate the prev quantity
+          @prev_quantity = @documents.first.sys_transactions
+                          .where(loggable_id: @product.id, loggable_type: "Product")
+                          .first.quantity_before
+          ## create hash[document id] => quantity of product filtered into the document
+          @doc_items = Hash.new
+          @documents.each do |document|
+            @doc_items[document.id] = Hash.new
+            @doc_items[document.id][:quantity_change] = document.doc_items
+                                                        .where(product_id: @product.id)
+                                                        .first.quantity
+            @doc_items[document.id][:quantity_after_change] = document.sys_transactions
+                                                              .where(loggable_id: @product.id, loggable_type: "Product")
+                                                              .first.quantity_after
+          end
         end
       end
     end
@@ -257,57 +270,53 @@ class DocumentsController < ApplicationController
           ## documents will display only when a valid person being choosen
           documents = Document.period_filter(filter)
           payments = Payment.period_filter(filter)
+          ## getting balance before filter period
           ## creating a hash of documents and payment too then sorting them
-          @finance_hash = create_sorted_finance_report(documents, payments, person_type)
+          sorted_docs = (documents + payments).sort_by{|document| document.class == Document ? document.doc_date : document.pay_date }
+          first_transaction = sorted_docs.first.sys_transactions.where(loggable: @person).first
+          @prev_balance = first_transaction.present? ? first_transaction.quantity_before : 0
+          @finance_hash = create_finance_report(sorted_docs, @person)
         end
       end
     end
 
-    def create_sorted_finance_report(documents, payments, person_type)
+    def create_finance_report(documents, person)
       finance = Hash.new
+      ## documents are both documents and payments
       documents.each do |document|
         finance_hash = Hash.new
-        finance_hash[:object_type] = "document"
+        finance_hash[:object_type] = document.class.to_s
         finance_hash[:object_id] = document.id
-        finance_hash[:date] = document.doc_date
+        finance_hash[:date] = document.try(:doc_date) || document.pay_date
         finance_hash[:label] = document.label
-        finance_hash[:total_price] = document.total_price.to_i
+        finance_hash[:total_price] = document.try(:total_price).try(:to_i) || document.money.to_i
         finance_hash[:user_name] = document.user.user_name
-        ## depending on doc_type 
-        rest = (document.total_price - document.payment).to_i
-        case person_type
+        ## depending on doc_type
+        if document.class == Document
+          amount = (document.total_price - document.payment).to_i
+        else
+          amount = document.money.to_i
+        end
+        case person.person_type
         when 1
           ## customer
-          finance_hash[:m] = rest
+          if document.class == Document
+            finance_hash[:m] = amount
+          else
+            finance_hash[:d] = amount
+          end
         when 2
           ## supplier 
-          finance_hash[:d] = rest
+          if document.class == Document
+            finance_hash[:d] = amount
+          else
+            finance_hash[:m] = amount
+          end
         end
-        finance["document_#{document.id}"] = finance_hash
+        balance_transaction = SysTransaction.where(documentable: document, loggable: person).first
+        finance_hash[:balance_after] = balance_transaction.present? ? balance_transaction.quantity_after : nil
+        finance["#{document.class.to_s}_#{document.id}"] = finance_hash
       end
-
-      payments.each do |payment|
-        finance_hash = Hash.new
-        finance_hash[:object_type] = "payment"
-        finance_hash[:object_id] = payment.id
-        finance_hash[:date] = payment.pay_date
-        finance_hash[:total_price] = payment.money.to_i
-        finance_hash[:user_name] = payment.user.user_name
-
-        case person_type
-        when 1
-          ## customer
-          finance_hash[:d] = payment.money.to_i
-          finance_hash[:label] = "مستند سداد رقم #{payment.id}"
-        when 2
-          ## supplier
-          finance_hash[:m] = payment.money.to_i
-          finance_hash[:label] = "مستند صرف رقم #{payment.id}"
-        end
-        finance["payment_#{payment.id}"] = finance_hash
-      end
-      ## sorting by date => Note: date should be mandatory attribute 
-      sorted = finance.sort_by { |k| k.second[:date] }
-      return sorted
+      return finance
     end
 end

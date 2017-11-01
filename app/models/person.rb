@@ -13,6 +13,7 @@
 #  updated_at  :datetime         not null
 #
 
+
 class Person < ApplicationRecord
   PERSON_TYPE = { 1 => "customer",
                   2 => "supplier",
@@ -24,6 +25,8 @@ class Person < ApplicationRecord
   has_many :storage_payments,  :class_name  => 'Payment',  :foreign_key => 'storage_id'
   has_many :storage_documents, :class_name  => 'Document', :foreign_key => 'storage_id'
   has_many :store_documents,   :class_name  => 'Document', :foreign_key => 'store_id'
+  has_many :sys_transactions, :as => :loggable
+  has_many :payments
 
   validates :name, presence: true, length: { within: 3..60 }, uniqueness: { scope: [:person_type] }
 
@@ -37,7 +40,34 @@ class Person < ApplicationRecord
     Person.where('person_type = ?', type).sorted
   }
 
+  ## Methods
   def full_description
     "#{Person::PERSON_TYPE[id]} - #{self.name}".html_safe
+  end
+
+  def create_person_transaction(document)
+    person = self
+    balance_before_change = person.sys_transactions.any? ? person.sys_transactions.last.quantity_after : 0
+    # rest = (document.total_price - document.payment).to_i
+    change_amount = document.class == Document ? (document.total_price - document.payment).to_i : document.money.to_i
+    balance = balance_before_change
+    case person.person_type
+    when 1 ## customer
+      if document.class == Document
+        balance += change_amount
+      else ## payment class
+        balance -= change_amount
+      end
+    when 2 ## supplier
+      if document.class == Document
+        balance -= change_amount
+      else ## payment class
+        balance += change_amount
+      end
+    end
+    ## document is the documentable that cause changes to balance
+    person.sys_transactions.new(documentable: document, 
+      quantity_before: balance_before_change , quantity_after: balance)
+    person.save
   end
 end
