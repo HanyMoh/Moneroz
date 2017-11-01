@@ -58,7 +58,7 @@ class Document < ApplicationRecord
   validates :code, uniqueness: { scope: [:doc_type] }
   validates :doc_date, presence: true
 
-  after_save :update_products_quantity, :create_person_transaction
+  after_save :update_products_quantity, :create_person_transaction, :create_storage_transaction
 
   scope :sorted, -> { order('created_at DESC') }
 
@@ -78,9 +78,9 @@ class Document < ApplicationRecord
     if filter[:doc_date_from].present? || filter[:doc_date_to].present?
       date_from = filter.delete(:doc_date_from) || Document.minimum(:doc_date).to_s
       date_to = filter.delete(:doc_date_to) || Date.today.to_s
-      includes(:products).includes(:person).includes(:user).where(doc_date: date_from..date_to).where(filter)
+      includes(:products).includes(:person).includes(:storage).includes(:user).where(doc_date: date_from..date_to).where(filter)
     else
-      includes(:products).includes(:person).includes(:user).where(filter)
+      includes(:products).includes(:person).includes(:storage).includes(:user).where(filter)
     end
   }
 
@@ -110,6 +110,12 @@ class Document < ApplicationRecord
   def create_person_transaction
     if self.total_price - self.payment > 0 ## not fully paid document, so changes person balance
       self.person.create_person_transaction(self)   
+    end
+  end
+
+  def create_storage_transaction
+    if self.payment.to_i > 0 ## payment paid document, so changes storage balance(some money goes in to the storage)
+      self.storage.create_storage_transaction(self)   
     end
   end
 

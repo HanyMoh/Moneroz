@@ -70,4 +70,21 @@ class Person < ApplicationRecord
       quantity_before: balance_before_change , quantity_after: balance)
     person.save
   end
+
+  def create_storage_transaction(document)
+    storage = self
+    balance_before_change = storage.sys_transactions.any? ? storage.sys_transactions.last.quantity_after : 0
+    change_amount = document.class == Document ? document.payment.to_i : document.money.to_i
+    balance = balance_before_change
+    case document.person.person_type
+    when 1 ## customer documents adds to storage credit
+        balance += change_amount
+    when 2 ## supplier documents sub from storage credit
+        balance -= change_amount
+    end
+    ## document is the documentable that cause changes to balance
+    storage.sys_transactions.new(documentable: document, 
+      quantity_before: balance_before_change , quantity_after: balance)
+    storage.save
+  end
 end

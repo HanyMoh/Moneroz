@@ -1,14 +1,21 @@
+<% if @person.present? %>
+  <h4><%= "حركة #{@person.name} في الفترة من #{params[:filter][:doc_date_from]} الي #{params[:filter][:doc_date_to]}" %></h4>
+<% end %>
 <%- if @finance_hash.present? %>
   <table class="table table-hover">
     <thead>
       <tr>
         <th>التاريخ</th>
         <th>رقم المستند</th>
-        <th>دائـن</th>
-        <th>مدين</th>
+        <% if @person_type == 4 %>
+          <th>الشخص المتداول</th>
+        <% end %>
+        <th><%= @d_label %></th>
+        <th><%= @m_label %></th>
         <th>اجمالي الفاتورة</th>
         <th>الرصيد</th>
         <th>أسم البائع</th>
+        <th>ملاحظات</th>
       </tr>
     </thead>
 
@@ -34,11 +41,15 @@
           </td>
           
           <td><%= document[:label] %></td>
+          <% if @person_type == 4 %>
+            <td><%= document[:person] %></td>
+          <% end %>
           <td><%= document[:d] if document[:d].to_i > 0 %></td>
           <td><%= document[:m] if document[:m].to_i > 0 %></td>
           <td><%= document[:total_price] %></td>
           <td><%= document[:balance_after] %></td>
           <td><%= document[:user_name] %></td>
+          <td><%= document[:notes] %></td>
         </tr>
       <% end %>
     </tbody>

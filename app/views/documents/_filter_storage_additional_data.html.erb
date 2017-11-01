@@ -11,11 +11,11 @@
 <div class= "row">
   <div class="form-group col-sm-1"></div>
   <div class="form-group col-sm-4">
-    <%= radio_button_tag("method", "all") %>
+    <%= f.radio_button :'people.person_type', "" %>
     <%= label :all, 'وارد و صادر' %>
-    <%= radio_button_tag("method", "in") %>
+    <%= f.radio_button :'people.person_type', "1", :checked => !!params[:filter][:'people.person_type'] == 1 %>
     <%= label :in, 'وارد فقط' %>
-    <%= radio_button_tag("method", "out") %>
+    <%= f.radio_button :'people.person_type', "2", :checked => !!params[:filter][:'people.person_type'] == 2 %>
     <%= label :out, 'صادر فقط' %>
   </div>
 </div>

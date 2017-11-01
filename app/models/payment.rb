@@ -39,7 +39,8 @@ class Payment < ApplicationRecord
   validates :money,       presence: true
   validates :pay_date, presence: true
 
-  after_save :create_person_transaction
+  # after_save :create_person_transaction
+  after_save :create_balance_transactions
 
   scope :sorted, -> { order('created_at DESC') }
 
@@ -59,15 +60,18 @@ class Payment < ApplicationRecord
     if filter[:doc_date_from].present? || filter[:doc_date_to].present?
       date_from = filter.delete(:doc_date_from) || Payment.minimum(:pay_date).to_s
       date_to = filter.delete(:doc_date_to) || Date.today.to_s
-      includes(:person).includes(:user).where(pay_date: date_from..date_to).where(person_id: filter["people.id"])
+      # includes(:person).includes(:user).where(pay_date: date_from..date_to).where(person_id: filter["people.id"])
+      includes(:person).includes(:user).includes(:storage).where(pay_date: date_from..date_to).where(filter)
     else
-      includes(:person).includes(:user).where(person_id: filter["people.id"])
+      # includes(:person).includes(:user).where(person_id: filter["people.id"])
+      includes(:person).includes(:user).includes(:storage).where(filter)
     end
   }
 
   ## Methods
-  def create_person_transaction
-    self.person.create_person_transaction(self)   
+  def create_balance_transactions
+    self.person.create_person_transaction(self)
+    self.storage.create_storage_transaction(self)   
   end
 
   def label

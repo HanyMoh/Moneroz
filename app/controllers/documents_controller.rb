@@ -201,6 +201,8 @@ class DocumentsController < ApplicationController
   def per_customer
     @page_title = "حركة حساب عميل"
     @person_type = 1
+    @m_label = "مدين"
+    @d_label = "دائن"
     per_person(@person_type, params)
   end
 
@@ -208,6 +210,8 @@ class DocumentsController < ApplicationController
   def per_supplier
     @page_title = "حركة حساب مورد"
     @person_type = 2
+    @m_label = "مدين"
+    @d_label = "دائن"
     per_person(@person_type, params)
   end
 
@@ -215,6 +219,8 @@ class DocumentsController < ApplicationController
   def per_storage
     @page_title = "حركة الخزينة"
     @person_type = 4
+    @m_label ="وارد"
+    @d_label = "صادر"
     per_person(@person_type, params)
   end
 
@@ -263,18 +269,30 @@ class DocumentsController < ApplicationController
     def per_person(person_type, params)
       documents = []
       if params[:filter].present?
-        ## delete empty filter params
+        ## delete empty and unwanted filter params
+        params[:filter].delete(:'people.name')
         filter = params[:filter].to_unsafe_h.clone.delete_if { |k, v| v.blank? }
-        if filter["people.id"]
-          @person = Person.find(filter["people.id"])
+        if filter["people.id"].present? || filter[:storage_id].present?
+          person_id = filter["people.id"] || filter[:storage_id]
+          @person = Person.find(person_id)
+        end
+        if @person.present?
           ## documents will display only when a valid person being choosen
           documents = Document.period_filter(filter)
+          ## storage documents report should only contain documents with payment (person_type = 4 ==> storage)
+          documents= documents.where("payment > 0") if person_type == 4  
           payments = Payment.period_filter(filter)
           ## getting balance before filter period
           ## creating a hash of documents and payment too then sorting them
           sorted_docs = (documents + payments).sort_by{|document| document.class == Document ? document.doc_date : document.pay_date }
-          first_transaction = sorted_docs.first.sys_transactions.where(loggable: @person).first
-          @prev_balance = first_transaction.present? ? first_transaction.quantity_before : 0
+          @prev_balance = 0
+          first_doc = sorted_docs.first
+          if first_doc.present?
+            first_transaction = first_doc.sys_transactions.where(loggable: @person).first
+            if first_transaction.present?
+              @prev_balance = first_transaction.quantity_before 
+            end
+          end
           @finance_hash = create_finance_report(sorted_docs, @person)
         end
       end
@@ -285,12 +303,15 @@ class DocumentsController < ApplicationController
       ## documents are both documents and payments
       documents.each do |document|
         finance_hash = Hash.new
+        concerened_person = document.person
         finance_hash[:object_type] = document.class.to_s
         finance_hash[:object_id] = document.id
         finance_hash[:date] = document.try(:doc_date) || document.pay_date
         finance_hash[:label] = document.label
         finance_hash[:total_price] = document.try(:total_price).try(:to_i) || document.money.to_i
         finance_hash[:user_name] = document.user.user_name
+        finance_hash[:person] = concerened_person.name
+        finance_hash[:notes] = document.note
         ## depending on doc_type
         if document.class == Document
           amount = (document.total_price - document.payment).to_i
@@ -308,6 +329,14 @@ class DocumentsController < ApplicationController
         when 2
           ## supplier 
           if document.class == Document
+            finance_hash[:d] = amount
+          else
+            finance_hash[:m] = amount
+          end
+        when 4
+          ## storage
+          amount = document.payment.to_i if document.class == Document
+          if concerened_person.person_type == 1
             finance_hash[:d] = amount
           else
             finance_hash[:m] = amount
