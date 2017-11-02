@@ -23,9 +23,18 @@ class DocItem < ApplicationRecord
   belongs_to :document, inverse_of: :doc_items
   belongs_to :product
 
+  ## validates only when subtract from stock
+  validate :quantity_compared_to_stock, if: -> { self.effect == 2 }
+
   attr_accessor :barcode
 
   scope :invoice_total, lambda { |document_id|
     where('document_id = ?', document_id).sum('(qty * price)- discount').to_f
   }
+
+
+  ## Methods
+  def quantity_compared_to_stock
+  	self.errors[:quantity] << "لا يمكن ان تتعدي الكمية المتوفرة في المخزن"  unless self.quantity <= self.product.quantity
+  end
 end

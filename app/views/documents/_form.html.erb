@@ -99,6 +99,7 @@
     <div class="div-table-col div-table-col-th">السعر</div>
     <div class="div-table-col div-table-col-th">الخصم</div>
     <div class="div-table-col div-table-col-th">الإجمالى</div>
+    <div class="div-table-col div-table-col-th">الكمية الحالية</div>
   </div>
 
   <%= f.fields_for :doc_items do |builder| %>
@@ -138,7 +139,7 @@
   <hr>
 
   <div class="actions">
-    <%= submit_tag "تسجيل المستند", class: "btn btn-primary" %>
+    <%= submit_tag "تسجيل المستند", class: "btn btn-primary", onclick: "return validate_stock()" %>
   </div>
 <% end %>
 <br>

@@ -14,3 +14,7 @@
   color: #FF4500 !important;
   font-weight: bold !important;
 }
+
+.nested_box.has-error .div-table-col {
+    color: red;
+}

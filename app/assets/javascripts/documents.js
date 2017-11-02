@@ -2,6 +2,7 @@ $(document).ready(function() {
 
   $('form').on('click', '.remove_fields', function(event) {
     var contained_box = $(this).closest('.nested_box');
+    contained_box.removeClass("has-error");
     contained_box.find('.total').val('0');
     $(this).prev('input[type=hidden]').val('1');
     contained_box.hide();
@@ -44,8 +45,16 @@ $(document).ready(function() {
   }
 
   function calculate_total_per_product(box){
+    box.removeClass("has-error");
     var total = (box.find('.quantity').val() * box.find('.price').val()) - box.find('.discount_value').val();
     box.find('.total').val(total);
+    quantity = box.find(".quantity");
+    stock = box.find(".stock");
+    effect = box.find(".effect");
+    if(effect.val() == "2" && Number(quantity.val()) > Number(stock.val())){
+      alert("الكمية لا يمكن ان تتعدي الكمية الحالية");
+      box.addClass("has-error");
+    }
   }
 
   function calculate_total_price(){
@@ -80,6 +89,7 @@ $(document).ready(function() {
       var product_value = $(this).val();
       var price = box.find('.price');
       var barcode = box.find('.barcode');
+      var stock = box.find('.stock');
       $.ajax({
         url: "give_me_barcode",
         type: "GET",
@@ -89,6 +99,7 @@ $(document).ready(function() {
         success: function(data) {
           price.val(data.price_out);
           barcode.val(data.barcode);
+          stock.val(data.quantity);
           calculate_total_per_product(box);
           calculate_total_price();
           invoice();
@@ -102,6 +113,7 @@ $(document).ready(function() {
       var barcode_value = $(this).val();
       console.log(barcode_value);
       var price = $(this).closest(".nested_box").find('.price');
+      var stock = $(this).closest(".nested_box").find('.stock');
       var product = $(this).closest(".nested_box").find('.product');
       $.ajax({
         url: "give_me_product",
@@ -112,6 +124,7 @@ $(document).ready(function() {
         success: function(data) {
           console.log(data);
           price.val(data.price_out);
+          stock.val(data.quantity);
           product.val(data.id);
           product.trigger("change");
         }
@@ -149,3 +162,8 @@ $(document).on('click', '.invoice-print', function(e) {
   window.print();
   window.location.reload();
 });
+
+function validate_stock(){
+  if($(".has-error").length > 0)
+    return false;
+}
