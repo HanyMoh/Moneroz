@@ -25,7 +25,7 @@
             <%= product.unit_refill.name if product.unit_refill %>
           </td>
           <td>
-            <%= product.quantity %>
+            <%= @product_stock[product.id] %>
           </td>
         </tr>
       <% end %>
