@@ -14,6 +14,7 @@
 #
 
 
+
 class Person < ApplicationRecord
   PERSON_TYPE = { 1 => "customer",
                   2 => "supplier",
