@@ -97,26 +97,31 @@ class Document < ApplicationRecord
         product.quantity += item.quantity
       elsif item.effect == 2 ## decrease quantity
         product.quantity -= item.quantity
-      end 
+      end
       if quantity_before_change != product.quantity ## quantity changed
         product.sys_transactions.new(
               documentable: self, quantity_before: quantity_before_change, quantity_after: product.quantity)
         product.save
-        
+
       end
     end
   end
 
   def create_person_transaction
     if self.total_price - self.payment > 0 ## not fully paid document, so changes person balance
-      self.person.create_person_transaction(self)   
+      self.person.create_person_transaction(self)
     end
   end
 
   def create_storage_transaction
     if self.payment.to_i > 0 ## payment paid document, so changes storage balance(some money goes in to the storage)
-      self.storage.create_storage_transaction(self)   
+      self.storage.create_storage_transaction(self)
     end
   end
+
+def rest
+  # rest money after payment money
+  total_price.to_f + tax.to_f - discount_value.to_f - payment.to_f
+end
 
 end

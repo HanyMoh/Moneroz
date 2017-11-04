@@ -49,11 +49,11 @@
                 </div>
 
                 <div class="col-xs-4">
-                  <b>الإجمالى:</b> <%= document.payment.to_f %><br><br>
-                  <b>الخصم:</b> <%= document.payment.to_f %><br>
+                  <b>الإجمالى:</b> <%= document.total_price.to_f %><br><br>
+                  <b>الخصم:</b> <%= document.discount_value.to_f %><br>
                   <b>الضريبة:</b><%= document.tax.to_f %><br>
                   <b>المدفوع:</b><%= document.payment.to_f %><br>
-                  <b>الباقى:</b><%= document.payment.to_f %>
+                  <b>الباقى:</b><%= document.rest.to_f %>
                 </div>
 
             <div class="clearfix"></div>
@@ -110,7 +110,7 @@
     <td><span class="label label-success"><%= document.payment %></span> ج.م</td>
     <td><%= document.discount_value %> ج.م</td>
     <td><%= document.tax %> ج.م</td>
-    <td><span class="label label-danger"><%= document.payment %></span>
+    <td><span class="label label-danger"><%= document.total_price %></span>
   ج.م</td>
     <td><%= document.user.user_name if document.user %></td>
 </tr>

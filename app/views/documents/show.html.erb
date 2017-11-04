@@ -16,11 +16,11 @@
     </div>
 
     <div class="col-xs-4">
-      <b>الإجمالى:</b> <%= @document.payment.to_f %><br><br>
-      <b>الخصم:</b> <%= @document.payment.to_f %><br>
+      <b>الإجمالى:</b> <%= @document.total_price.to_f %><br><br>
+      <b>الخصم:</b> <%= @document.discount_value.to_f %><br>
       <b>الضريبة:</b><%= @document.tax.to_f %><br>
       <b>المدفوع:</b><%= @document.payment.to_f %><br>
-      <b>الباقى:</b><%= @document.payment.to_f %>
+      <b>الباقى:</b><%= @document.rest.to_f %>
     </div>
 
 <div class="clearfix"></div>
