@@ -6,15 +6,15 @@ task set_product_quantity: :environment do
 		doc_items = DocItem.where(product_id: product.id)
 		doc_items.each do |item|
 			quantity_before_change = quantity
-			if item.effect == 1 ## increase quantity	
+			if item.effect == 1 ## increase quantity
 				quantity += item.quantity
 			elsif item.effect == 2 ## decrease quantity
 				quantity -= item.quantity
 			end
 			if quantity_before_change != quantity ## actual change occured on quantity
-				product.sys_transactions.new(document_id: item.document_id, 
+				product.sys_transactions.new(documentable_id: item.document_id, 
 					quantity_before: quantity_before_change , quantity_after: quantity)
-			end	
+			end
 		end
 
 	    product.quantity = quantity
