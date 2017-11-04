@@ -100,8 +100,7 @@ class Document < ApplicationRecord
       end 
       if quantity_before_change != product.quantity ## quantity changed
         product.sys_transactions.new(
-              documentable_id: item.document_id, documentable_type: "Product",
-              quantity_before: quantity_before_change, quantity_after: product.quantity)
+              documentable: self, quantity_before: quantity_before_change, quantity_after: product.quantity)
         product.save
         
       end

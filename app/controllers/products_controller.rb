@@ -95,9 +95,12 @@ class ProductsController < ApplicationController
     @product_stock = Hash.new
     @products.each do |product|
       inventory_date_stock = 0
-      inventory_date_transactions = product.sys_transactions.includes(:document)
-                                    .where("documents.doc_date <= ?", @inventory_date)
-                                    .references(:document)
+      # inventory_date_transactions = product.sys_transactions.includes(:document)
+      #                               .where("documents.doc_date <= ?", @inventory_date)
+      #                               .references(:document)
+      inventory_date_transactions = product.sys_transactions
+                                    .joins("INNER JOIN documents ON documents.id = sys_transactions.documentable_id AND sys_transactions.documentable_type = 'Document'")
+                                    .where("documents.doc_date <= ?", inventory_date)
       if inventory_date_transactions.any?
         inventory_date_stock = inventory_date_transactions.last.quantity_after
       end
