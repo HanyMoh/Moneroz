@@ -13,9 +13,9 @@
   <div class="form-group col-sm-4">
     <%= f.radio_button :'people.person_type', "" %>
     <%= label :all, 'وارد و صادر' %>
-    <%= f.radio_button :'people.person_type', "1", checked: (params[:filter][:'people.person_type'] == "1") %>
+    <%= f.radio_button :'people.person_type', "1", checked: (params[:filter].present? && params[:filter][:'people.person_type'] == "1") %>
     <%= label :in, 'وارد فقط' %>
-    <%= f.radio_button :'people.person_type', "2", checked: (params[:filter][:'people.person_type'] == "2") %>
+    <%= f.radio_button :'people.person_type', "2", checked: (params[:filter].present? && params[:filter][:'people.person_type'] == "2") %>
     <%= label :out, 'صادر فقط' %>
   </div>
 </div>
