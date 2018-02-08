@@ -5,6 +5,8 @@
  * ================================*/
 @import url(https://fonts.googleapis.com/css?family=Lato:300,400,400i,700);
 @import url(https://fonts.googleapis.com/css?family=Niconne);
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+
 /*
  * Bootstrap v3.3.6
  */
@@ -16,6 +18,7 @@ html {
 
 body {
   margin: 0;
+  font-family: 'Droid Arabic Kufi', serif !important;
 }
 
 article,
@@ -318,7 +321,6 @@ html {
 }
 
 body {
-  font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
@@ -14210,7 +14212,7 @@ be a descendant of the grid when it is being dragged.
   width: auto;
   height: auto;
   position: absolute;
-  right: 0;
+  left: 3px;
   padding: 0;
   float: none;
   margin-right: 10px;
@@ -14230,7 +14232,7 @@ be a descendant of the grid when it is being dragged.
 }
 
 .sidebar-menu li.active > .treeview-menu {
-  display: block;
+  display: block !important;
 }
 
 .sidebar-menu .treeview-menu {
@@ -14242,7 +14244,7 @@ be a descendant of the grid when it is being dragged.
   padding-bottom: 5px;
 }
 
-.sidebar-menu .treeview-menu .treeview-menu {
+.sidebar-menu .treeview-menu{
   padding-left: 20px;
 }
 
