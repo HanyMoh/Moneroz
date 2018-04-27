@@ -45,6 +45,7 @@ class Product < ApplicationRecord
   scope :max_code,  -> { Product.maximum('code').to_i + 1 }
 
   scope :generat_barcode, lambda{ |product|
+    return '' if product.section.nil?
     "#{product.section.id.to_s.rjust(3, '0')}#{product.code.to_s.rjust(6, '0')}"
   }
 

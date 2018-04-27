@@ -5,5 +5,5 @@ $(".person_phone").val('');
 $(".person_address").val('');
 $(".person_note").val('');
 
-$(".all_people").prepend('<%= j render @person %>');
+$(".all_people").prepend('<%= j render @person if @person.persisted? %>');
 $("#person_<%= @person.id %>").hide().fadeIn(700);

@@ -34,7 +34,7 @@ class SectionsController < ApplicationController
 
     respond_to do |format|
       if @section.save
-        format.html { redirect_to sections_url, notice: 'Section was successfully created.' }
+        format.html { redirect_to sections_url, notice: 'تم الحفظ بنجاح' }
         format.json { render :show, status: :created, location: @section }
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class SectionsController < ApplicationController
       end
 
       if @section.update(section_params)
-        format.html { redirect_to sections_url, notice: 'Section was successfully updated.' }
+        format.html { redirect_to sections_url, notice: 'تم التعديل بنجاح' }
         format.json { render :show, status: :ok, location: @section }
       else
         format.html { render :edit }
@@ -67,7 +67,7 @@ class SectionsController < ApplicationController
     authorize! :destroy, Section
     @section.destroy
     respond_to do |format|
-      format.html { redirect_to sections_url, notice: 'Section was successfully destroyed.' }
+      format.html { redirect_to sections_url, notice: 'تم الحف بنجاح' }
       format.json { head :no_content }
     end
   end

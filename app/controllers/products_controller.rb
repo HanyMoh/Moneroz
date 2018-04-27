@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to products_url, notice: 'Product was successfully created.' }
+        format.html { redirect_to products_url, notice: 'تم الحفظ بنجاح' }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }
@@ -60,11 +60,11 @@ class ProductsController < ApplicationController
         @product.code = Product.max_code
       end
       if params[:product][:barcode].blank?
-        params[:product][:barcode] = Product.set_barcode(@product)
+        params[:product][:barcode] = Product.generat_barcode(@product)
       end
 
       if @product.update(product_params)
-        format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
+        format.html { redirect_to products_url, notice: 'تم التعديل بنجاح' }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit }
@@ -79,7 +79,7 @@ class ProductsController < ApplicationController
     authorize! :destroy, Product
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to products_url, notice: 'تم الحذف بنجاح' }
       format.json { head :no_content }
     end
   end
