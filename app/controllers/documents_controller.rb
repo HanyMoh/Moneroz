@@ -255,6 +255,7 @@ class DocumentsController < ApplicationController
       @document.doc_type = doc_type
       @document.effect = effect
       @document.user = current_user
+      @document.doc_date = Date.today
       @document.store = Person.find(2)
       set_field
       @document.doc_items.build
@@ -280,7 +281,7 @@ class DocumentsController < ApplicationController
           ## documents will display only when a valid person being choosen
           documents = Document.period_filter(filter)
           ## storage documents report should only contain documents with payment (person_type = 4 ==> storage)
-          documents= documents.where("payment > 0") if person_type == 4  
+          documents= documents.where("payment > 0") if person_type == 4
           payments = Payment.period_filter(filter)
           ## getting balance before filter period
           ## creating a hash of documents and payment too then sorting them
@@ -290,7 +291,7 @@ class DocumentsController < ApplicationController
           if first_doc.present?
             first_transaction = first_doc.sys_transactions.where(loggable: @person).first
             if first_transaction.present?
-              @prev_balance = first_transaction.quantity_before 
+              @prev_balance = first_transaction.quantity_before
             end
           end
           @finance_hash = create_finance_report(sorted_docs, @person)
@@ -327,7 +328,7 @@ class DocumentsController < ApplicationController
             finance_hash[:d] = amount
           end
         when 2
-          ## supplier 
+          ## supplier
           if document.class == Document
             finance_hash[:d] = amount
           else

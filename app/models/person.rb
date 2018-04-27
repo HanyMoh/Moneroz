@@ -29,7 +29,8 @@ class Person < ApplicationRecord
   has_many :sys_transactions, :as => :loggable
   has_many :payments
 
-  validates :name, presence: true, length: { within: 3..60 }, uniqueness: { scope: [:person_type] }
+  validates :code, presence: true, uniqueness: { scope: [:person_type] }
+  validates :name, presence: true, length: { within: 2..60 }, uniqueness: { scope: [:person_type] }
 
   scope :sorted, -> { order('created_at DESC') }
 
@@ -67,7 +68,7 @@ class Person < ApplicationRecord
       end
     end
     ## document is the documentable that cause changes to balance
-    person.sys_transactions.new(documentable: document, 
+    person.sys_transactions.new(documentable: document,
       quantity_before: balance_before_change , quantity_after: balance)
     person.save
   end
@@ -84,7 +85,7 @@ class Person < ApplicationRecord
         balance -= change_amount
     end
     ## document is the documentable that cause changes to balance
-    storage.sys_transactions.new(documentable: document, 
+    storage.sys_transactions.new(documentable: document,
       quantity_before: balance_before_change , quantity_after: balance)
     storage.save
   end

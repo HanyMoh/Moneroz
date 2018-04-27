@@ -27,10 +27,10 @@ class PeopleController < ApplicationController
     set_field
     respond_to do |format|
       if @person.save
-        format.html { redirect_to people_url, notice: 'This item was successfully created.' }
+        format.html { redirect_to people_url, notice: 'تم الحفظ بنجاح.' }
         format.js
       else
-        format.html { redirect_to people_url, alert: 'This item was unsuccessfully updated.' }
+        format.html { redirect_to people_url, alert: 'لم يتم الحفظ للأسف' }
         format.js
       end
     end
@@ -42,10 +42,10 @@ class PeopleController < ApplicationController
     set_field
     respond_to do |format|
       if @person.update(person_params)
-        format.html { redirect_to people_url, notice: 'This item was successfully updated.' }
+        format.html { redirect_to people_url, notice: 'تم التعديل بنجاح' }
         format.js
       else
-        format.html { redirect_to people_url, alert: 'This item was unsuccessfully updated.' }
+        format.html { redirect_to people_url, alert: 'لم يتم التعديل للأسف' }
         format.js
       end
     end
@@ -77,7 +77,7 @@ class PeopleController < ApplicationController
   def destroy
     @person.destroy
     respond_to do |format|
-      format.html { redirect_to people_url, notice: 'This item was successfully destroyed.' }
+      format.html { redirect_to people_url, notice: 'تم الحذف بنجاح' }
       format.js
     end
   end
