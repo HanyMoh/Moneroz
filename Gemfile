@@ -5,7 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-# gem 'rails', '~> 5.0.2'
 gem 'rails', '~> 5.1.4'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
@@ -20,7 +19,6 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem "font-awesome-rails"
 gem 'devise'
 gem 'cancancan', '~> 2.0'
-gem 'react-rails'
 gem 'annotate', '~> 2.7', '>= 2.7.2'
 gem 'rails-jquery-autocomplete'
 

@@ -18,7 +18,4 @@
 //= require turbolinks
 //= require plugins/pace.min
 //= require plugins/bootstrap-datepicker.min
-//= require react
-//= require react_ujs
-//= require components
 //= require_tree .
