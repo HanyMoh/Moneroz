@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       ## reports
       get :autocomplete_product_name
       get :inventory
+      get :about_to_empty_inventory
     end
   end
   resources :units, :except => [:show]

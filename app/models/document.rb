@@ -124,4 +124,12 @@ def rest
   total_price.to_f + tax.to_f - discount_value.to_f - payment.to_f
 end
 
+def self.cash_documents_count
+  where(doc_type: 3).count
+end
+
+def self.selling_futures_documents_count
+  where(doc_type: 4).count
+end
+
 end

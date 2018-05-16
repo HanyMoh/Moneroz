@@ -108,6 +108,27 @@ class ProductsController < ApplicationController
     end
   end
 
+  def about_to_empty_inventory
+    @products = Product.all.includes(:section).includes(:unit).includes(:unit_refill)
+    if params[:filter].present?
+      @inventory_date = params[:filter].delete :inventory_date
+      ## delete empty filter params
+      filter = params[:filter].to_unsafe_h.clone.delete_if { |k, v| v.blank? }
+      @products = @products.where(filter)
+    end
+    @product_stock = Hash.new
+    @products.each do |product|
+      inventory_date_stock = 0
+      inventory_date_transactions = product.sys_transactions
+                                    .joins("INNER JOIN documents ON documents.id = sys_transactions.documentable_id AND sys_transactions.documentable_type = 'Document'")
+                                    .where("documents.doc_date <= ?", @inventory_date)
+      if inventory_date_transactions.any?
+        inventory_date_stock = inventory_date_transactions.last.quantity_after
+      end
+      @product_stock[product.id] = inventory_date_stock
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

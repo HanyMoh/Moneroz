@@ -4565,6 +4565,21 @@ a.label:hover, a.label:focus {
   background-color: #FF9800;
 }
 
+.badge-warning {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #000;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: center;
+  background-color: #FF9800;
+  border-radius: 10px;
+}
+
 .label-warning[href]:hover, .label-warning[href]:focus {
   background-color: #cc7a00;
 }

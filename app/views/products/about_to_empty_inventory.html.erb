@@ -1,0 +1,40 @@
+<%= render 'filter_about_empty' %>
+
+<h4><%= "أصناف على وشك النفاد" %></h4>
+<%- if @products.any? %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>القسم</th>
+        <th>رقم الصنف</th>
+        <th>اسم الصنف</th>
+        <th>الوحدة</th>
+        <th>الرصيد</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%- @products.each do |product| %>
+        <% if @product_stock[product.id] < 5 && @product_stock[product.id] > 0 %>
+          <tr id="product_<%= product.id %>">
+            <td><%= product.section.name %></td>
+            <td><%= product.barcode %></td>
+            <td><%= product.name %></td>
+            <td>
+              <%= product.unit.name if product.unit %>
+              <span class="badge"><%= product.refill %></span>
+              <%= product.unit_refill.name if product.unit_refill %>
+            </td>
+            <td>
+              <% if @product_stock[product.id] > 0 %>
+                <span class="badge-warning"><b><%= @product_stock[product.id] %></b></span>
+                <% else %>
+                  <%= @product_stock[product.id] %>
+                <% end %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -71,10 +71,14 @@ class Payment < ApplicationRecord
   ## Methods
   def create_balance_transactions
     self.person.create_person_transaction(self)
-    self.storage.create_storage_transaction(self)   
+    self.storage.create_storage_transaction(self)
   end
 
   def label
     "مستند سداد رقم #{self.id}"
+  end
+
+  def self.cash_in_payments_count
+    where(pay_type: 1).count
   end
 end
