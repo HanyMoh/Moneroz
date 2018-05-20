@@ -74,6 +74,13 @@ class Document < ApplicationRecord
       where('doc_type = ? and user_id = ?', doc_type, user).sorted
     end
   }
+  scope :invoices_dashboard, lambda { |user|
+    if user.admin?
+      all.sorted
+    else
+      where('user_id = ?', user).sorted
+    end
+  }
 
   scope :period_filter, -> (filter) {
     if filter[:doc_date_from].present? || filter[:doc_date_to].present?

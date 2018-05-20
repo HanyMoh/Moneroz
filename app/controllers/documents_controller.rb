@@ -203,6 +203,7 @@ class DocumentsController < ApplicationController
     @person_type = 1
     @m_label = "مدين"
     @d_label = "دائن"
+    @filter_label = "اسم العميل"
     per_person(@person_type, params)
   end
 
@@ -212,6 +213,7 @@ class DocumentsController < ApplicationController
     @person_type = 2
     @m_label = "مدين"
     @d_label = "دائن"
+    @filter_label = "اسم المورد"
     per_person(@person_type, params)
   end
 
@@ -221,6 +223,7 @@ class DocumentsController < ApplicationController
     @person_type = 4
     @m_label ="وارد"
     @d_label = "صادر"
+    @filter_label = "اسم الخزينة"
     per_person(@person_type, params)
   end
 

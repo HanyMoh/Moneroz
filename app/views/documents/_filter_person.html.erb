@@ -1,8 +1,8 @@
 <%= form_for :filter, :action => path, html: { method: :get } do |f| %>
-  
+
   <div class="row">
     <div class="form-group col-sm-1">
-      <%= f.label :name, "أسم الشخص" %>
+      <%= f.label :name, @filter_label %>
     </div>
     <div class="form-group col-sm-3">
       <%= f.autocomplete_field :'people.name', autocomplete_person_name_documents_path(person_type: @person_type), :id_element => '#filter_person_id', value: (@person.present? ? @person.name : ''), placeholder: "Enter person name", class: "form-control" %>

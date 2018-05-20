@@ -1,6 +1,6 @@
 <div class="row">
   <div class="form-group col-sm-1">
-    <%= f.label :name, "أسم البائـع" %>
+    <%= f.label :name, "اسم البائـع" %>
   </div>
   <div class="form-group col-sm-3">
     <%= f.autocomplete_field :'users.name', autocomplete_user_user_name_documents_path, :id_element => '#filter_user_id', value: (params[:filter].present? ? params[:filter]['users.name'] : ''), placeholder: "Enter user name", class: "form-control" %>

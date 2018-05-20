@@ -5,7 +5,7 @@ class HomeController < ApplicationController
         redirect_to home_new_url, notice: 'معذرة .. حسابك غير نشط, تابع مع الإدارة'
       else
           authorize! :read, Document
-          @documents = Document.order(id: :desc).limit 5
+          @documents = Document.invoices_dashboard(current_user).limit 5
       end
     else
       redirect_to new_user_session_path

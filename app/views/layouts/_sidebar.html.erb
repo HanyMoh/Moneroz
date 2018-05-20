@@ -47,6 +47,7 @@
           <% end %>
         </ul>
       </li>
+      <% if can? :storage, Person %>
       <li class="treeview <%= active_class(purchase_documents_path) %> <%= active_class(returned_buy_documents_path) %> <%= active_class(suppliers_people_path) %> <%= active_class(add_purchase_documents_path) %> <%= active_class(add_returned_buy_documents_path) %>"><a href="#"><i class="fa fa-th-list"></i><span>المشتريات</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
           <% if can? :purchase, Document %>
@@ -72,6 +73,7 @@
           <% end %>
         </ul>
       </li>
+      <% end %>
       <li class="treeview <%= active_class(storages_people_path) %> <%= active_class(fees_people_path) %> <%= active_class(cash_in_payments_path) %> <%= active_class(cash_out_payments_path) %>"><a href="#"><i class="fa fa-file-text"></i><span>الحسابان</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
           <% if can? :cash_in, Payment %>
@@ -137,7 +139,8 @@
           <% end %>
         </ul>
       </li>
-      <li class="treeview"><a href="#"><i class="fa fa-pie-chart"></i><span>التقارير</span><i class="fa fa-angle-right"></i></a>
+      <% if can? :storage, Person %>
+      <li class="treeview <%= active_class(per_storage_documents_path) %> <%= active_class(per_product_documents_path) %> <%= active_class(inventory_products_path) %> <%= active_class(per_supplier_documents_path) %> <%= active_class(per_customer_documents_path) %> <%= active_class(about_to_empty_inventory_products_path) %>"><a href="#"><i class="fa fa-pie-chart"></i><span>التقارير</span><i class="fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
           <% if can? :barcode, Document %>
             <li>
@@ -183,6 +186,7 @@
           <% end %>
         </ul>
       </li>
+      <% end %>
     </ul>
   </section>
 </aside>
