@@ -31,9 +31,9 @@
   <div class="row">
     <div class="field col-sm-4">
       <% case @document.doc_type %>
-      <% when 1 %>
+      <% when 12 %>
       <!-- # first_term # don't show any person -->
-      <% when 2,6  %>
+      <% when 2,6,1  %>
       <!-- # purchase or returned_buy -->
       <%= f.label :person_id,"اسم المورد" %><br>
       <%= f.collection_select(:person_id, Person.people_by_type(2), :id, :name, {:selected => 1}, { :class => "form-control require" }) %>

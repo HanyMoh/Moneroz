@@ -72,6 +72,7 @@ GEM
     capistrano-rbenv (2.1.3)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
+    coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -126,6 +127,12 @@ GEM
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
     pg (0.21.0)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-byebug (3.6.0)
+      byebug (~> 10.0)
+      pry (~> 0.10)
     puma (3.11.4)
     rack (2.0.5)
     rack-test (1.0.0)
@@ -227,6 +234,7 @@ DEPENDENCIES
   jquery-ui-rails
   listen (~> 3.0.5)
   pg (~> 0.18)
+  pry-byebug
   puma (~> 3.0)
   rails (~> 5.1.4)
   rails-jquery-autocomplete
