@@ -1,64 +1,72 @@
 <section class="invoice">
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-xs-12">
-      <h2 class="page-header"><i class="fa fa-globe"></i>زلط .. لمفروشات العرائس <small class="pull-right">التاريخ: <%= @document.doc_date %></small></h2>
+      <h2 class="page-header">
+        <i class="fa fa-globe"></i>زلط .. لمفروشات العرائس
+        <small class="pull-right">:
+          <%= @document.doc_date %></small>
+      </h2>
     </div>
-  </div>
+  </div> -->
   <div class="row invoice-info">
 
-    <div class="col-xs-4">
-      <b>مسلسل #<%= @document.code %></b><br><br><b>الفرع:</b> <%= @document.store.name if @document.store %><br><b>الخزينة:</b> <%= @document.storage.name if @document.storage %><br><b>المستخدم:</b> <%= @document.user.user_name if  @document.user %>
+    <div class="col-xs-12 text-center">
+      <%= image_tag 'logo.png', class: 'report_logo' %><br>
+      <b>مسلسل #<%= @document.code %></b><br>
+      <b>التاريخ: <%= @document.doc_date  %></b><br><br>
+      <b>الخزينة:</b>
+      <%= @document.storage.name if @document.storage %><br>
+      <b>البائع:</b>
+      <%= @document.user.user_name if @document.user %><br>
+      <b>المتداول:</b>
+      <%= @document.person.name if @document.person %><br><br>
     </div>
 
-    <div class="col-xs-4">
-      <b>المتداول:</b> <%= @document.person.name if @document.person %><br><br>
-      <b>ملاحظات:</b><p><%= @document.note %></p>
-    </div>
+    <div class="clearfix"></div>
+    <br><br>
 
-    <div class="col-xs-4">
-      <b>الإجمالى:</b> <%= @document.total_price.to_f %><br><br>
-      <b>الخصم:</b> <%= @document.discount_value.to_f %><br>
-      <b>الضريبة:</b><%= @document.tax.to_f %><br>
-      <b>المدفوع:</b><%= @document.payment.to_f %><br>
-      <b>الباقى:</b><%= @document.rest.to_f %>
-    </div>
-
-<div class="clearfix"></div>
-<br><br>
-
-  <div class="row">
-    <div class="col-xs-12 table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>الباركود</th>
-            <th>اسم الصنف</th>
-            <th>الكمية</th>
-            <th>السعر</th>
-            <th>الخصم</th>
-            <th>الإجمالى</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @document.doc_items.each do |item| %>
-          <tr>
-            <td><%= item.product.barcode if item.product %></td>
-            <td><%= item.product.name if item.product %></td>
-            <td><%= item.quantity %></td>
-            <td><%= item.price.to_f %></td>
-            <td><%= item.discount_value.to_f %></td>
-            <td><%= item.quantity * item.price.to_f - item.discount_value.to_f %></td>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="row hidden-print mt-20">
-    <div class="col-xs-12 text-right"><a class="btn btn-primary invoice-print"><i class="fa fa-print"></i> طباعة</a></div>
-  </div>
-</section>
-
-
-<% if can? :update, Document %>
-  <%= link_to 'تعديل', edit_document_path(@document) %>
-<% end %>
+    <div class="row">
+      <div class="col-xs-12 table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>اسم الصنف</th>
+              <th>السعر</th>
+              <th>الإجمالى</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @document.doc_items.each do |item| %>
+              <tr>
+                <td>
+                  <b><%= item.product.name if item.product %></b><br/>
+                  <small><%= item.product.barcode if item.product %></small>
+                </td>
+                <td>
+                  <b><%= "#{item.quantity} × #{item.price.to_f}" %></b><br/>
+                  <small><%= item.discount_value.to_f %> خصم</small>
+                </td>
+                <td><b><%= item.quantity * item.price.to_f - item.discount_value.to_f %></b></td>
+              </tr>
+              <% end %>
+              <tr><td colspan="2"><b>الإجمالى</b></td><td><b><%= @document.total_price.to_f %> ج.م</b></td></tr>
+              <tr><td colspan="2"><b>المدفوع</b></td><td><b><%= @document.payment.to_f %> ج.م</b></td></tr>
+              <tr><td colspan="2"><b>الباقى</b></td><td><b><%= @document.rest.to_f %> ج.م</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p>* سياسة الاسترجاع والاستبدال خلال ١٤ يوم من تاريخ الشراء بشرط ان تكون السلعة بنفس الحالة عند الشراء.</p>
+      <p>* المشغولات اليدوية ليس لها مرتجع ولا استبدال.</p>
+      <p>* تابعونا علي صفحتنا علي الفيس بوك @zalatcenter</p>
+      <div class="row hidden-print mt-20">
+        <div class="col-xs-12 text-right">
+          <a class="btn btn-primary invoice-print">
+            <i class="fa fa-print"></i>
+            طباعة</a>
+            <% if can? :update, Document %>
+            <%= link_to 'تعديل', edit_document_path(@document) %>
+            <% end %>
+        </div>
+      </div>
+    </section>
