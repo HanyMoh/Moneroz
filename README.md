@@ -7,3 +7,13 @@ You can view my demo on heroku on this link https://moneroz.herokuapp.com/
 - user name: Admin
 
 - password: 123456
+
+![Imgur](https://i.imgur.com/cJkQDwM.png)
+
+![Imgur](https://i.imgur.com/rxpNF2y.png)
+
+![Imgur](https://i.imgur.com/GEdGipd.png)
+
+![Imgur](https://i.imgur.com/h779jXM.png)
+
+![Imgur](https://i.imgur.com/5Q2drfu.png)
