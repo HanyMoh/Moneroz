@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the Moneroz, It's a POS system (point of sale) contains Multi-stores and simple accounts, It's a Multi-purpose web application for clothes, Iron, wood, food, barcode, etc. 
 
-Things you may want to cover:
+You can view my demo on heroku on this link https://moneroz.herokuapp.com/
 
-* Ruby version
+- user name: Admin
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- password: 123456
